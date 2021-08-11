@@ -41,28 +41,45 @@ def executeRequest(query):
     :param query: a fact name stored within the PuppetDB
     :return: JSON object with relevant data if successful, otherwise 0
     """
+    # Ensure that the fact is a known value
     if query not in factKeys:
         return 0
 
+    # Format query string correctly
     formattedQuery = '["=",+"name",+"' + query + '"]'
 
+    # Ensure that URL is encoded in the specific way that the PuppetDB instance is expecting
     queryEncoded = urllib.parse.urlencode({'query': formattedQuery}, safe='+')
     queryEncoded = queryEncoded.replace("query=", '')
 
+    # PuppetDB requires specific JSON accept headers to function
     headers = {'Accept': 'application/json'}
-    request = requests.get(puppetDbServers[1] + '/pdb/query/v4/facts?query=' + queryEncoded, headers=headers)
-    return json.loads(request.text)
+
+    # Query each PuppetDB server for results
+    results = []
+    for server in puppetDbServers:
+        results.append(
+            json.loads(requests.get(server + '/pdb/query/v4/facts?query=' + queryEncoded, headers=headers).text))
+
+    return results
 
 
 def main():
+    # Ensure that a facts name file exists
     if not (os.path.isfile(keysFilePath)):
         exit("Please ensure a the keys file (named factnames.json) is within the working directory.")
 
+    # Set global variable of fact key names
     keys = getFactKeysFromJson(keysFilePath)
     for key in keys:
         factKeys.append(key.strip())
 
-    print(executeRequest('virtual'))
+    query = executeRequest('mysql_extra_version')
+    if query != 0:
+        for i in query:
+            print(i)
+    else:
+        print("Unknown fact name, please double check spelling")
 
 
 def __init__():
@@ -72,4 +89,5 @@ def __init__():
     main()
 
 
+# Run the main function
 main()
