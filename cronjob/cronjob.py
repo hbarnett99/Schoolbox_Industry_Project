@@ -3,7 +3,7 @@
     cronjob.py
 
     Written by Dane Rainbird (drai0001@student.monash.edu)
-    Last edited 11/08/2021
+    Last edited 12/08/2021
 
     Pulls data from the Schoolbox PuppetDB Servers and produces blobs
     that are stored in a local MySQL DB for later loading
@@ -14,6 +14,7 @@ import json
 import os
 import urllib.parse
 import requests
+import queries
 
 # Global Variables
 keysFilePath = os.path.dirname(os.path.abspath(__file__)) + '\\factnames.json'
@@ -64,6 +65,22 @@ def executeRequest(query):
     return results
 
 
+def performQuery(query):
+    """
+    Performs a given query and it's associated business logic, and returns the value
+    :param query: a fact name stored within the PuppetDB
+    :return: dictionary containing results if successful, otherwise string indicating error
+    """
+    querySwitcher = {
+        'schoolbox_totalusers': queries.schoolbox_totalusers
+    }
+    function = querySwitcher.get(query, "Unknown query type")
+    if type(function) is str:
+        return "Unknown query type. Please check inputs and try again."
+
+    return function(executeRequest(query))
+
+
 def main():
     # Ensure that a facts name file exists
     if not (os.path.isfile(keysFilePath)):
@@ -74,12 +91,7 @@ def main():
     for key in keys:
         factKeys.append(key.strip())
 
-    query = executeRequest('mysql_extra_version')
-    if query != 0:
-        for i in query:
-            print(i)
-    else:
-        print("Unknown fact name, please double check spelling")
+    print(performQuery('schoolbox_totalusers'))
 
 
 def __init__():
