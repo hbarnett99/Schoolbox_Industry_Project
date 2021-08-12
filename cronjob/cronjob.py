@@ -72,7 +72,12 @@ def performQuery(query):
     :return: dictionary containing results if successful, otherwise string indicating error
     """
     querySwitcher = {
-        'schoolbox_totalusers': queries.schoolbox_totalusers
+        'schoolbox_totalusers': queries.schoolbox_totalusers,
+        'schoolbox_users_student': queries.schoolbox_users_student,
+        'schoolbox_users_staff': queries.schoolbox_users_staff,
+        'schoolbox_users_parent': queries.schoolbox_users_parent,
+        'schoolbox_totalcampus': queries.schoolbox_totalcampus,
+        'virtual': queries.virtual
     }
     function = querySwitcher.get(query, "Unknown query type")
     if type(function) is str:
@@ -91,7 +96,9 @@ def main():
     for key in keys:
         factKeys.append(key.strip())
 
-    print(performQuery('schoolbox_totalusers'))
+    # Get data from each fact query
+    for fact in factKeys:
+        print(performQuery(fact))
 
 
 def __init__():

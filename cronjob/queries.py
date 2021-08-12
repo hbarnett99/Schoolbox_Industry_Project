@@ -12,6 +12,7 @@
 
 # Imports
 import math
+import pprint
 
 
 def schoolbox_totalusers(result):
@@ -41,3 +42,82 @@ def schoolbox_totalusers(result):
         'totalUsersFleetCount': totalUserFleetCount,
         'totalUsers': totalUsers
     }
+
+
+def schoolbox_users_student(result):
+    totalStudentCount = 0
+    for returnedServers in result:
+        for server in returnedServers:
+            # Ensure only using production servers
+            if '.prd.' in server['certname'] or '.live.' in server['certname']:
+                # Increase the total user count
+                totalStudentCount = totalStudentCount + sum(list(map(int, server['value'].values())))
+
+    return {
+        'totalStudentCount': totalStudentCount
+    }
+
+
+def schoolbox_users_staff(result):
+    totalStaffCount = 0
+    for returnedServers in result:
+        for server in returnedServers:
+            # Ensure only using production servers
+            if '.prd.' in server['certname'] or '.live.' in server['certname']:
+                # Increase the total user count
+                totalStaffCount = totalStaffCount + sum(list(map(int, server['value'].values())))
+
+    return {
+        'totalStaffCount': totalStaffCount
+    }
+
+
+def schoolbox_users_parent(result):
+    totalParentCount = 0
+    for returnedServers in result:
+        for server in returnedServers:
+            # Ensure only using production servers
+            if '.prd.' in server['certname'] or '.live.' in server['certname']:
+                # Increase the total user count
+                totalParentCount = totalParentCount + sum(list(map(int, server['value'].values())))
+
+    return {
+        'totalParentCount': totalParentCount
+    }
+
+
+def schoolbox_totalcampus(result):
+    totalCampus = 0
+    for returnedServers in result:
+        for server in returnedServers:
+            # Ensure only using production servers
+            if '.prd.' in server['certname'] or '.live.' in server['certname']:
+                # Increase the total user count
+                totalCampus = totalCampus + sum(list(map(int, server['value'].values())))
+
+    return {
+        'totalCampus': totalCampus
+    }
+
+
+def virtual(result):
+    serverTypes = ['.prd.', '.live.', '.dev.', '.stg.', '.dr.']
+    virtualServerType = {}
+    total = 0
+    for returnedServers in result:
+        for server in returnedServers:
+            # Only used named dev and prod servers
+            if any(x in server['certname'] for x in serverTypes):
+                if not server['value'] in virtualServerType.keys():
+                    virtualServerType[server['value']] = {'count': 1, 'percent': 0}
+                else:
+                    virtualServerType[server['value']]['count'] = virtualServerType[server['value']]['count'] + 1
+                total = total + 1
+
+    # Get percentage of total install for each server type
+    for virtualType in virtualServerType:
+        count = virtualServerType.get(virtualType).get('count')
+        percent = round((count / total) * 100, 2)
+        virtualServerType.get(virtualType)['percent'] = percent
+
+    return virtualServerType

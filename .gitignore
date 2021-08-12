@@ -1,6 +1,7 @@
 # Custom
 /tmp/*
 /.idea/*
+/cronjob/__pycache__/
 
 # CakePHP 3
 
