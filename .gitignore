@@ -1,5 +1,6 @@
 # Custom
 /tmp/*
+/.idea/*
 
 # CakePHP 3
 
@@ -47,3 +48,4 @@ tmp/debug_kit.sqlite
 *.en_US
 *.en_US
 .env
+*.iml
