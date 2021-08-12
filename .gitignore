@@ -46,3 +46,4 @@ tmp/debug_kit.sqlite
 *.sqlite
 *.en_US
 *.en_US
+.env
