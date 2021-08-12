@@ -14,11 +14,12 @@ import json
 import os
 import urllib.parse
 import requests
+from dotenv import load_dotenv
 import queries
 
 # Global Variables
 keysFilePath = os.path.dirname(os.path.abspath(__file__)) + '\\factnames.json'
-puppetDbServers = ['http://puppet.alaress.com.au:8080', 'http://puppetstage.alaress.com.au:8080']
+puppetDbServers = ['https://puppetdb.stg.1.schoolbox.com.au', 'https://puppetdb.prd.1.schoolbox.com.au']
 factKeys = []
 
 
@@ -54,7 +55,7 @@ def executeRequest(query):
     queryEncoded = queryEncoded.replace("query=", '')
 
     # PuppetDB requires specific JSON accept headers to function
-    headers = {'Accept': 'application/json'}
+    headers = {'Accept': 'application/json', 'Authorization': 'Basic ' + os.getenv('PROXY_COMBINED_AUTH')}
 
     # Query each PuppetDB server for results
     results = []
@@ -81,12 +82,15 @@ def performQuery(query):
     }
     function = querySwitcher.get(query, "Unknown query type")
     if type(function) is str:
-        return "Unknown query type. Please check inputs and try again."
+        return "Unknown query type: \"" + query + "\". Please check inputs and try again."
 
     return function(executeRequest(query))
 
 
 def main():
+    # Load environment variables
+    load_dotenv()
+
     # Ensure that a facts name file exists
     if not (os.path.isfile(keysFilePath)):
         exit("Please ensure a the keys file (named factnames.json) is within the working directory.")
