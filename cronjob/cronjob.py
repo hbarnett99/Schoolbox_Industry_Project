@@ -14,6 +14,7 @@ import json
 import os
 import urllib.parse
 import requests
+import pprint
 from dotenv import load_dotenv
 import queries
 
@@ -74,11 +75,25 @@ def performQuery(query):
     """
     querySwitcher = {
         'schoolbox_totalusers': queries.schoolbox_totalusers,
+        'schoolbox_config_site_type': queries.schoolbox_config_site_type,
         'schoolbox_users_student': queries.schoolbox_users_student,
         'schoolbox_users_staff': queries.schoolbox_users_staff,
         'schoolbox_users_parent': queries.schoolbox_users_parent,
         'schoolbox_totalcampus': queries.schoolbox_totalcampus,
-        'virtual': queries.virtual
+        'virtual': queries.virtual,
+        'processorcount': queries.processorcount,
+        'memorysize': queries.memorysize,
+        'schoolbox_config_date_timezone': queries.schoolbox_config_date_timezone,
+        'schoolbox_config_external_type': queries.schoolbox_config_external_type,
+        'schoolbox_first_file_upload_year': queries.schoolbox_first_file_upload_year,
+        'mysql_extra_version': queries.mysql_extra_version,
+        'php_cli_version': queries.php_cli_version,
+        'kernelrelease': queries.kernelrelease,
+        'kernelmajversion': queries.kernelmajversion,
+        'lsbdistdescription': queries.lsbdistdescription,
+        'schoolbox_config_site_version': queries.schoolbox_config_site_version,
+        'schoolbox_package_version': queries.schoolbox_package_version,
+        'schoolboxdev_package_version': queries.schoolboxdev_package_version
     }
     function = querySwitcher.get(query, "Unknown query type")
     if type(function) is str:
