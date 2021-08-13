@@ -10,12 +10,13 @@
 
 """
 # Imports
+import datetime
 import json
 import os
 import urllib.parse
 import requests
-import pprint
 from dotenv import load_dotenv
+import pymysql.cursors
 import queries
 
 # Global Variables
@@ -102,9 +103,44 @@ def performQuery(query):
     return function(executeRequest(query))
 
 
+def insertIntoDb(results):
+    """
+    Inserts the data obtained from querying the PuppetDB and performing business analysis and
+    inserts them into a MySQL DB
+    :param results: an array containing all the results taken from the previous queries
+    """
+    connection = pymysql.connect(host='localhost',
+                                 user='root',
+                                 password='',
+                                 database='u21s2026_schoolbox',
+                                 charset='utf8mb4',
+                                 cursorclass=pymysql.cursors.DictCursor)
+
+    currentTime = datetime.datetime.now()
+
+    with connection:
+        with connection.cursor() as cursor:
+            sql = "INSERT INTO `historical_facts`(`timestamp`, `schoolbox_totalusers`, `schoolbox_config_site_type`, " \
+                  "`schoolbox_users_student`, `schoolbox_users_staff`, `schoolbox_users_parent`, " \
+                  "`schoolbox_totalcampus`, `schoolbox_package_version`, `schoolboxdev_package_version`, " \
+                  "`schoolbox_config_site_version`, `virtual`, `lsbdistdescription`, `kernelmajversion`," \
+                  "`kernelrelease`, `php_cli_version`, `mysql_extra_version`, `processorcount`,`memorysize`, " \
+                  "`schoolbox_config_date_timezone`, `schoolbox_config_external_type`," \
+                  "`schoolbox_first_file_upload_year`) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s," \
+                  "%s,%s,%s) "
+            cursor.execute(sql, (currentTime, json.dumps(results.get('schoolbox_totalusers')), json.dumps(results.get('schoolbox_config_site_type')), json.dumps(results.get('schoolbox_users_student')), json.dumps(results.get('schoolbox_users_staff')), json.dumps(results.get('schoolbox_users_parent')), json.dumps(results.get('schoolbox_totalcampus')), json.dumps(results.get('schoolbox_package_version')), json.dumps(results.get('schoolboxdev_package_version')), json.dumps(results.get('schoolbox_config_site_version')), json.dumps(results.get('virtual')), json.dumps(results.get('lsbdistdescription')), json.dumps(results.get('kernelmajversion')), json.dumps(results.get('kernelrelease')), json.dumps(results.get('php_cli_version')), json.dumps(results.get('mysql_extra_version')), json.dumps(results.get('processorcount')), json.dumps(results.get('memorysize')), json.dumps(results.get('schoolbox_config_date_timezone')), json.dumps(results.get('schoolbox_config_external_type')), json.dumps(results.get('schoolbox_first_file_upload_year'))))
+
+        connection.commit()
+
+
 def main():
+    """
+    Main function
+    """
     # Load environment variables
     load_dotenv()
+
+    print("Beginning cronjob at " + str(datetime.datetime.now()))
 
     # Ensure that a facts name file exists
     if not (os.path.isfile(keysFilePath)):
@@ -115,9 +151,16 @@ def main():
     for key in keys:
         factKeys.append(key.strip())
 
+    print("Obtained all facts from file.")
+
     # Get data from each fact query
+    results = {}
     for fact in factKeys:
-        print(performQuery(fact))
+        print("Executing query for fact '" + fact + "'. Please wait.")
+        results[fact] = performQuery(fact)
+
+    print("All fact data gathered successfully.\n")
+    insertIntoDb(results)
 
 
 def __init__():
