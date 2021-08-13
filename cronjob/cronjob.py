@@ -112,7 +112,7 @@ def insertIntoDb(results):
     connection = pymysql.connect(host='localhost',
                                  user='root',
                                  password='',
-                                 database='u21s2026_schoolbox',
+                                 database='u21s1026_schoolbox',
                                  charset='utf8mb4',
                                  cursorclass=pymysql.cursors.DictCursor)
 
