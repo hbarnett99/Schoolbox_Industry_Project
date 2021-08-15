@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Cake\Event\EventInterface;
+use Cake\I18n\FrozenTime;
 
 /**
  * HistoricalFacts Controller
@@ -32,7 +33,9 @@ class HistoricalFactsController extends AppController
      */
     public function index()
     {
-        $historicalFacts = $this->paginate($this->HistoricalFacts);
+        $historicalFacts = $this->paginate($this->HistoricalFacts, [
+            'order' => ['HistoricalFacts.id' => 'desc']
+        ]);
 
         $this->set(compact('historicalFacts'));
     }
@@ -50,50 +53,6 @@ class HistoricalFactsController extends AppController
             'contain' => [],
         ]);
 
-        $this->set(compact('historicalFact'));
-    }
-
-    /**
-     * Add method
-     *
-     * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
-     */
-    public function add()
-    {
-        $historicalFact = $this->HistoricalFacts->newEmptyEntity();
-        if ($this->request->is('post')) {
-            $historicalFact = $this->HistoricalFacts->patchEntity($historicalFact, $this->request->getData());
-            if ($this->HistoricalFacts->save($historicalFact)) {
-                $this->Flash->success(__('The historical fact has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The historical fact could not be saved. Please, try again.'));
-        }
-        $this->set(compact('historicalFact'));
-    }
-
-    /**
-     * Edit method
-     *
-     * @param string|null $id Historical Fact id.
-     * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function edit($id = null)
-    {
-        $historicalFact = $this->HistoricalFacts->get($id, [
-            'contain' => [],
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $historicalFact = $this->HistoricalFacts->patchEntity($historicalFact, $this->request->getData());
-            if ($this->HistoricalFacts->save($historicalFact)) {
-                $this->Flash->success(__('The historical fact has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The historical fact could not be saved. Please, try again.'));
-        }
         $this->set(compact('historicalFact'));
     }
 

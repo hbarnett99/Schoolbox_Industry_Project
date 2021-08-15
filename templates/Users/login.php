@@ -7,7 +7,7 @@
 <head>
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Schoolbox Status | TESTUBG</title>
+    <title>Schoolbox Status | Homepage</title>
     <?= $this->Html->meta('icon') ?>
 
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
@@ -55,6 +55,7 @@
                             );
                         } else {
                             echo "<div class='message default text-center'>You are signed in as " . $this->request->getSession()->read('Auth.email') . "</div>";
+                            echo $this->Html->link("Go to the facts dashboard!<br/>", ['controller' => 'historicalfacts', 'action' => 'index'], ['escape' => false]);
                             echo $this->Html->link($this->Html->Image('signout_button.png', ['style' => 'width: 150px; margin-bottom:0px!important']), ['controller' => 'Users', 'action' => 'logout'], ['escape' => false]);
                         }
                         ?>

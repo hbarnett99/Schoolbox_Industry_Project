@@ -37,7 +37,9 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 </head>
 <body>
     <nav class="top-nav">
-
+        <?=
+            $this->Html->link("Sign out", ['controller' => 'Users', 'action' => 'logout'], ['class' => 'button', 'style' => 'margin-left: auto;'])
+        ?>
     </nav>
     <main class="main">
         <div class="container">
