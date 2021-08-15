@@ -1,5 +1,8 @@
 # Custom
 /tmp/*
+/.idea/*
+/cronjob/__pycache__/
+/cronjob/.idea/
 
 # CakePHP 3
 
@@ -46,4 +49,5 @@ tmp/debug_kit.sqlite
 *.sqlite
 *.en_US
 *.en_US
+*.iml
 .env
