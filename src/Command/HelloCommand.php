@@ -12,7 +12,8 @@ class HelloCommand extends Command
 
     public function execute(Arguments $args, ConsoleIo $io)
     {
-        $io->out($this->executeCommand(QueryServerCommand::class));
+        $this->executeCommand(QueryServerCommand::class);
+        $io->out("asd");
     }
 
 }
