@@ -89,15 +89,13 @@ class QueryServerCommand extends Command
             case "schoolbox_totalcampus":
                 return schoolbox_totalcampus($this->sendRequest('schoolbox_totalcampus'));
             case "schoolbox_package_version":
-                return "Not yet implemented";
+                return schoolbox_package_version($this->sendRequest('schoolbox_package_version'));
             case "schoolboxdev_package_version":
-                return "Not yet implemented";
+                return schoolboxdev_package_version($this->sendRequest('schoolboxdev_package_version'));
             case "schoolbox_config_site_version":
-                return "Not yet implemented";
-            case "schoolbox_users_student":
-                return "Not yet implemented";
+                return "Not yet implemented ";
             case "virtual":
-                return "Not yet implemented";
+                return virtual($this->sendRequest('virtual'));
             case "lsbdistdescription":
                 return lsbdistdescription($this->sendRequest('lsbdistdescription'));
             case "kernelmajversion":
@@ -109,15 +107,15 @@ class QueryServerCommand extends Command
             case "mysql_extra_version":
                 return mysql_extra_version($this->sendRequest('mysql_extra_version'));
             case "processorcount":
-                return "Not yet implemented";
+                return processorcount($this->sendRequest('processorcount'));
             case "memorysize":
-                return "Not yet implemented";
+                return memorysize($this->sendRequest('memorysize'));
             case "schoolbox_config_date_timezone":
-                return "Not yet implemented";
+                return schoolbox_config_date_timezone($this->sendRequest('schoolbox_config_date_timezone'));
             case "schoolbox_config_external_type":
-                return "Not yet implemented";
+                return schoolbox_config_external_type($this->sendRequest('schoolbox_config_external_type'));
             case "schoolbox_first_file_upload_year":
-                return "Not yet implemented";
+                return schoolbox_first_file_upload_year($this->sendRequest('schoolbox_first_file_upload_year'));
             default:
                 break;
         }
@@ -134,12 +132,13 @@ class QueryServerCommand extends Command
 
         $factKeys = $this->getFactKeys();
 
-        $results = [];
-        foreach ($factKeys as $fact) {
-            array_push($results, $this->performQuery($fact));
-        }
+//        $results = [];
+//        foreach ($factKeys as $fact) {
+//            array_push($results, $this->performQuery($fact));
+//        }
+//        debug($results);
 
-        debug($results);
+        debug($this->performQuery('schoolbox_first_file_upload_year'));
 
 
     }
