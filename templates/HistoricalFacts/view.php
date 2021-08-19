@@ -197,7 +197,7 @@
                 <strong><?= __('Linux Versions') ?></strong>
                 <blockquote>
                     <?php
-                        $details = json_decode($historicalFact->virtual, JSON_PRETTY_PRINT);
+                        $details = json_decode($historicalFact->lsbdistdescription, JSON_PRETTY_PRINT);
 
                         // Sort the array
                         $details = sortByCountDescending($details);
