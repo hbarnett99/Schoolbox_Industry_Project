@@ -9,6 +9,8 @@
      *
      */
 
+    $siteTypeArray = [];
+
     function schoolbox_totalusers($results) : array {
     $totalUserFleetCount = 0;
     $totalUsers = [];
@@ -36,6 +38,19 @@
         'totalUsers' => $totalUsers
     ];
 }
+
+    function schoolbox_config_site_type($results) : array {
+        $siteType = [];
+        foreach ($results as $server) {
+            foreach ($server as $individualServer) {
+                foreach ($individualServer['value'] as $key => $value) {
+                    $siteType[strval($key)] = $value;
+                }
+            }
+        }
+        $GLOBALS['siteTypeArray'] = $siteType;
+        return $siteType;
+    }
 
     function schoolbox_users_student($results) : array {
         $totalStudentCount = 0;
@@ -192,6 +207,58 @@
         return [
             'productionPackageVersions' => $productionPackageVersions,
             'developmentPackageVersions' => $developmentPackageVersions
+        ];
+    }
+
+    function schoolbox_config_site_version($results) : array {
+        $siteTypes = $GLOBALS['siteTypeArray'];
+        $stagingServerVersions = [];
+        $productionServerVersions = [];
+        $stagingTotal = 0;
+        $productionTotal = 0;
+
+        foreach ($results as $server) {
+            foreach ($server as $individualServer) {
+                foreach ($individualServer['value'] as $key => $value) {
+                    // Get all development environments
+                    if ($siteTypes[(string) $key] == 'dev') {
+                        if (!array_key_exists($value, $stagingServerVersions)) {
+                            $stagingServerVersions[$value] = ['count' => 1, 'percent' => 0.00];
+                        } else {
+                            $stagingServerVersions[$value]['count']++;
+                        }
+                        $stagingTotal++;
+
+                    // Get all production environments
+                    } elseif ($siteTypes[(string) $key] == 'prod') {
+                        if (!array_key_exists($value, $productionServerVersions)) {
+                            $productionServerVersions[$value] = ['count' => 1, 'percent' => 0.00];
+                        } else {
+                            $productionServerVersions[$value]['count']++;
+                        }
+                        $productionTotal++;
+                    }
+                }
+            }
+        }
+
+        // Calculate percentages for production
+        foreach ($productionServerVersions as $productionServerVersion => $value) {
+            $count = $value['count'];
+            $percent = round(($count / $productionTotal) * 100, 2);
+            $productionServerVersions[$productionServerVersion]['percent'] = $percent;
+        }
+
+        // Calculate percentages for staging
+        foreach ($stagingServerVersions as $stagingServerVersion => $value) {
+            $count = $value['count'];
+            $percent = round(($count / $stagingTotal) * 100, 2);
+            $stagingServerVersions[$stagingServerVersion]['percent'] = $percent;
+        }
+
+        return [
+            'stagingServers' => $stagingServerVersions,
+            'productionServers' => $productionServerVersions
         ];
     }
 
