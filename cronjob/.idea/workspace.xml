@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c39d4d67-33a7-471b-a5ac-94a4fc61df16" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../templates/HistoricalFacts/view.php" beforeDir="false" afterPath="$PROJECT_DIR$/../templates/HistoricalFacts/view.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,6 +75,10 @@
       <workItem from="1628761007044" duration="12028000" />
       <workItem from="1628847236484" duration="4318000" />
       <workItem from="1628853779883" duration="2136000" />
+      <workItem from="1628988611489" duration="393000" />
+      <workItem from="1629072706662" duration="2133000" />
+      <workItem from="1629256439617" duration="6553000" />
+      <workItem from="1629291906614" duration="6480000" />
     </task>
     <servers />
   </component>
@@ -92,7 +97,18 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/cronjob.py</url>
+          <line>162</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/cronjob$cronjob.coverage" NAME="cronjob Coverage Results" MODIFIED="1628853838749" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/cronjob$cronjob.coverage" NAME="cronjob Coverage Results" MODIFIED="1629333232752" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
