@@ -12,42 +12,30 @@
  * @since         0.10.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  * @var \App\View\AppView $this
- *
- * Default layout file, based off of "Soft UI Dashboard" HTML template.
- * Called when users interact with the non-administrative side of the site
- * Written by Henry Barnett, 19/08/2021
  */
 
-$pageDescription = 'Server Health - Schoolbox';
+$cakeDescription = 'CakePHP: the rapid development php framework';
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <?= $this->Html->charset() ?>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
-        <?= $pageDescription ?>:
+        <?= $cakeDescription ?>:
         <?= $this->fetch('title') ?>
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <!-- CSS Loading -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
-    <?= $this->Html->css(['nucleo-icons', 'nucleo-svg', 'soft-ui-dashboard']) ?> <!--  Template CSS  -->
-    <?= $this->Html->css(['normalize.min', 'milligram.min', 'cake']) ?> <!--  Default CakePHP CSS  -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
 
-    <!-- Default content loading -->
+    <?= $this->Html->css(['normalize.min', 'milligram.min', 'cake']) ?>
+
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
-
-    <!--  Template content loading  -->
-    <?= $this->fetch('https://kit.fontawesome.com/42d5adcbca.js')?>
-
 </head>
 <body>
-    <?= $this->element('navbar')?>
-
     <nav class="top-nav">
         <?=
             $this->Html->link("Sign out", ['controller' => 'Users', 'action' => 'logout'], ['class' => 'button', 'style' => 'margin-left: auto;'])
@@ -59,6 +47,7 @@ $pageDescription = 'Server Health - Schoolbox';
             <?= $this->fetch('content') ?>
         </div>
     </main>
-        <?= $this->element('footer')?>
+    <footer>
+    </footer>
 </body>
 </html>
