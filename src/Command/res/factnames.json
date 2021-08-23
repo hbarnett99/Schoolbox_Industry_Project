@@ -1,0 +1,22 @@
+{
+    "schoolbox_totalusers ": " total schoolbox users",
+    "schoolbox_config_site_type ": "dev or prod",
+    "schoolbox_users_student ": " total schoolbox student users",
+	"schoolbox_users_staff ": " total schoolbox staff users",
+	"schoolbox_users_parent ": " total schoolbox parent users",
+	"schoolbox_totalcampus ": " schoolbox campuses",
+    "schoolbox_package_version": "schoolbox package version (prod)",
+    "schoolboxdev_package_version": "schoolbox package version (dev)",
+    "schoolbox_config_site_version ": " schoolbox version",
+    "virtual ": " host server type",
+    "lsbdistdescription ": " server operating system version",
+	"kernelmajversion ": " Linux Kernel Version",
+	"kernelrelease ": " Linux Release Version",
+	"php_cli_version ": " PHP Version",
+	"mysql_extra_version ": " MySQL version",
+	"processorcount ": " number of cpu cores",
+	"memorysize ": " RAM size",
+	"schoolbox_config_date_timezone ": " timezone",
+    "schoolbox_config_external_type ": " external db",
+	"schoolbox_first_file_upload_year ": " Schoolbox - Year of first file upload"
+}

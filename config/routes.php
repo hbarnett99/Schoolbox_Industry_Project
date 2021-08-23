@@ -50,12 +50,7 @@ $routes->scope('/', function (RouteBuilder $builder) {
      * its action called 'display', and we pass a param to select the view file
      * to use (in this case, templates/Pages/home.php)...
      */
-    $builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
-
-    /*
-     * ...and connect the rest of 'Pages' controller's URLs.
-     */
-    $builder->connect('/pages/*', 'Pages::display');
+    $builder->connect('/', ['controller' => 'Users', 'action' => 'login']);
 
     /*
      * Connect catchall routes for all controllers.
@@ -80,10 +75,10 @@ $routes->scope('/', function (RouteBuilder $builder) {
  * ```
  * $routes->scope('/api', function (RouteBuilder $builder) {
  *     // No $builder->applyMiddleware() here.
- *     
+ *
  *     // Parse specified extensions from URLs
  *     // $builder->setExtensions(['json', 'xml']);
- *     
+ *
  *     // Connect API actions here.
  * });
  * ```

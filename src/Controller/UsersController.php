@@ -17,11 +17,22 @@ class UsersController extends AppController
     public function beforeFilter(EventInterface $event)
     {
         parent::beforeFilter($event);
+        $path = $this->request->getPath();
+        //debug($this->getRequest()); die;
         $userEmail = $this->request->getSession()->read('Auth.email');
-        if ($userEmail == null) {
-            $this->Flash->error("Please sign in first...");
-            $this->redirect(['controller' => 'Pages', 'action' => 'display', 'home']);
+        if ($userEmail == null && $path != "/users/login" && $path != "/") {
+            //$this->Flash->error("Please sign in first...");
+            if ($path != "/users/logout") {
+                $this->redirect('/users/login?redirect=' . $path);
+            }
         }
+    }
+
+    /**
+     * Login route, powered by ADmad's cakephp-social-auth plugin
+     */
+    public function login() {
+        // This is a stub that has to be here for the route to connect.
     }
 
     /**
@@ -33,7 +44,7 @@ class UsersController extends AppController
         $this->request->getSession()->delete("Auth");
         $this->Flash->success("Signed out successfully!");
 
-        return $this->redirect(['controller' => 'Pages', 'action' => 'display', 'home']);
+        return $this->redirect(['controller' => 'Users', 'action' => 'login']);
     }
 
 }

@@ -18,8 +18,5 @@
 	"memorysize ": " RAM size",
 	"schoolbox_config_date_timezone ": " timezone",
     "schoolbox_config_external_type ": " external db",
-	"schoolbox_update_errormsg ": " \"schoolbox package Update Error State\"",
-	"schoolbox_last_backup ": " last backup",
-	"postfix_queue ": " postfix local relay queue length",
 	"schoolbox_first_file_upload_year ": " Schoolbox - Year of first file upload"
 }
