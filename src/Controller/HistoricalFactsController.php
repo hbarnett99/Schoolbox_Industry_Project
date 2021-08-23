@@ -75,4 +75,20 @@ class HistoricalFactsController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    /**
+     * Newest Data Method
+     *
+     * Retrieves the newest entry in the DB
+     */
+    public function newestData() {
+        $historicalFact = $this->HistoricalFacts->find('all', [
+            'order' => ['id' => 'DESC']
+        ]);
+
+        $historicalFact = $historicalFact->first();
+
+        $this->set(compact('historicalFact'));
+        $this->render('view');
+    }
 }

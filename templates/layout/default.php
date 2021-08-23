@@ -34,7 +34,9 @@ $pageDescription = 'Server Health - Schoolbox';
     <!-- CSS Loading -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
     <?= $this->Html->css(['nucleo-icons', 'nucleo-svg', 'soft-ui-dashboard']) ?> <!--  Template CSS  -->
-    <?= $this->Html->css(['normalize.min', 'milligram.min', 'cake']) ?> <!--  Default CakePHP CSS  -->
+    <?php //$this->Html->css(['normalize.min', 'milligram.min', 'cake']) ?> <!--  Default CakePHP CSS  -->
+    <?= $this->Html->css('all') ?> <!-- Font Awesome -->
+    <?= $this->Html->css('custom') ?> <!-- Custom Overrides -->
 
     <!-- Default content loading -->
     <?= $this->fetch('meta') ?>
@@ -48,13 +50,8 @@ $pageDescription = 'Server Health - Schoolbox';
 <body>
     <?= $this->element('navbar')?>
 
-    <nav class="top-nav">
-        <?=
-            $this->Html->link("Sign out", ['controller' => 'Users', 'action' => 'logout'], ['class' => 'button', 'style' => 'margin-left: auto;'])
-        ?>
-    </nav>
     <main class="main">
-        <div class="container">
+        <div class="container-fluid">
             <?= $this->Flash->render() ?>
             <?= $this->fetch('content') ?>
         </div>
