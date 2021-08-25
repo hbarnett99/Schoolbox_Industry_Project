@@ -140,7 +140,6 @@
     <!--   Core JS Files   -->
 <?= $this->Html->script('core/popper.min.js') ?>
 <?= $this->Html->script('core/bootstrap.min.js') ?>
-<?= $this->Html->script('plugins/perfect-scrollbar.min.js') ?>
 <?= $this->Html->script('plugins/smooth-scrollbar.min.js') ?>
 <script>
 var win = navigator.platform.indexOf('Win') > -1;
@@ -151,10 +150,3 @@ if (win && document.querySelector('#sidenav-scrollbar')) {
     Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
 }
 </script>
-<!-- Github buttons -->
-<!--<script async defer src="https://buttons.github.io/buttons.js"></script>-->
-<?= $this->Html->script('https://buttons.github.io/buttons.js') ?>
-
-<!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-<!--<script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>-->
-<?= $this->Html->script('soft-ui-dashboard.min.js?v=1.0.3') ?>

@@ -88,6 +88,9 @@ class HistoricalFactsController extends AppController
 
         $historicalFact = $historicalFact->first();
 
+        // Display a flash message when showing the most recent dataset
+        $this->Flash->success("You are viewing the most up-to-date dataset!");
+
         $this->set(compact('historicalFact'));
         $this->render('view');
     }
