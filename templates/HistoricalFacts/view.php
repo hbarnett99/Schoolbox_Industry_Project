@@ -13,9 +13,24 @@
         });
         return $array;
     }
+
+    if ($this->getRequest()->getPath() != '/historicalfacts/newest-data') {
+        $this->Breadcrumbs->add([
+            ['title' => 'Historical Facts', 'url' => ['controller' => 'historicalfacts', 'action' => 'index']],
+            ['title' => 'Fact Sets', 'url' => ['controller' => 'historicalfacts', 'action' => 'index']],
+            ['title' => $this->Time->format($historicalFact->timestamp, \IntlDateFormatter::MEDIUM, null), 'url' => ['controller' => 'historicalfacts', 'action' => 'view', $historicalFact->id]]
+        ]);
+    }
+
 ?>
 <div class="row">
     <div class="col-12">
+        <?php
+        echo $this->Breadcrumbs->render(
+            ['class' => 'breadcrumb'],
+            ['separator' => '<i id="breadcrumb-divider" class="fa fa-angle-right"> </i>']
+        );
+        ?>
         <div class="card mb-4">
             <div class="card-header pb-0">
                 <?= $this->Flash->render() ?>

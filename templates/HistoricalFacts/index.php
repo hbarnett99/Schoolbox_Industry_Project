@@ -3,10 +3,22 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\HistoricalFact[]|\Cake\Collection\CollectionInterface $historicalFacts
  */
+
+$this->Breadcrumbs->add([
+    ['title' => 'Historical Facts', 'url' => ['controller' => 'historicalfacts', 'action' => 'index']]
+]);
+
 ?>
 <div class="row">
     <div class="col-12">
+        <?php
+            echo $this->Breadcrumbs->render(
+                ['class' => 'breadcrumb'],
+                ['separator' => '<i class="fa fa-angle-right"></i>']
+            );
+        ?>
         <div class="card mb-4">
+
             <div class="card-header pb-0">
                 <h6><?= __('Historical Facts') ?></h6>
             </div>
