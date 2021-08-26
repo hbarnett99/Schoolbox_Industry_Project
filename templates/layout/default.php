@@ -33,6 +33,7 @@ $pageDescription = 'Server Health - Schoolbox';
 
     <!-- CSS Loading -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.25/sc-2.0.5/datatables.min.css"/>
     <?= $this->Html->css(['nucleo-icons', 'nucleo-svg', 'soft-ui-dashboard']) ?> <!--  Template CSS  -->
     <?php //$this->Html->css(['normalize.min', 'milligram.min', 'cake']) ?> <!--  Default CakePHP CSS  -->
     <?= $this->Html->css('all') ?> <!-- Font Awesome -->
@@ -46,6 +47,9 @@ $pageDescription = 'Server Health - Schoolbox';
     <!--  Template content loading  -->
     <?= $this->fetch('https://kit.fontawesome.com/42d5adcbca.js')?>
 
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.25/sc-2.0.5/datatables.min.js"></script>
+
+
 </head>
 <body>
     <?= $this->element('navbar')?>
@@ -56,6 +60,19 @@ $pageDescription = 'Server Health - Schoolbox';
             <?= $this->fetch('content') ?>
         </div>
     </main>
-        <?= $this->element('footer')?>
+    <?= $this->element('footer')?>
+
+    <?= '<script>
+        // Do fadeout on flash message clos
+        $(".close").click(function() {
+            $(".alert").fadeOut(200, function(){
+                $(this).remove();
+            });
+        });
+        // Animate any flash messages
+        $(document).ready(function() {
+            $(".alert").fadeIn();
+        });
+    </script>' ?>
 </body>
 </html>

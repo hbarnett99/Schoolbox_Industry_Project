@@ -105,13 +105,6 @@
           </ol>
           <h6 class="font-weight-bolder mb-0"></h6>
         </nav>
-        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-            <div class="input-group">
-              <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-              <input type="text" class="form-control" placeholder="Type here...">
-            </div>
-          </div>
           <ul class="navbar-nav  justify-content-end">
             <li class="nav-item d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
@@ -140,7 +133,6 @@
     <!--   Core JS Files   -->
 <?= $this->Html->script('core/popper.min.js') ?>
 <?= $this->Html->script('core/bootstrap.min.js') ?>
-<?= $this->Html->script('plugins/perfect-scrollbar.min.js') ?>
 <?= $this->Html->script('plugins/smooth-scrollbar.min.js') ?>
 <script>
 var win = navigator.platform.indexOf('Win') > -1;
@@ -151,10 +143,3 @@ if (win && document.querySelector('#sidenav-scrollbar')) {
     Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
 }
 </script>
-<!-- Github buttons -->
-<!--<script async defer src="https://buttons.github.io/buttons.js"></script>-->
-<?= $this->Html->script('https://buttons.github.io/buttons.js') ?>
-
-<!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-<!--<script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>-->
-<?= $this->Html->script('soft-ui-dashboard.min.js?v=1.0.3') ?>
