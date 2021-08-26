@@ -246,20 +246,35 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                         </button>
                                                     </h2>
                                                     <div id="schoolboxPackageVersionsCollapse"
-                                                         class="accordion-collapse collapse" aria-labelledby="totalUsersHeading"
-                                                    >
+                                                         class="accordion-collapse collapse" aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <?php
-                                                            $details = json_decode($historicalFact->schoolbox_package_version, JSON_PRETTY_PRINT)['productionPackageVersions'];
+                                                            <table id="schoolboxPackageVersionsTable" class="table table-responsive">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Key</th>
+                                                                        <th>Count</th>
+                                                                        <th>Percent</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <?php
+                                                                $details = json_decode($historicalFact->schoolbox_package_version, JSON_PRETTY_PRINT)['productionPackageVersions'];
 
-                                                            // Sort the array
-                                                            $details = sortByCountDescending($details);
+                                                                // Sort the array
+                                                                $details = sortByCountDescending($details);
 
-                                                            foreach ($details as $key => $detail) {
-                                                                echo $key . ' : ' . $detail['count'] . ' (' . $detail['percent'] . '%)' . "<br />";
-                                                            }
-                                                            ?>
+                                                                foreach ($details as $key => $detail) {
+                                                                    echo "<tr>
+                                                                            <td>". $key . "</td>
+                                                                            <td>" . $detail['count'] . "</td>
+                                                                            <td>" . $detail['percent'] . "%" . "</td>
+                                                                          </tr>";
+                                                                }
+                                                                ?>
+                                                                </tbody>
+                                                            </table>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -831,5 +846,13 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                 });
             });
         }());
+
+        $(document).ready(() => {
+            $('#schoolboxPackageVersionsTable').DataTable({
+                paging: false,
+                order: [[2, 'desc']],
+                info: false
+            })
+        })
 
     </script>
