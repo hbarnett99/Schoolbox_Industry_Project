@@ -14,10 +14,10 @@
         return $array;
     }
 
-    if ($this->getRequest()->getPath() != '/historicalfacts/newest-data') {
+    if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
         $this->Breadcrumbs->add([
-            ['title' => 'Historical Facts', 'url' => ['controller' => 'historicalfacts', 'action' => 'index']],
-            ['title' => 'Fact Sets', 'url' => ['controller' => 'historicalfacts', 'action' => 'index']],
+            ['title' => 'Historical Facts', 'url' => ['controller' => 'historical-facts', 'action' => 'index']],
+            ['title' => 'Fact Sets', 'url' => ['controller' => 'historical-facts', 'action' => 'index']],
             ['title' => $this->Time->format($historicalFact->timestamp, \IntlDateFormatter::MEDIUM, null), 'url' => ['controller' => 'historicalfacts', 'action' => 'view', $historicalFact->id]]
         ]);
     }
@@ -39,6 +39,9 @@
             <div class="card-body px-0 pt-0 pb-2">
                 <div class="row">
                     <div class="col-12">
+                        <div class="input-group px-4">
+                            <input type="search" id="accordion_search_bar" class="form-control" placeholder="Type here to search by fact name!">
+                        </div>
                         <div class="row p-4">
                             <!-- Left Column -->
                             <div class="col">
@@ -673,6 +676,29 @@
         </div>
     </div>
 </div>
+<script>
+
+    (function(){
+        $('#accordion_search_bar').on('change keyup paste click', function () {
+            var filter = $(this).val().toLowerCase(); //get text
+            $("#factsAccordion [data-bs-toggle]").each(function() {
+                if ($(this).text().toLowerCase().trim().indexOf(filter) < 0) {
+                    $(this).closest(".card").hide(200); //hide closest card
+                } else {
+                    $(this).closest(".card").show(200)
+                }
+            });
+            $("#factsAccordion2 [data-bs-toggle]").each(function() {
+                if ($(this).text().toLowerCase().trim().indexOf(filter) < 0) {
+                    $(this).closest(".card").hide(200); //hide closest card
+                } else {
+                    $(this).closest(".card").show(200);
+                }
+            });
+        });
+    }());
+
+</script>
 <div class="row">
 <!--    <aside class="column">-->
 <!--        <div class="side-nav">-->
@@ -681,9 +707,4 @@
 <!--            --><?//= $this->Html->link(__('List Historical Facts'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
 <!--        </div>-->
 <!--    </aside>-->
-    <div class="column-responsive column-80">
-        <div class="historicalFacts view content">
-
-        </div>
-    </div>
 </div>

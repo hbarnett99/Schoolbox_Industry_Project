@@ -5,7 +5,7 @@
  */
 
 $this->Breadcrumbs->add([
-    ['title' => 'Historical Facts', 'url' => ['controller' => 'historicalfacts', 'action' => 'index']]
+    ['title' => 'Historical Facts', 'url' => ['controller' => 'historical-facts', 'action' => 'index']]
 ]);
 
 ?>

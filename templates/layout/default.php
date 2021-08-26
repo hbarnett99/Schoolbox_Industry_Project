@@ -47,6 +47,9 @@ $pageDescription = 'Server Health - Schoolbox';
     <!--  Template content loading  -->
     <?= $this->fetch('https://kit.fontawesome.com/42d5adcbca.js')?>
 
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.25/sc-2.0.5/datatables.min.js"></script>
+
+
 </head>
 <body>
     <?= $this->element('navbar')?>
@@ -58,7 +61,6 @@ $pageDescription = 'Server Health - Schoolbox';
         </div>
     </main>
     <?= $this->element('footer')?>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.25/sc-2.0.5/datatables.min.js"></script>
 
     <?= '<script>
         // Do fadeout on flash message clos
