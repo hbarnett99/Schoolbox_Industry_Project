@@ -109,19 +109,33 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                          class="accordion-collapse collapse" aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <?php
+                                                            <table id="totalUserCountDistributionTable" class="table table-responsive">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Value</th>
+                                                                        <th>Amount</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <?php
                                                             $details = json_decode($historicalFact->schoolbox_totalusers, JSON_PRETTY_PRINT)['totalUsers'];
                                                             // Sort the array by key from low high to low
                                                             krsort($details);
                                                             foreach ($details as $key => $detail) {
+                                                                echo "<tr>";
                                                                 // If the key is 0, then replace with < 1000.
                                                                 if ($key == 0) {
-                                                                    echo '< ' . 1000 . " : " . $detail . "<br />";
+                                                                    echo "<td>" . '< 1000' . "</td>";
+                                                                    echo "<td>" . $detail . "</td>";
                                                                 } else {
-                                                                    echo '> ' . number_format($key * 1000) . " : " . $detail . "<br />";
+                                                                    echo "<td> >" . number_format($key * 1000) . "</td>";
+                                                                    echo "<td>" . $detail . "</td>";
                                                                 }
+                                                                echo "</tr>";
                                                             }
                                                             ?>
+                                                                </tbody>
+                                                            </table>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -252,9 +266,9 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                             <table id="schoolboxPackageVersionsTable" class="table table-responsive">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th>Key</th>
-                                                                        <th>Count</th>
-                                                                        <th>Percent</th>
+                                                                        <th>Value</th>
+                                                                        <th>Amount</th>
+                                                                        <th>Percentage</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -299,16 +313,31 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                     >
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <?php
-                                                            $details = json_decode($historicalFact->schoolbox_package_version, JSON_PRETTY_PRINT)['developmentPackageVersions'];
+                                                            <table id="schoolboxDevPackageVersionsTable" class="table table-responsive">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Value</th>
+                                                                        <th>Amount</th>
+                                                                        <th>Percentage</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <?php
+                                                                    $details = json_decode($historicalFact->schoolbox_package_version, JSON_PRETTY_PRINT)['developmentPackageVersions'];
 
-                                                            // Sort the array
-                                                            $details = sortByCountDescending($details);
+                                                                    // Sort the array
+                                                                    $details = sortByCountDescending($details);
 
-                                                            foreach ($details as $key => $detail) {
-                                                                echo $key . ' : ' . $detail['count'] . ' (' . $detail['percent'] . '%)' . "<br />";
-                                                            }
-                                                            ?>
+                                                                    foreach ($details as $key => $detail) {
+                                                                        echo "<tr>
+                                                                            <td>". $key . "</td>
+                                                                            <td>" . $detail['count'] . "</td>
+                                                                            <td>" . $detail['percent'] . "%" . "</td>
+                                                                          </tr>";
+                                                                    }
+                                                                    ?>
+                                                                </tbody>
+                                                            </table>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -333,16 +362,30 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                     >
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
+                                                            <table id="stagingSchoolboxPackageVersionsTable" class="table table-responsive">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Value</th>
+                                                                        <th>Amount</th>
+                                                                        <th>Percentage</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+
                                                             <?php
                                                             $details = json_decode($historicalFact->schoolboxdev_package_version, JSON_PRETTY_PRINT)['productionPackageVersions'];
 
                                                             // Sort the array
                                                             $details = sortByCountDescending($details);
 
-                                                            foreach ($details as $key => $detail) {
-                                                                echo $key . ' : ' . $detail['count'] . ' (' . $detail['percent'] . '%)' . "<br />";
-                                                            }
+                                                            echo "<tr>
+                                                                            <td>". $key . "</td>
+                                                                            <td>" . $detail['count'] . "</td>
+                                                                            <td>" . $detail['percent'] . "%" . "</td>
+                                                                          </tr>";
                                                             ?>
+                                                                </tbody>
+                                                            </table>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -367,6 +410,15 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                     >
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
+                                                            <table id="stagingSchoolboxDevPackageVersionsTable" class="table table-responsive">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Value</th>
+                                                                        <th>Amount</th>
+                                                                        <th>Percentage</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
                                                             <?php
                                                             $details = json_decode($historicalFact->schoolboxdev_package_version, JSON_PRETTY_PRINT)['developmentPackageVersions'];
 
@@ -374,9 +426,14 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                             $details = sortByCountDescending($details);
 
                                                             foreach ($details as $key => $detail) {
-                                                                echo $key . ' : ' . $detail['count'] . ' (' . $detail['percent'] . '%)' . "<br />";
-                                                            }
+                                                                echo "<tr>
+                                                                            <td>". $key . "</td>
+                                                                            <td>" . $detail['count'] . "</td>
+                                                                            <td>" . $detail['percent'] . "%" . "</td>
+                                                                          </tr>";                                                            }
                                                             ?>
+                                                                </tbody>
+                                                            </table>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -400,6 +457,15 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                          aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
+                                                            <table id="productionSiteVersionsTable" class="table table-responsive">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Value</th>
+                                                                        <th>Amount</th>
+                                                                        <th>Percentage</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
                                                             <?php
                                                             $details = json_decode($historicalFact->schoolbox_config_site_version, JSON_PRETTY_PRINT)['productionServers'];
 
@@ -407,9 +473,14 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                             $details = sortByCountDescending($details);
 
                                                             foreach ($details as $key => $detail) {
-                                                                echo $key . ' : ' . $detail['count'] . ' (' . $detail['percent'] . '%)' . "<br />";
-                                                            }
+                                                                echo "<tr>
+                                                                            <td>". $key . "</td>
+                                                                            <td>" . $detail['count'] . "</td>
+                                                                            <td>" . $detail['percent'] . "%" . "</td>
+                                                                          </tr>";                                                                 }
                                                             ?>
+                                                                </tbody>
+                                                            </table>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -437,6 +508,15 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                          aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
+                                                            <table id="stagingSiteVersionsTable" class="table table-responsive">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Value</th>
+                                                                        <th>Amount</th>
+                                                                        <th>Percentage</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
                                                             <?php
                                                             $details = json_decode($historicalFact->schoolbox_config_site_version, JSON_PRETTY_PRINT)['stagingServers'];
 
@@ -444,9 +524,14 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                             $details = sortByCountDescending($details);
 
                                                             foreach ($details as $key => $detail) {
-                                                                echo $key . ' : ' . $detail['count'] . ' (' . $detail['percent'] . '%)' . "<br />";
-                                                            }
+                                                                echo "<tr>
+                                                                            <td>". $key . "</td>
+                                                                            <td>" . $detail['count'] . "</td>
+                                                                            <td>" . $detail['percent'] . "%" . "</td>
+                                                                          </tr>";                                                                }
                                                             ?>
+                                                                </tbody>
+                                                            </table>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -470,6 +555,15 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                          aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
+                                                            <table id="virtualTable" class="table table-responsive">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Value</th>
+                                                                        <th>Amount</th>
+                                                                        <th>Percentage</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
                                                             <?php
                                                             $details = json_decode($historicalFact->virtual, JSON_PRETTY_PRINT);
 
@@ -477,9 +571,15 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                             $details = sortByCountDescending($details);
 
                                                             foreach ($details as $key => $detail) {
-                                                                echo $key . ' : ' . $detail['count'] . ' (' . $detail['percent'] . '%)' . "<br />";
+                                                                echo "<tr>
+                                                                            <td>". $key . "</td>
+                                                                            <td>" . $detail['count'] . "</td>
+                                                                            <td>" . $detail['percent'] . "%" . "</td>
+                                                                          </tr>";
                                                             }
                                                             ?>
+                                                                </tbody>
+                                                            </table>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -503,6 +603,15 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                          aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
+                                                            <table id="linuxVersionsTable" class="table table-responsive">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th>Value</th>
+                                                                    <th>Amount</th>
+                                                                    <th>Percentage</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
                                                             <?php
                                                             $details = json_decode($historicalFact->lsbdistdescription, JSON_PRETTY_PRINT);
 
@@ -510,9 +619,15 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                             $details = sortByCountDescending($details);
 
                                                             foreach ($details as $key => $detail) {
-                                                                echo $key . ' : ' . $detail['count'] . ' (' . $detail['percent'] . '%)' . "<br />";
+                                                                echo "<tr>
+                                                                            <td>". $key . "</td>
+                                                                            <td>" . $detail['count'] . "</td>
+                                                                            <td>" . $detail['percent'] . "%" . "</td>
+                                                                          </tr>";
                                                             }
                                                             ?>
+                                                                </tbody>
+                                                            </table>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -536,6 +651,15 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                          aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
+                                                            <table id="kernelVersionsTable" class="table table-responsive">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Value</th>
+                                                                        <th>Amount</th>
+                                                                        <th>Percentage</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
                                                             <?php
                                                             $details = json_decode($historicalFact->kernelmajversion, JSON_PRETTY_PRINT);
 
@@ -543,9 +667,15 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                             $details = sortByCountDescending($details);
 
                                                             foreach ($details as $key => $detail) {
-                                                                echo $key . ' : ' . $detail['count'] . ' (' . $detail['percent'] . '%)' . "<br />";
+																echo "<tr>
+                                                                            <td>". $key . "</td>
+                                                                            <td>" . $detail['count'] . "</td>
+                                                                            <td>" . $detail['percent'] . "%" . "</td>
+                                                                          </tr>";
                                                             }
                                                             ?>
+                                                                </tbody>
+                                                            </table>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -569,16 +699,31 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                          aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <?php
+                                                            <table id="kernelReleasesTable" class="table table-responsive">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Value</th>
+                                                                        <th>Amount</th>
+                                                                        <th>Percentage</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <?php
                                                             $details = json_decode($historicalFact->kernelrelease, JSON_PRETTY_PRINT);
 
                                                             // Sort the array
                                                             $details = sortByCountDescending($details);
 
                                                             foreach ($details as $key => $detail) {
-                                                                echo $key . ' : ' . $detail['count'] . ' (' . $detail['percent'] . '%)' . "<br />";
+                                                                echo "<tr>
+                                                                            <td>". $key . "</td>
+                                                                            <td>" . $detail['count'] . "</td>
+                                                                            <td>" . $detail['percent'] . "%" . "</td>
+                                                                          </tr>";
                                                             }
                                                             ?>
+                                                                </tbody>
+                                                            </table>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -602,16 +747,31 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                          aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <?php
+                                                            <table id="phpVersionsTable" class="table table-responsive">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Value</th>
+                                                                        <th>Amount</th>
+                                                                        <th>Percentage</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <?php
                                                             $details = json_decode($historicalFact->php_cli_version, JSON_PRETTY_PRINT);
 
                                                             // Sort the array
                                                             $details = sortByCountDescending($details);
 
                                                             foreach ($details as $key => $detail) {
-                                                                echo $key . ' : ' . $detail['count'] . ' (' . $detail['percent'] . '%)' . "<br />";
+                                                                echo "<tr>
+                                                                            <td>". $key . "</td>
+                                                                            <td>" . $detail['count'] . "</td>
+                                                                            <td>" . $detail['percent'] . "%" . "</td>
+                                                                          </tr>";
                                                             }
                                                             ?>
+                                                                </tbody>
+                                                            </table>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -635,16 +795,31 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                          aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <?php
+                                                            <table id="mysqlVersionsTable" class="table table-responsive">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Value</th>
+                                                                        <th>Amount</th>
+                                                                        <th>Percentage</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <?php
                                                             $details = json_decode($historicalFact->mysql_extra_version, JSON_PRETTY_PRINT);
 
                                                             // Sort the array
                                                             $details = sortByCountDescending($details);
 
                                                             foreach ($details as $key => $detail) {
-                                                                echo $key . ' : ' . $detail['count'] . ' (' . $detail['percent'] . '%)' . "<br />";
+                                                                echo "<tr>
+                                                                            <td>". $key . "</td>
+                                                                            <td>" . $detail['count'] . "</td>
+                                                                            <td>" . $detail['percent'] . "%" . "</td>
+                                                                          </tr>";
                                                             }
                                                             ?>
+                                                                </tbody>
+                                                            </table>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -668,16 +843,31 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                          aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <?php
+                                                            <table id="processorsTable" class="table table-responsive">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Value</th>
+                                                                        <th>Amount</th>
+                                                                        <th>Percentage</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <?php
                                                             $details = json_decode($historicalFact->processorcount, JSON_PRETTY_PRINT);
 
                                                             // Sort the array
                                                             $details = sortByCountDescending($details);
 
                                                             foreach ($details as $key => $detail) {
-                                                                echo $key . ' : ' . $detail['count'] . ' (' . $detail['percent'] . '%)' . "<br />";
+																echo "<tr>
+                                                                            <td>". $key . "</td>
+                                                                            <td>" . $detail['count'] . "</td>
+                                                                            <td>" . $detail['percent'] . "%" . "</td>
+                                                                          </tr>";
                                                             }
                                                             ?>
+                                                                </tbody>
+                                                            </table>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -701,16 +891,31 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                          aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <?php
+                                                            <table id="ramSizeTable" class="table table-responsive">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Value</th>
+                                                                        <th>Amount</th>
+                                                                        <th>Percentage</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <?php
                                                             $details = json_decode($historicalFact->memorysize, JSON_PRETTY_PRINT);
 
                                                             // Sort the array
                                                             $details = sortByCountDescending($details);
 
                                                             foreach ($details as $key => $detail) {
-                                                                echo $key . ' : ' . $detail['count'] . ' (' . $detail['percent'] . '%)' . "<br />";
+                                                                echo "<tr>
+                                                                            <td>". $key . "GB" . "</td>
+                                                                            <td>" . $detail['count'] . "</td>
+                                                                            <td>" . $detail['percent'] . "%" . "</td>
+                                                                          </tr>";
                                                             }
                                                             ?>
+                                                                </tbody>
+                                                            </table>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -734,16 +939,31 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                          aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <?php
+                                                            <table id="dateTimeZoneTable" class="table table-responsive">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Value</th>
+                                                                        <th>Amount</th>
+                                                                        <th>Percentage</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <?php
                                                             $details = json_decode($historicalFact->schoolbox_config_date_timezone, JSON_PRETTY_PRINT);
 
                                                             // Sort the array
                                                             $details = sortByCountDescending($details);
 
                                                             foreach ($details as $key => $detail) {
-                                                                echo $key . ' : ' . $detail['count'] . ' (' . $detail['percent'] . '%)' . "<br />";
+                                                                echo "<tr>
+                                                                            <td>". $key . "</td>
+                                                                            <td>" . $detail['count'] . "</td>
+                                                                            <td>" . $detail['percent'] . "%" . "</td>
+                                                                          </tr>";
                                                             }
                                                             ?>
+                                                                </tbody>
+                                                            </table>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -767,16 +987,31 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                          aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <?php
+                                                            <table id="externalDbTable" class="table table-responsive">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Value</th>
+                                                                        <th>Amount</th>
+                                                                        <th>Percentage</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <?php
                                                             $details = json_decode($historicalFact->schoolbox_config_external_type, JSON_PRETTY_PRINT);
 
                                                             // Sort the array
                                                             $details = sortByCountDescending($details);
 
                                                             foreach ($details as $key => $detail) {
-                                                                echo $key . ' : ' . $detail['count'] . ' (' . $detail['percent'] . '%)' . "<br />";
+                                                                echo "<tr>
+                                                                            <td>". $key . "</td>
+                                                                            <td>" . $detail['count'] . "</td>
+                                                                            <td>" . $detail['percent'] . "%" . "</td>
+                                                                          </tr>";
                                                             }
                                                             ?>
+                                                                </tbody>
+                                                            </table>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -800,16 +1035,31 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                          aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <?php
+                                                            <table id="firstFileTable" class="table table-responsive">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Value</th>
+                                                                        <th>Amount</th>
+                                                                        <th>Percentage</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <?php
                                                             $details = json_decode($historicalFact->schoolbox_first_file_upload_year, JSON_PRETTY_PRINT);
 
                                                             // Sort the array
                                                             $details = sortByCountDescending($details);
 
                                                             foreach ($details as $key => $detail) {
-                                                                echo $key . ' : ' . $detail['count'] . ' (' . $detail['percent'] . '%)' . "<br />";
+                                                                echo "<tr>
+                                                                            <td>". $key . "</td>
+                                                                            <td>" . $detail['count'] . "</td>
+                                                                            <td>" . $detail['percent'] . "%" . "</td>
+                                                                          </tr>";
                                                             }
                                                             ?>
+                                                                </tbody>
+                                                            </table>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -847,12 +1097,99 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
             });
         }());
 
+        // DataTable configuration
         $(document).ready(() => {
+            $('#totalUserCountDistributionTable').DataTable({
+                paging: false,
+                order: [[1, 'desc']],
+                info: false
+            })
             $('#schoolboxPackageVersionsTable').DataTable({
                 paging: false,
                 order: [[2, 'desc']],
                 info: false
             })
+            $('#schoolboxDevPackageVersionsTable').DataTable({
+                paging: false,
+                order: [[2, 'desc']],
+                info: false
+            })
+            $('#stagingSchoolboxPackageVersionsTable').DataTable({
+                paging: false,
+                order: [[2, 'desc']],
+                info: false
+            })
+            $('#stagingSchoolboxDevPackageVersionsTable').DataTable({
+                paging: false,
+                order: [[2, 'desc']],
+                info: false
+            })
+            $('#productionSiteVersionsTable').DataTable({
+                paging: false,
+                order: [[2, 'desc']],
+                info: false
+            })
+            $('#stagingSiteVersionsTable').DataTable({
+                paging: false,
+                order: [[2, 'desc']],
+                info: false
+            })
+            $('#virtualTable').DataTable({
+                paging: false,
+                order: [[2, 'desc']],
+                info: false
+            })
+            $('#linuxVersionsTable').DataTable({
+                paging: false,
+                order: [[2, 'desc']],
+                info: false
+            })
+            $('#kernelVersionsTable').DataTable({
+                paging: false,
+                order: [[2, 'desc']],
+                info: false
+            })
+            $('#kernelReleasesTable').DataTable({
+                paging: false,
+                order: [[2, 'desc']],
+                info: false
+            })
+            $('#phpVersionsTable').DataTable({
+                paging: false,
+                order: [[2, 'desc']],
+                info: false
+            })
+            $('#mysqlVersionsTable').DataTable({
+                paging: false,
+                order: [[2, 'desc']],
+                info: false
+            })
+            $('#processorsTable').DataTable({
+                paging: false,
+                order: [[2, 'desc']],
+                info: false
+            })
+            $('#ramSizeTable').DataTable({
+                paging: false,
+                order: [[2, 'desc']],
+                info: false
+            })
+            $('#dateTimeZoneTable').DataTable({
+                paging: false,
+                order: [[2, 'desc']],
+                info: false
+            })
+            $('#externalDbTable').DataTable({
+                paging: false,
+                order: [[2, 'desc']],
+                info: false
+            })
+            $('#firstFileTable').DataTable({
+                paging: false,
+                order: [[2, 'desc']],
+                info: false
+            })
+
         })
 
     </script>
