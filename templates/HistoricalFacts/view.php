@@ -14,6 +14,7 @@
         return $array;
     }
 
+    // Only show breadcrumbs when not on main page
     if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
         $this->Breadcrumbs->add([
             ['title' => 'Historical Facts', 'url' => ['controller' => 'historical-facts', 'action' => 'index']],
@@ -34,7 +35,20 @@
         <div class="card mb-4">
             <div class="card-header pb-0">
                 <?= $this->Flash->render() ?>
-                <h4><?= __('Fact Set') ?> as of <?=  h($this->Time->format($historicalFact->timestamp, \IntlDateFormatter::MEDIUM, null)) ?></h4>
+                <div class="row">
+                    <div class="col">
+                        <h4><?= __('Fact Set') ?> as of <?=  h($this->Time->format($historicalFact->timestamp, \IntlDateFormatter::MEDIUM, null)) ?></h4>
+                    </div>
+                    <div class="col-3">
+                        <div class="action-buttons pb-2 float-end">
+                            <?php if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
+                                echo $this->Form->postLink(__('<i class="fas fa-trash"></i> Delete'), ['action' => 'delete', $historicalFact->id], ['confirm' => __('Are you sure you want to delete # {0}?', $historicalFact->id), 'class' => 'btn btn-danger mx-1', 'escape' => false]);
+                                echo $this->Html->link(__('<i class="fas fa-list"></i> View all Facts'), ['action' => 'index'], ['class' => 'btn btn-info', 'escape' => false]) ;
+                            } ?>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 <div class="row">
@@ -699,12 +713,3 @@
     }());
 
 </script>
-<div class="row">
-<!--    <aside class="column">-->
-<!--        <div class="side-nav">-->
-<!--            <h4 class="heading">--><?//= __('Actions') ?><!--</h4>-->
-<!--            --><?//= $this->Form->postLink(__('Delete Historical Fact'), ['action' => 'delete', $historicalFact->id], ['confirm' => __('Are you sure you want to delete # {0}?', $historicalFact->id), 'class' => 'side-nav-item']) ?>
-<!--            --><?//= $this->Html->link(__('List Historical Facts'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-<!--        </div>-->
-<!--    </aside>-->
-</div>
