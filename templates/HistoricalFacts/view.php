@@ -65,7 +65,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                 <div class="accordion" id="factsAccordion">
                                     <div class="row">
                                         <div class="col" id="accordionColOne">
-                                            <!-- Accordion Item Begin -->
+                                            <!-- Accordion Item (Total Users) Begin -->
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
@@ -91,7 +91,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                 </div>
                                             </div>
                                             <!-- End Accordion Item -->
-                                            <!-- Accordion Item Begin -->
+                                            <!-- Accordion Item (User Distribution) Begin -->
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
@@ -127,7 +127,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                 </div>
                                             </div>
                                             <!-- End Accordion Item -->
-                                            <!-- Accordion Item Begin -->
+                                            <!-- Accordion Item (Total Student) Begin -->
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
@@ -153,7 +153,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                 </div>
                                             </div>
                                             <!-- End Accordion Item -->
-                                            <!-- Accordion Item Begin -->
+                                            <!-- Accordion Item (Total Staff) Begin -->
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
@@ -179,7 +179,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                 </div>
                                             </div>
                                             <!-- End Accordion Item -->
-                                            <!-- Accordion Item Begin -->
+                                            <!-- Accordion Item (Total Parents) Begin -->
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
@@ -205,7 +205,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                 </div>
                                             </div>
                                             <!-- End Accordion Item -->
-                                            <!-- Accordion Item Begin -->
+                                            <!-- Accordion Item (Total Campus) Begin -->
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
@@ -231,7 +231,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                 </div>
                                             </div>
                                             <!-- End Accordion Item -->
-                                            <!-- Accordion Item Begin -->
+                                            <!-- Accordion Item (Production Schoolbox Package Versions) Begin -->
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
@@ -265,7 +265,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                 </div>
                                             </div>
                                             <!-- End Accordion Item -->
-                                            <!-- Accordion Item Begin -->
+                                            <!-- Accordion Item (Production Schoolboxdev Package Versions) Begin -->
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
@@ -299,7 +299,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                 </div>
                                             </div>
                                             <!-- End Accordion Item -->
-                                            <!-- Accordion Item Begin -->
+                                            <!-- Accordion Item (Staging Schoolbox Package Versions) Begin -->
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
@@ -333,7 +333,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                 </div>
                                             </div>
                                             <!-- End Accordion Item -->
-                                            <!-- Accordion Item Begin -->
+                                            <!-- Accordion Item (Staging Schoolboxdev Package Versions) Begin -->
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
@@ -367,7 +367,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                 </div>
                                             </div>
                                             <!-- End Accordion Item -->
-                                            <!-- Accordion Item Begin -->
+                                            <!-- Accordion Item (Production Site Versions) Begin -->
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
@@ -402,7 +402,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <!-- End Accordion Item -->
                                         </div>
                                         <div class="col" id="accordionColTwo">
-                                            <!-- Accordion Item Begin -->
+                                            <!-- Accordion Item (Staging Site Versions) Begin -->
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
@@ -437,7 +437,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                 </div>
                                             </div>
                                             <!-- End Accordion Item -->
-                                            <!-- Accordion Item Begin -->
+                                            <!-- Accordion Item (Virtual) Begin -->
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
@@ -470,7 +470,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                 </div>
                                             </div>
                                             <!-- End Accordion Item -->
-                                            <!-- Accordion Item Begin -->
+                                            <!-- Accordion Item (Linux Versions) Begin -->
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
@@ -503,7 +503,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                 </div>
                                             </div>
                                             <!-- End Accordion Item -->
-                                            <!-- Accordion Item Begin -->
+                                            <!-- Accordion Item (Kernel Major Versions) Begin -->
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
@@ -536,7 +536,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                 </div>
                                             </div>
                                             <!-- End Accordion Item -->
-                                            <!-- Accordion Item Begin -->
+                                            <!-- Accordion Item (Kernel Releases) Begin -->
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
@@ -569,7 +569,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                 </div>
                                             </div>
                                             <!-- End Accordion Item -->
-                                            <!-- Accordion Item Begin -->
+                                            <!-- Accordion Item (PHP CLI Versions) Begin -->
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
@@ -602,7 +602,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                 </div>
                                             </div>
                                             <!-- End Accordion Item -->
-                                            <!-- Accordion Item Begin -->
+                                            <!-- Accordion Item (MySQL Versions) Begin -->
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
@@ -635,7 +635,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                 </div>
                                             </div>
                                             <!-- End Accordion Item -->
-                                            <!-- Accordion Item Begin -->
+                                            <!-- Accordion Item (Number of Processors) Begin -->
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
@@ -668,7 +668,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                 </div>
                                             </div>
                                             <!-- End Accordion Item -->
-                                            <!-- Accordion Item Begin -->
+                                            <!-- Accordion Item (RAM Size) Begin -->
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
@@ -701,7 +701,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                 </div>
                                             </div>
                                             <!-- End Accordion Item -->
-                                            <!-- Accordion Item Begin -->
+                                            <!-- Accordion Item (Schoolbox Config - Date / Time) Begin -->
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
@@ -734,7 +734,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                 </div>
                                             </div>
                                             <!-- End Accordion Item -->
-                                            <!-- Accordion Item Begin -->
+                                            <!-- Accordion Item (Schoolbox Config - External DB Type) Begin -->
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
@@ -767,7 +767,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                 </div>
                                             </div>
                                             <!-- End Accordion Item -->
-                                            <!-- Accordion Item Begin -->
+                                            <!-- Accordion Item (Schoolbox - First File Upload Date) Begin -->
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
