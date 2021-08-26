@@ -39,7 +39,7 @@
                     <div class="col">
                         <h4><?= __('Fact Set') ?> as of <?=  h($this->Time->format($historicalFact->timestamp, \IntlDateFormatter::MEDIUM, null)) ?></h4>
                     </div>
-                    <div class="col-3">
+                    <div class="col">
                         <div class="action-buttons pb-2 float-end">
                             <?php if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                 echo $this->Form->postLink(__('<i class="fas fa-trash"></i> Delete'), ['action' => 'delete', $historicalFact->id], ['confirm' => __('Are you sure you want to delete # {0}?', $historicalFact->id), 'class' => 'btn btn-danger mx-1', 'escape' => false]);
