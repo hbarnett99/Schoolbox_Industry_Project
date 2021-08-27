@@ -46,6 +46,7 @@ $pageDescription = 'Server Health - Schoolbox';
     <!--  Template content loading  -->
     <?= $this->fetch('https://kit.fontawesome.com/42d5adcbca.js')?>
 
+    <!-- DataTables Scripts -->
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.25/sc-2.0.5/datatables.min.js"></script>
 
 </head>
@@ -59,6 +60,12 @@ $pageDescription = 'Server Health - Schoolbox';
         </div>
     </main>
     <?= $this->element('footer')?>
+
+    <!--   Core JS Files   -->
+    <?= $this->Html->script('core/popper.min.js') ?>
+    <?= $this->Html->script('core/bootstrap.min.js') ?>
+    <?= $this->Html->script('plugins/smooth-scrollbar.min.js') ?>
+    <?= $this->Html->script('plugins/natural.js') ?>
 
     <?= '<script>
         // Do fadeout on flash message clos

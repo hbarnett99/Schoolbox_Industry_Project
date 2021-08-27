@@ -1172,6 +1172,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
             $('#ramSizeTable').DataTable({
                 paging: false,
                 order: [[2, 'desc']],
+                columnDefs: [ { targets: 0, type: 'natural' } ],
                 info: false
             })
             $('#dateTimeZoneTable').DataTable({
