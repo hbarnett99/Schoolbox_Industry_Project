@@ -128,12 +128,7 @@
       </div>
     </nav>
 </body>
-    <!-- End Navbar -->
-
-    <!--   Core JS Files   -->
-<?= $this->Html->script('core/popper.min.js') ?>
-<?= $this->Html->script('core/bootstrap.min.js') ?>
-<?= $this->Html->script('plugins/smooth-scrollbar.min.js') ?>
+<!-- End Navbar -->
 
 <script>
 var win = navigator.platform.indexOf('Win') > -1;

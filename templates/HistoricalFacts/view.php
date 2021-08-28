@@ -39,7 +39,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                 <div class="row">
                     <div class="col">
                         <h4><?= __('Fact Set') ?> as
-                            of <?= h($this->Time->format($historicalFact->timestamp, \IntlDateFormatter::MEDIUM, null)) ?></h4>
+                            of <span class="font-weight-bolder"><?= $this->Time->format($historicalFact->timestamp, \IntlDateFormatter::MEDIUM, null) ?></span></h4>
                     </div>
                     <div class="col">
                         <div class="action-buttons pb-2 float-end">
@@ -1172,6 +1172,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
             $('#ramSizeTable').DataTable({
                 paging: false,
                 order: [[2, 'desc']],
+                columnDefs: [ { targets: 0, type: 'natural' } ],
                 info: false
             })
             $('#dateTimeZoneTable').DataTable({
