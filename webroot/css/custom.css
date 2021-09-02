@@ -21,3 +21,11 @@
 #breadcrumb-divider {
     padding: 5px;
 }
+
+select {
+    appearance: auto !important;
+}
+
+option {
+    font-family: "Open Sans";
+}

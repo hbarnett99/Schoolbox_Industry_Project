@@ -26,25 +26,37 @@
                     <div class="col-12">
                         <div class="card-body">
                             <?php
+                            // If the results value is set, then display value information, otherwise display greeting message
                                 if (isset($results)) {
-                                    echo empty($results[0]) && empty($results[1]) ? 'Unknown fact name, or no details returned from server.' : print_r($results);
+                                    if (!array_filter(array_map('array_filter', $results))) {
+                                      echo 'Unknown fact name, or no details returned from server.';
+                                    } else {
+                                        $json = json_encode($results);
+                                        echo $json;
+                                    }
                                 } else {
                                     echo 'Welcome to the individual Facts page. Please select a fact from the below dropdown:';
                                 }
                             ?>
 
-                            <?php
-                                echo $this->Form->create();
-                                echo $this->Form->select(
+                            <hr />
+                            <div class="form-group">
+                                <?php
+                                echo $this->Form->create(null, ['url' => ['action' => 'fact_details']]);
+                                echo '<div class="row"><div class="col-4">';
+                                echo $this->Form->input(
                                     'fact',
-                                    [1, 2, 3, 4, 5]
+                                    [
+                                        'type' => 'select',
+                                        'options' => $factNamesList,
+                                        'class' => 'form-control'
+                                    ]
                                 );
-                                echo $this->Form->submit();
+                                echo '</div><div class="col-3">';
+                                echo $this->Form->button('Go to fact details!', ['type' => 'submit', 'class' => 'btn']);
                                 echo $this->Form->end();
-                            ?>
-
-                            <div class="input-group">
-
+                                echo '</div>';
+                                ?>
                             </div>
                         </div>
                     </div>
