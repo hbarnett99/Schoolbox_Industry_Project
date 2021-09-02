@@ -262,7 +262,7 @@
         ];
     }
 
-    function virtual($results) : array {
+    function virtualEnv($results) : array {
         $serverTypes = [];
         $total = 0;
 
