@@ -19,7 +19,7 @@
                 <div class="">
                     <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
                         <div class="card z-index-0 ">
-                            <div class="card-header text-center pt-4">
+                            <div class="card-header text-center">
                                 <?= $this->Html->image('../favicon.ico', ['class' => 'img-fluid']); ?>
 <!--                                <h5>Login with Google</h5>-->
                             </div>
@@ -27,7 +27,7 @@
                                 <?=
                                     $this->Flash->render();
                                 ?>
-
+                                <h3 class="card-header text-center"> Login with Google </h3>
                                 <!-- ATTEMPTED CONVERSION OF TEMPLATE TO PHP -->
                                 <?php
                                 echo $this->Form->postLink(
@@ -41,11 +41,13 @@
                                         '?' => ['redirect' => $this->request->getQuery('redirect')]
                                     ],
                                     [
-                                        'class' => 'nav-link active btn btn-outline-light w-100 bg-white',
+                                        'class' => 'nav-link active btn btn-outline-light w-100 bg-white ml-3',
                                         'escape' => false
                                     ]
                                 );
                                 ?>
+                            </div>
+                            <div class="pb-4"> 
                             </div>
                         </div>
                     </div>
