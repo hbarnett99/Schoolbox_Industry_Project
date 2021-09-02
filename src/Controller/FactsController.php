@@ -100,8 +100,6 @@ class FactsController extends AppController
                 return schoolbox_package_version($this->getDetailsFromServer('schoolbox_package_version'));
             case "schoolboxdev_package_version":
                 return schoolboxdev_package_version($this->getDetailsFromServer('schoolboxdev_package_version'));
-            case "schoolbox_config_site_version":
-                return schoolbox_config_site_version($this->getDetailsFromServer('schoolbox_config_site_version'));
             case "virtual":
                 return virtualEnv($this->getDetailsFromServer('virtual'));
             case "lsbdistdescription":
@@ -125,7 +123,8 @@ class FactsController extends AppController
             case "schoolbox_first_file_upload_year":
                 return schoolbox_first_file_upload_year($this->getDetailsFromServer('schoolbox_first_file_upload_year'));
             default:
-                return $this->getDetailsFromServer($fact);
+                $returnResults = $this->getDetailsFromServer($fact);
+                return array_merge($returnResults[0], $returnResults[1]);
         }
     }
 
