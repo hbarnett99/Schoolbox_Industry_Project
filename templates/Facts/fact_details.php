@@ -20,7 +20,7 @@ $knownFacts = [
 	"schoolbox_config_date_timezone",
     "schoolbox_config_external_type",
 	"schoolbox_first_file_upload_year"
-]
+];
 
 ?>
 
@@ -36,40 +36,132 @@ $knownFacts = [
 
             <div class="card-header pb-0">
                 <?php
+                    // Determine what header to show
                     if (isset($fact)) {
                         echo "<h5><em><b>'$fact'</b></em> Details</h5>";
+                        // Determine if this fact is instance specific
+                        $isInstanceSpecific =
+                            str_starts_with($fact, 'schoolbox_config_') ||
+                            str_starts_with($fact, 'schoolbox_users_')  ||
+                            str_starts_with($fact, 'schoolbox_media_')  ||
+                            $fact == 'schoolbox_totalusers' ||
+                            $fact == 'schoolbox_totalcampus';
+
                     } else {
                         echo '<h5>Individual Fact Details</h5>';
+                        $isInstanceSpecific = false;
                     }
                 ?>
+
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 <div class="row">
                     <div class="col-12">
                         <div class="card-body">
                             <?php
-                            // If the results value is set, then display value information, otherwise display greeting message
-                                if (isset($results)) {
-                                    if (!array_filter(array_map('array_filter', $results))) {
-                                      echo 'Unknown fact name, or no details returned from server.';
-                                    } else {
-                                        if (in_array($fact, $knownFacts)) {
-                                            echo "Known fact";
-                                        } else {
-                                            foreach ($results as $result) {
-                                                debug($result);
+                                // Check if results are set, and display default message if not
+                                if (!isset($results)) {
+                                    echo 'Welcome to the individual Facts page. Please select a fact from the below dropdown:';
+                                } else {
+                                    if (isset($results[0])) {
+                                        if ($results[0] !== 'integer') {
+                                            if (!array_filter(array_map('array_filter', $results))) {
+                                                echo 'Unknown fact name, or no details returned from server.';
                                             }
                                         }
-
                                     }
-                                } else {
-                                    echo 'Welcome to the individual Facts page. Please select a fact from the below dropdown:';
+
+                                    // Start creating the table
+                                    echo '<table id="factTable" class="table table-responsive w-100"><thead><tr>';
+
+
+                                    // If in the array of known facts, render entirely different table + skip data processing
+                                    if (in_array($fact, $knownFacts)) {
+                                        // If the known fact is an integer (e.g. total users), then just display the value and nothing else
+                                        if (is_int(array_values($results)[0])) {
+                                            echo '<th>Value</th></tr><tbody><td>' . array_values($results)[0] . '</td></tr>';
+                                        } else {
+                                            // Create the header
+                                            echo "<th>Value</th>
+                                                  <th>Amount</th>
+                                                  <th>Percentage</th>
+                                                  </tr></thead>";
+                                            // Create the columns
+                                            echo '<tbody>';
+                                            foreach ($results as $key => $value) {
+                                                echo '<tr>';
+                                                echo '<td>' . $key . '</td>';
+                                                echo '<td>' . $value['count'] . '</td>';
+                                                echo '<td>' . $value['percent'] . '</td>';
+                                                echo '</tr>';
+                                            }
+                                            echo '</tbody>';
+                                        }
+                                    } else {
+                                        // If instance-specific, render with InstanceID column
+                                        if ($isInstanceSpecific) {
+                                            echo '<th>Instance ID</th><th>Certname</th><th>Value</th>';
+                                        } else {
+                                            echo '<th>Certname</th><th>Value</th>';
+                                        }
+                                        echo '</tr></thead>';
+                                        echo '<tbody>';
+
+                                        $data = [];
+                                        $certNameValues = [];
+                                        // Loop over returned results
+                                        foreach ($results as $result) {
+                                            $certNameValues[$result['certname']] = $result['value'];
+                                        }
+                                        // If the query is instance specific, then get the instance ID as the first column of the table
+                                        foreach ($certNameValues as $certName => $values) {
+                                            if ($isInstanceSpecific) {
+                                                foreach ($values as $instanceId => $value) {
+                                                    if (!array_key_exists($instanceId, $data)) {
+                                                        $data[$instanceId] = [[], []];
+                                                    }
+                                                    $data[$instanceId][0][] = $certName;
+                                                    $data[$instanceId][1][] = $value;
+                                                }
+                                                // If not instance specific, then just create the data array normally
+                                            } else {
+                                                foreach ($certNameValues as $certName => $value) {
+                                                    $data[$certName] = [is_array($value) ? json_encode($value) : $value];
+                                                }
+                                            }
+                                        }
+                                        // If instance specific, render with 3 columns (InstanceID, CertName, Value)
+                                        foreach ($data as $key => $value) {
+                                            if ($isInstanceSpecific) {
+                                                // Create key / instance ID value
+                                                echo '<tr>';
+                                                echo '<td>' . $key . '</td>';
+
+                                                // Create certname
+                                                echo '<td>';
+                                                echo implode(', ', $value[0]);
+                                                echo '</td>';
+
+                                                // Create fact value
+                                                echo '<td>' . $value[1][0] . '</td>';
+                                                echo '</tr>';
+                                            } else {
+                                                // If not instance specific, render with 2 columns (CertName, Value)
+                                                echo '<tr>';
+                                                echo '<td>' . $key . '</td>';
+                                                echo '<td>' . $value[0] . '</td>';
+                                                echo '</tr>';
+                                            }
+                                        }
+                                    }
+                                    echo '</tbody></table>';
                                 }
-                            ?>
+                                ?>
 
                             <hr />
                             <div class="form-group">
                                 <?php
+                                // Create an HTML form for selecting the type
                                 echo $this->Form->create(null, ['url' => ['action' => 'fact_details']]);
                                 echo '<div class="row"><div class="col-4">';
                                 echo $this->Form->input(
@@ -93,3 +185,27 @@ $knownFacts = [
         </div>
     </div>
 </div>
+<script>
+    // DataTable initialisation
+    $(document).ready(() => {
+        $('#factTable').DataTable({
+            paging: false,
+            order: [
+                [
+                    <?php
+                    if ($isInstanceSpecific) {
+                        if (in_array($fact, $knownFacts)) {
+                            echo 0;
+                        } else {
+                            echo 2;
+                        }
+                    } else {
+                        echo 1;
+                    }
+                    ?>,
+                    'desc']
+            ],
+            info: false
+        })
+    });
+</script>
