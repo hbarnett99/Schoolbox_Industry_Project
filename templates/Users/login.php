@@ -5,8 +5,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<body class="g-sidenav-show  bg-gray-100">
-  <section class="min-vh-100 mb-8">
+<body class="g-sidenav-show bg-gray-100">
+  <section class="min-vh-100">
     <div class="page-header align-items-start min-vh-95 pt-5 pb-11 m-3 border-radius-lg login-backsplash">
       <span class="mask bg-gradient-dark opacity-2"></span>
       <div class="container">
@@ -47,7 +47,7 @@
                                 );
                                 ?>
                             </div>
-                            <div class="pb-4"> 
+                            <div class="pb-4">
                             </div>
                         </div>
                     </div>

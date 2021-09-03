@@ -57,8 +57,6 @@ $pageDescription = 'Server Health - Schoolbox';
             <?= $this->fetch('content') ?>
         </div>
     </main>
-    <?= $this->element('footer')?>
-
     <!--   Core JS Files   -->
     <?= $this->Html->script('core/popper.min.js') ?>
     <?= $this->Html->script('core/bootstrap.min.js') ?>
