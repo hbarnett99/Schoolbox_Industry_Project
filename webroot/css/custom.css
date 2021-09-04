@@ -57,7 +57,7 @@ option {
     font-family: "Open Sans";
 }
 
-table td a {
+.accordion table td a, .accordion-results-link {
     color: #cb0c9f;
     text-decoration: underline;
 }
