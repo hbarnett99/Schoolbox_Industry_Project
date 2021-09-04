@@ -57,7 +57,7 @@ option {
     font-family: "Open Sans";
 }
 
-table a {
+table td a {
     color: #cb0c9f;
     text-decoration: underline;
 }
