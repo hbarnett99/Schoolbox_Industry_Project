@@ -18,14 +18,15 @@ class UsersController extends AppController
     {
         parent::beforeFilter($event);
         $path = $this->request->getPath();
-        //debug($this->getRequest()); die;
         $userEmail = $this->request->getSession()->read('Auth.email');
         if ($userEmail == null && $path != "/users/login" && $path != "/") {
-            //$this->Flash->error("Please sign in first...");
             if ($path != "/users/logout") {
+                $this->Flash->error("Please sign in first...");
                 $this->redirect('/users/login?redirect=' . $path);
             }
         }
+
+        $this->checkIfLoggedIn();
     }
 
     /**
@@ -33,6 +34,7 @@ class UsersController extends AppController
      */
     public function login() {
         // This is a stub that has to be here for the route to connect.
+        $this->viewBuilder()->setLayout('login');
     }
 
     /**
@@ -45,6 +47,14 @@ class UsersController extends AppController
         $this->Flash->success("Signed out successfully!");
 
         return $this->redirect(['controller' => 'Users', 'action' => 'login']);
+    }
+
+    public function checkIfLoggedIn(){
+        if ($this->request->getSession()->read('Auth.email') != null) {
+            if ($this->request->getPath() != '/users/logout') {
+                return $this->redirect(['controller' => 'HistoricalFacts', 'action' => 'newestData']);
+            }
+        }
     }
 
 }

@@ -7,6 +7,11 @@
     background-color: #ED5562 !important;
     border-color: #ED5562 !important;
 }
+
+.alert-danger {
+    color: white;
+}
+
 .navbar {
     overflow-y: hidden !important;
 }
@@ -16,6 +21,28 @@
     bottom: 0;
     margin-left: 15px;
     margin-right: 15px;
+}
+.login-backsplash {
+    background-image: url('../img/abstact.jpg')
+}
+
+.login-backsplash-animate {
+    background-image: url('../img/animate.gif')
+}
+
+.all-auto {
+    margin: auto !important;
+}
+
+.bg-white {
+    background-color: white;
+}
+
+.center {
+    margin: auto;
+    width: 60%;
+    border: 5px solid #FFFF00;
+    padding: 10px;
 }
 
 #breadcrumb-divider {

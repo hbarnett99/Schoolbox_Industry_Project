@@ -19,7 +19,7 @@ class HistoricalFactsController extends AppController
     {
         parent::beforeFilter($event);
         $this->loadModel('HistoricalFacts');
-        
+
         // Capture query params if passed
         $queryString = '?';
         foreach ($this->request->getQueryParams() as $key => $value) {
@@ -30,6 +30,7 @@ class HistoricalFactsController extends AppController
         $path = $this->request->getPath();
         $userEmail = $this->request->getSession()->read('Auth.email');
         if ($userEmail == null) {
+            $this->Flash->error("Please sign in first...");
             $this->redirect('/users/login?redirect=' . $path . $queryString);
         }
     }
