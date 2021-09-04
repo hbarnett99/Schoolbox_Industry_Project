@@ -251,7 +251,8 @@ if (isset($fact)) {
                     ?>,
                     'desc']
             ],
-            info: false
+            info: false,
+            scrollX: true
         })
     });
 </script>
