@@ -224,6 +224,12 @@ if (isset($fact)) {
 <script>
     // DataTable initialisation
     $(document).ready(() => {
+        let numberOfColumns = document.getElementById('factTable').rows[0].cells.length;
+        // Set only the first column to be searchable and disable all others
+        let columns = [{'searchable' : true}];
+        for (var i=1; i < numberOfColumns; i++) {
+            columns.push({"searchable": false});
+        }
         $('#factTable').DataTable({
             paging: false,
             search: {
@@ -252,7 +258,9 @@ if (isset($fact)) {
                     'desc']
             ],
             info: false,
-            scrollX: true
+            scrollX: true,
+            columns: columns
         })
     });
 </script>
+
