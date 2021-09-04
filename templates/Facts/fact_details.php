@@ -1,5 +1,6 @@
 <?php
 
+// Known facts list - known facts should be treated differently in table rendering
 $knownFacts = [
     "schoolbox_totalusers",
     "schoolbox_config_site_type",
@@ -22,6 +23,41 @@ $knownFacts = [
 	"schoolbox_first_file_upload_year"
 ];
 
+/**
+ * Note regarding this weirdness:
+ *
+ * For whatever reason, if you try to access $value after the table is rendered,
+ * it will sometimes be an array (but not all the time, of course).
+ *
+ * The easiest solution I can find is to set the variable here (where it is always
+ * a string), and then just use that new variable elsewhere (as it always remains
+ * a string).
+ *
+ * CakePHP is wild.
+ *
+ * Dane Rainbird, 04/09/2021
+ */
+if (isset($value)) {
+    $searchVal = $value;
+} else {
+    $searchVal = null;
+}
+
+// Only show breadcrumbs when not on default page
+if (isset($fact)) {
+    $this->Breadcrumbs->add([
+        ['title' => 'Individual Facts', 'url' => ['controller' => 'Facts', 'action' => 'fact-details']],
+        ['title' => $fact, 'url' => ['controller' => 'Facts', 'action' => 'fact-details', '?' => ['fact' => $fact]]]
+    ]);
+    // If a search value has been provided, then render an extra breadcrumb for the search value
+    if (isset($searchVal)) {
+        $this->Breadcrumbs->add([
+            ['title' => "Search: '<em>" . $searchVal . "'</em>", 'url' => ['controller' => 'Facts', 'action' => 'fact-details', '?' => ['fact' => $fact, 'value' => $searchVal]]]
+        ]);
+    }
+}
+
+
 ?>
 
 <div class="row">
@@ -29,7 +65,7 @@ $knownFacts = [
         <?php
         echo $this->Breadcrumbs->render(
             ['class' => 'breadcrumb'],
-            ['separator' => '<i class="fa fa-angle-right"></i>']
+            ['separator' => '<i id="breadcrumb-divider" class="fa fa-angle-right"> </i>']
         );
         ?>
         <div class="card mb-4">
@@ -190,6 +226,16 @@ $knownFacts = [
     $(document).ready(() => {
         $('#factTable').DataTable({
             paging: false,
+            search: {
+                search: <?php
+                            // Set the search based on queryString
+                             if ($searchVal) {
+                                echo "'" . h($searchVal) . "'";
+                            } else {
+                                echo "''";
+                            }
+                        ?>
+            },
             order: [
                 [
                     <?php

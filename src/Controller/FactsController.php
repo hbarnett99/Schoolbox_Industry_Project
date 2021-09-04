@@ -261,6 +261,7 @@ class FactsController extends AppController
 
         // Get fact from query
         $fact = $this->request->getQuery('fact');
+        $value = $this->request->getQuery('value');
 
         // Prioritise requests from form on page
         if ($this->request->is('post')) {
@@ -273,6 +274,11 @@ class FactsController extends AppController
             $this->set('fact', $fact);
             // Get the results from the server for this fact and then return details
             $this->set('results', $this->performQuery($fact));
+        }
+
+        // Check if a search value has been provided, and set it as a variable
+        if ($value) {
+            $this->set('value', $value);
         }
 
     }
