@@ -56,3 +56,8 @@ select {
 option {
     font-family: "Open Sans";
 }
+
+table a {
+    color: #cb0c9f;
+    text-decoration: underline;
+}

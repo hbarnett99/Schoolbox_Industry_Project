@@ -118,7 +118,7 @@ if (isset($fact)) {
                                             echo '<th>Value</th></tr><tbody><td>' . array_values($results)[0] . '</td></tr>';
                                         } else {
                                             // Create the header
-                                            echo "<th>Value</th>
+                                            echo "<th id='value'>Value</th>
                                                   <th>Amount</th>
                                                   <th>Percentage</th>
                                                   </tr></thead>";
@@ -136,9 +136,9 @@ if (isset($fact)) {
                                     } else {
                                         // If instance-specific, render with InstanceID column
                                         if ($isInstanceSpecific) {
-                                            echo '<th>Instance ID</th><th>Certname</th><th>Value</th>';
+                                            echo '<th>Instance ID</th><th>Certname</th><th id="value">Value</th>';
                                         } else {
-                                            echo '<th>Certname</th><th>Value</th>';
+                                            echo '<th>Certname</th><th id="value">Value</th>';
                                         }
                                         echo '</tr></thead>';
                                         echo '<tbody>';
@@ -225,23 +225,9 @@ if (isset($fact)) {
     // DataTable initialisation
     $(document).ready(() => {
         let numberOfColumns = document.getElementById('factTable').rows[0].cells.length;
-        // Set only the first column to be searchable and disable all others
-        let columns = [{'searchable' : true}];
-        for (var i=1; i < numberOfColumns; i++) {
-            columns.push({"searchable": false});
-        }
-        $('#factTable').DataTable({
+
+        let table = $('#factTable').DataTable({
             paging: false,
-            search: {
-                search: <?php
-                            // Set the search based on queryString
-                             if ($searchVal) {
-                                echo "'" . h($searchVal) . "'";
-                            } else {
-                                echo "''";
-                            }
-                        ?>
-            },
             order: [
                 [
                     <?php
@@ -259,8 +245,19 @@ if (isset($fact)) {
             ],
             info: false,
             scrollX: true,
-            columns: columns
+            <?php
+                if (isset($searchVal)) {
+                    echo 'dom: "ti",';
+                }
+            ?>
         })
+
+        // Set search value
+        table.columns("#value")
+            .search(<?= "'" . $searchVal . "'" ?>)
+            .draw();
+
     });
+
 </script>
 
