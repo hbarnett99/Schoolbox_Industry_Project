@@ -2,25 +2,25 @@
 
 // Known facts list - known facts should be treated differently in table rendering
 $knownFacts = [
-    "schoolbox_totalusers",
-    "schoolbox_config_site_type",
-    "schoolbox_users_student",
-	"schoolbox_users_staff",
-	"schoolbox_users_parent",
-	"schoolbox_totalcampus",
-    "schoolbox_package_version",
-    "schoolboxdev_package_version",
-    "virtual",
-    "lsbdistdescription",
-	"kernelmajversion",
-	"kernelrelease",
-	"php_cli_version",
-	"mysql_extra_version",
-	"processorcount",
-	"memorysize",
-	"schoolbox_config_date_timezone",
-    "schoolbox_config_external_type",
-	"schoolbox_first_file_upload_year"
+//    "schoolbox_totalusers",
+//    "schoolbox_config_site_type",
+//    "schoolbox_users_student",
+//	"schoolbox_users_staff",
+//	"schoolbox_users_parent",
+//	"schoolbox_totalcampus",
+//    "schoolbox_package_version",
+//    "schoolboxdev_package_version",
+//    "virtual",
+//    "lsbdistdescription",
+//	"kernelmajversion",
+//	"kernelrelease",
+//	"php_cli_version",
+//	"mysql_extra_version",
+//	"processorcount",
+//	"memorysize",
+//	"schoolbox_config_date_timezone",
+//    "schoolbox_config_external_type",
+//	"schoolbox_first_file_upload_year"
 ];
 
 /**
