@@ -13,7 +13,6 @@
         <div class="row justify-content-center">
             <div class="col-lg-5 text-center mx-auto">
                 <h1 class="text-white mb-2 mt-5">Schoolbox Server Health</h1>
-<!--                <p class="text-lead text-white">Schoolbox</p>-->
             </div>
             <div class="container">
                 <div class="">
@@ -21,14 +20,12 @@
                         <div class="card z-index-0 ">
                             <div class="card-header text-center">
                                 <?= $this->Html->image('../favicon.ico', ['class' => 'img-fluid']); ?>
-<!--                                <h5>Login with Google</h5>-->
                             </div>
                             <div class="row px-xl-5 px-sm-4 px-3">
                                 <?=
-                                    $this->Flash->render();
+                                $this->Flash->render();
                                 ?>
                                 <h3 class="card-header text-center"> Login with Google </h3>
-                                <!-- ATTEMPTED CONVERSION OF TEMPLATE TO PHP -->
                                 <?php
                                 echo $this->Form->postLink(
                                     $this->Html->Image('google_logo.svg'),

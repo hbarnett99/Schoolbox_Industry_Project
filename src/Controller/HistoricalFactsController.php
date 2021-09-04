@@ -22,6 +22,7 @@ class HistoricalFactsController extends AppController
         $path = $this->request->getPath();
         $userEmail = $this->request->getSession()->read('Auth.email');
         if ($userEmail == null) {
+            $this->Flash->error("Please sign in first...");
             $this->redirect('/users/login?redirect=' . $path);
         }
     }

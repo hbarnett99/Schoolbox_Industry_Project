@@ -18,11 +18,10 @@ class UsersController extends AppController
     {
         parent::beforeFilter($event);
         $path = $this->request->getPath();
-        //debug($this->getRequest()); die;
         $userEmail = $this->request->getSession()->read('Auth.email');
         if ($userEmail == null && $path != "/users/login" && $path != "/") {
-            //$this->Flash->error("Please sign in first...");
             if ($path != "/users/logout") {
+                $this->Flash->error("Please sign in first...");
                 $this->redirect('/users/login?redirect=' . $path);
             }
         }
@@ -52,7 +51,9 @@ class UsersController extends AppController
 
     public function checkIfLoggedIn(){
         if ($this->request->getSession()->read('Auth.email') != null) {
-            return $this->redirect(['controller' => 'HistoricalFacts', 'action' => 'newestData']);
+            if ($this->request->getPath() != '/users/logout') {
+                return $this->redirect(['controller' => 'HistoricalFacts', 'action' => 'newestData']);
+            }
         }
     }
 
