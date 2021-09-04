@@ -199,7 +199,7 @@ if (isset($fact)) {
                                 <?php
                                 // Create an HTML form for selecting the type
                                 echo $this->Form->create(null, ['url' => ['action' => 'fact_details']]);
-                                echo '<div class="row"><div class="col-4">';
+                                echo '<div class="row align-items-center"><div class="col-auto">';
                                 echo $this->Form->input(
                                     'fact',
                                     [
@@ -208,8 +208,8 @@ if (isset($fact)) {
                                         'class' => 'form-control'
                                     ]
                                 );
-                                echo '</div><div class="col-3">';
-                                echo $this->Form->button('Go to fact details!', ['type' => 'submit', 'class' => 'btn']);
+                                echo '</div><div class="col-auto">';
+                                echo $this->Form->button('Go to fact details!', ['type' => 'submit', 'class' => 'btn btn-primary mb-0']);
                                 echo $this->Form->end();
                                 echo '</div>';
                                 ?>
