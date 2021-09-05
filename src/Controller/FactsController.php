@@ -262,6 +262,8 @@ class FactsController extends AppController
         // Get fact from query
         $fact = $this->request->getQuery('fact');
         $value = $this->request->getQuery('value');
+        $environment = $this->request->getQuery('environment');
+
 
         // Prioritise requests from form on page
         if ($this->request->is('post')) {
@@ -279,6 +281,11 @@ class FactsController extends AppController
         // Check if a search value has been provided, and set it as a variable
         if ($value) {
             $this->set('value', $value);
+        }
+
+        // Check if an environment value has been provided, and set it as a variable
+        if ($environment) {
+            $this->set('environmentSpecific', $environment);
         }
 
     }

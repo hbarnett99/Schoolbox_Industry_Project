@@ -55,6 +55,12 @@ if (isset($fact)) {
             ['title' => "Search: '<em>" . $searchVal . "'</em>", 'url' => ['controller' => 'Facts', 'action' => 'fact-details', '?' => ['fact' => $fact, 'value' => $searchVal]]]
         ]);
     }
+    // If an environment value has been provided, then render an extra breadcrumb for the environment value
+    if (isset($environmentSpecific)) {
+        $this->Breadcrumbs->add([
+            ['title' => "Environment: '<em>" . $environmentSpecific . "'</em>", 'url' => ['controller' => 'Facts', 'action' => 'fact-details', '?' => ['fact' => $fact, 'value' => $searchVal, 'environment' => $environmentSpecific]]]
+        ]);
+    }
 }
 
 
@@ -69,12 +75,21 @@ if (isset($fact)) {
         );
         ?>
         <div class="card mb-4">
-
             <div class="card-header pb-0">
                 <?php
                     // Determine what header to show
                     if (isset($fact)) {
+                        echo "
+                        <div class='alert alert-primary alert-dismissible fade show' role='alert'>
+                            <span class='text-white font-weight-bold'>The below is <u>live</u> data, pulled from the server just now.</span>
+                            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'>
+                                <span aria-hidden='true'>&times;</span>
+                            </button>
+                        </div>";
                         echo "<h5><em><b>'$fact'</b></em> Details</h5>";
+                        if (isset($searchVal)) {
+                            echo "<em>Searching for: '<b>" . $searchVal . "</b>'" .  (isset($environmentSpecific) ? ", in environment: '<b>" . $environmentSpecific . "</b>'.</em>" : ".</em>");
+                        };
                         // Determine if this fact is instance specific
                         $isInstanceSpecific =
                             str_starts_with($fact, 'schoolbox_config_') ||
@@ -147,7 +162,16 @@ if (isset($fact)) {
                                         $certNameValues = [];
                                         // Loop over returned results
                                         foreach ($results as $result) {
-                                            $certNameValues[$result['certname']] = $result['value'];
+                                            // If the requested fact is environment specific, then filter by the environment value
+                                            if (isset($environmentSpecific)) {
+                                                if ($result['environment'] == $environmentSpecific) {
+                                                    $certNameValues[$result['certname']] = $result['value'];
+                                                }
+                                                // Otherwise, just get all values
+                                            } else {
+                                                $certNameValues[$result['certname']] = $result['value'];
+
+                                            }
                                         }
                                         // If the query is instance specific, then get the instance ID as the first column of the table
                                         foreach ($certNameValues as $certName => $values) {
