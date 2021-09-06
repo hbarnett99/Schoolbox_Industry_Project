@@ -17,15 +17,12 @@
             <div class="container img-fluid">
                 <div class="">
                     <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
-                        <div class="card z-index-0 ">
-                            <div class="card-header text-center">
+                        <div class="card z-index-0">
+                            <div class="card-header text-center card-logo">
                                 <?= $this->Html->image('../favicon.ico', ['class' => 'img-fluid']); ?>
                             </div>
-                            <div class="row px-xl-5 px-sm-4 px-3">
-                                <?=
-                                $this->Flash->render();
-                                ?>
-                                <h3 class="card-header text-center"> Login with Google </h3>
+                            <div class="row px-5 mx-3">
+                                <h3 class="card-header text-center pb-3"> Login with Google </h3>
                                 <?php
                                 echo $this->Form->postLink(
                                     $this->Html->Image('google_logo.svg'),
@@ -47,6 +44,10 @@
                             <div class="pb-4">
                             </div>
                         </div>
+                        <br>
+                        <?=
+                        $this->Flash->render();
+                        ?>
                     </div>
                 </div>
             </div>
