@@ -22,17 +22,16 @@
                                 <?= $this->Html->image('../favicon.ico', ['class' => 'img-fluid']); ?>
                             </div>
                             <div class="row px-5 mx-3">
+								<div class="pb-4">
+									<small>Login is currently disabled for this example - please just click the link to sign in.</small>
+								</div>
                                 <h3 class="card-header text-center pb-3"> Login with Google </h3>
                                 <?php
                                 echo $this->Form->postLink(
                                     $this->Html->Image('google_logo.svg'),
                                     [
-                                        'prefix' => false,
-                                        'plugin' => 'ADmad/SocialAuth',
-                                        'controller' => 'Auth',
+                                        'controller' => 'Users',
                                         'action' => 'login',
-                                        'provider' => 'google',
-                                        '?' => ['redirect' => $this->request->getQuery('redirect')]
                                     ],
                                     [
                                         'class' => 'nav-link active btn btn-outline-light w-100 bg-white ml-3',
@@ -40,8 +39,6 @@
                                     ]
                                 );
                                 ?>
-                            </div>
-                            <div class="pb-4">
                             </div>
                         </div>
                         <br>
