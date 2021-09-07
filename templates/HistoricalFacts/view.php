@@ -1097,6 +1097,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
             });
         }());
 
+        /*
+            'scrollX: true' doesn't actually handle resizing according to the size of the container
+            So, we use "initComplete" to wrap the table in a container that is relatively positioned
+         */
+
         // DataTable configuration
         $(document).ready(() => {
             $('#totalUserCountDistributionTable').DataTable({
@@ -1107,88 +1112,139 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
             $('#schoolboxPackageVersionsTable').DataTable({
                 paging: false,
                 order: [[2, 'desc']],
-                info: false
+                info: false,
+                "initComplete": function (settings, json) {
+                    $("#schoolboxPackageVersionsTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                },
             })
             $('#schoolboxDevPackageVersionsTable').DataTable({
                 paging: false,
                 order: [[2, 'desc']],
-                info: false
+                info: false,
+                "initComplete": function (settings, json) {
+                    $("#schoolboxDevPackageVersionsTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                },
             })
             $('#stagingSchoolboxPackageVersionsTable').DataTable({
                 paging: false,
                 order: [[2, 'desc']],
-                info: false
+                info: false,
+                "initComplete": function (settings, json) {
+                    $("#stagingSchoolboxPackageVersionsTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                },
             })
             $('#stagingSchoolboxDevPackageVersionsTable').DataTable({
                 paging: false,
                 order: [[2, 'desc']],
-                info: false
+                info: false,
+                "initComplete": function (settings, json) {
+                    $("#stagingSchoolboxDevPackageVersionsTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                },
             })
             $('#productionSiteVersionsTable').DataTable({
                 paging: false,
                 order: [[2, 'desc']],
-                info: false
+                info: false,
+                "initComplete": function (settings, json) {
+                    $("#productionSiteVersionsTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                },
             })
             $('#stagingSiteVersionsTable').DataTable({
                 paging: false,
                 order: [[2, 'desc']],
-                info: false
+                info: false,
+                "initComplete": function (settings, json) {
+                    $("#stagingSiteVersionsTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                },
             })
             $('#virtualTable').DataTable({
                 paging: false,
                 order: [[2, 'desc']],
-                info: false
+                info: false,
+                "initComplete": function (settings, json) {
+                    $("#virtualTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                },
             })
             $('#linuxVersionsTable').DataTable({
                 paging: false,
                 order: [[2, 'desc']],
-                info: false
+                info: false,
+                "initComplete": function (settings, json) {
+                    $("#linuxVersionsTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                },
             })
             $('#kernelVersionsTable').DataTable({
                 paging: false,
                 order: [[2, 'desc']],
-                info: false
+                info: false,
+                "initComplete": function (settings, json) {
+                    $("#kernelVersionsTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                },
             })
             $('#kernelReleasesTable').DataTable({
                 paging: false,
                 order: [[2, 'desc']],
-                info: false
+                info: false,
+                "initComplete": function (settings, json) {
+                    $("#kernelReleasesTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                },
             })
             $('#phpVersionsTable').DataTable({
                 paging: false,
                 order: [[2, 'desc']],
-                info: false
+                info: false,
+                "initComplete": function (settings, json) {
+                    $("#phpVersionsTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                },
             })
             $('#mysqlVersionsTable').DataTable({
                 paging: false,
                 order: [[2, 'desc']],
-                info: false
+                info: false,
+                "initComplete": function (settings, json) {
+                    $("#mysqlVersionsTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                },
             })
             $('#processorsTable').DataTable({
                 paging: false,
                 order: [[2, 'desc']],
-                info: false
+                info: false,
+                "initComplete": function (settings, json) {
+                    $("#processorsTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                },
             })
             $('#ramSizeTable').DataTable({
                 paging: false,
                 order: [[2, 'desc']],
                 columnDefs: [ { targets: 0, type: 'natural' } ],
-                info: false
+                info: false,
+                "initComplete": function (settings, json) {
+                    $("#ramSizeTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                },
             })
             $('#dateTimeZoneTable').DataTable({
                 paging: false,
                 order: [[2, 'desc']],
-                info: false
+                info: false,
+                "initComplete": function (settings, json) {
+                    $("#dateTimeZoneTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                },
             })
             $('#externalDbTable').DataTable({
                 paging: false,
                 order: [[2, 'desc']],
-                info: false
+                info: false,
+                "initComplete": function (settings, json) {
+                    $("#externalDbTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                },
             })
             $('#firstFileTable').DataTable({
                 paging: false,
                 order: [[2, 'desc']],
-                info: false
+                info: false,
+                "initComplete": function (settings, json) {
+                    $("#firstFileTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                },
             })
 
         })
