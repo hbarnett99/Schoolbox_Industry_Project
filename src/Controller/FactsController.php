@@ -268,7 +268,8 @@ class FactsController extends AppController
         // Prioritise requests from form on page
         if ($this->request->is('post')) {
             $fact = $this->request->getData('fact');
-            $this->redirect(['action' => 'factDetails', '?' => ['fact' => $fact]]);
+            $environment = $this->request->getData('environment');
+            $this->redirect(['action' => 'factDetails', '?' => ['fact' => $fact, 'environment' => $environment]]);
         }
 
         // Check if a fact name has been provided, and set it as a variable

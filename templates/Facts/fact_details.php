@@ -89,6 +89,8 @@ if (isset($fact)) {
                         echo "<h5><em><b>'$fact'</b></em> Details</h5>";
                         if (isset($searchVal)) {
                             echo "<em>Searching for: '<b>" . $searchVal . "</b>'" .  (isset($environmentSpecific) ? ", in environment: '<b>" . $environmentSpecific . "</b>'.</em>" : ".</em>");
+                        } else if (isset($environmentSpecific)) {
+                            echo "<em>In  environment:'<b>" . $environmentSpecific . "</b>'</em>";
                         };
                         // Determine if this fact is instance specific
                         $isInstanceSpecific =
@@ -229,6 +231,18 @@ if (isset($fact)) {
                                     [
                                         'type' => 'select',
                                         'options' => $factNamesList,
+                                        'class' => 'form-control'
+                                    ]
+                                );
+                                echo '</div><div class="col-md-auto">';
+                                echo $this->Form->input(
+                                    'environment',
+                                    [
+                                        'type' => 'select',
+                                        'options' => [
+                                            'production' => 'production',
+                                            'staging' => 'staging'
+                                        ],
                                         'class' => 'form-control'
                                     ]
                                 );
