@@ -7,25 +7,22 @@
 
 <body class="g-sidenav-show bg-gray-100">
   <section class="min-vh-100">
-    <div class="page-header align-items-start min-vh-95 pt-5 pb-11 m-3 border-radius-lg login-backsplash">
+    <div class="page-header align-items-start min-vh-95 pt-5 m-3 border-radius-lg animation-area">
       <span class="mask bg-gradient-dark opacity-2"></span>
       <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-5 text-center mx-auto">
                 <h1 class="text-white mb-2 mt-5">Schoolbox Server Health</h1>
             </div>
-            <div class="container">
+            <div class="container img-fluid">
                 <div class="">
                     <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
-                        <div class="card z-index-0 ">
-                            <div class="card-header text-center">
+                        <div class="card z-index-0">
+                            <div class="card-header text-center card-logo">
                                 <?= $this->Html->image('../favicon.ico', ['class' => 'img-fluid']); ?>
                             </div>
-                            <div class="row px-xl-5 px-sm-4 px-3">
-                                <?=
-                                $this->Flash->render();
-                                ?>
-                                <h3 class="card-header text-center"> Login with Google </h3>
+                            <div class="row px-5 mx-3">
+                                <h3 class="card-header text-center pb-3"> Login with Google </h3>
                                 <?php
                                 $redirectUrl = '';
                                 foreach($this->request->getQueryParams() as $param => $key) {
@@ -52,11 +49,23 @@
                             <div class="pb-4">
                             </div>
                         </div>
+                        <br>
+                        <?=
+                        $this->Flash->render();
+                        ?>
                     </div>
                 </div>
             </div>
         </div>
       </div>
+        <ul class="box-area">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
     </div>
 
   </section>
