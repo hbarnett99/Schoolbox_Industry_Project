@@ -73,10 +73,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                                 data-bs-target="#totalUsersCollapse" aria-expanded="true"
                                                                 aria-controls="totalUsersCollapse">
                                                             <strong>Total Users</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="totalUsersCollapse" class="accordion-collapse collapse show"
@@ -95,14 +92,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#totalUserCountDistributionCollapse"
                                                                 aria-expanded="true" aria-controls="totalUsersCollapse">
                                                             <strong>User Count Distribution</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="totalUserCountDistributionCollapse"
@@ -145,14 +139,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#totalStudentsCollapse" aria-expanded="true"
                                                                 aria-controls="totalUsersCollapse">
                                                             <strong>Total Students</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="totalStudentsCollapse" class="accordion-collapse collapse"
@@ -171,14 +162,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#totalStaffCollapse" aria-expanded="true"
                                                                 aria-controls="totalUsersCollapse">
                                                             <strong>Total Staff</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="totalStaffCollapse" class="accordion-collapse collapse"
@@ -197,14 +185,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#totalParentsCollapse" aria-expanded="true"
                                                                 aria-controls="totalUsersCollapse">
                                                             <strong>Total Parents</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="totalParentsCollapse" class="accordion-collapse collapse"
@@ -223,14 +208,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#totalCampusCollapse" aria-expanded="true"
                                                                 aria-controls="totalUsersCollapse">
                                                             <strong>Total Campuses</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="totalCampusCollapse" class="accordion-collapse collapse"
@@ -249,14 +231,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#schoolboxPackageVersionsCollapse"
                                                                 aria-expanded="true" aria-controls="totalUsersCollapse">
                                                             <strong>Production 'Schoolbox' Package Versions</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="schoolboxPackageVersionsCollapse"
@@ -298,14 +277,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#schoolboxDevPackageVersionsCollapse"
                                                                 aria-expanded="true" aria-controls="totalUsersCollapse">
                                                             <strong>Production 'Schoolboxdev' Package Versions</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="schoolboxDevPackageVersionsCollapse"
@@ -347,14 +323,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#stagingSchoolboxPackageVersionsCollapse"
                                                                 aria-expanded="true" aria-controls="totalUsersCollapse">
                                                             <strong>Staging 'Schoolbox' Package Versions</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="stagingSchoolboxPackageVersionsCollapse"
@@ -395,14 +368,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#stagingSchoolboxDevPackageVersionsCollapse"
                                                                 aria-expanded="true" aria-controls="totalUsersCollapse">
                                                             <strong>Staging 'Schoolboxdev' Package Versions</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="stagingSchoolboxDevPackageVersionsCollapse"
@@ -443,14 +413,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#productionSiteVersionsCollapse"
                                                                 aria-expanded="true" aria-controls="totalUsersCollapse">
                                                             <strong>Production Site Versions</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="productionSiteVersionsCollapse" class="accordion-collapse collapse"
@@ -492,15 +459,12 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#stagingSiteVersionsCollapse"
                                                                 aria-expanded="true"
                                                                 aria-controls="totalUsersCollapse">
                                                             <strong>Staging Site Versions</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="stagingSiteVersionsCollapse"
@@ -541,14 +505,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#virtualCollapse" aria-expanded="true"
                                                                 aria-controls="totalUsersCollapse">
                                                             <strong>Virtual</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="virtualCollapse" class="accordion-collapse collapse"
@@ -589,14 +550,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#linuxVersionsCollapse" aria-expanded="true"
                                                                 aria-controls="totalUsersCollapse">
                                                             <strong>Linux Versions</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="linuxVersionsCollapse" class="accordion-collapse collapse"
@@ -637,14 +595,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#kernelVersionsCollapse" aria-expanded="true"
                                                                 aria-controls="totalUsersCollapse">
                                                             <strong>Kernel Major Versions</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="kernelVersionsCollapse" class="accordion-collapse collapse"
@@ -685,14 +640,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#kernelReleasesCollapse" aria-expanded="true"
                                                                 aria-controls="totalUsersCollapse">
                                                             <strong>Kernel Releases</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="kernelReleasesCollapse" class="accordion-collapse collapse"
@@ -733,14 +685,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#phpVersionsCollapse" aria-expanded="true"
                                                                 aria-controls="totalUsersCollapse">
                                                             <strong>PHP CLI Versions</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="phpVersionsCollapse" class="accordion-collapse collapse"
@@ -781,14 +730,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#mysqlVersionsCollapse" aria-expanded="true"
                                                                 aria-controls="totalUsersCollapse">
                                                             <strong>MySQL Versions</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="mysqlVersionsCollapse" class="accordion-collapse collapse"
@@ -829,14 +775,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#processorsCollapse" aria-expanded="true"
                                                                 aria-controls="totalUsersCollapse">
                                                             <strong>Number of Processors</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="processorsCollapse" class="accordion-collapse collapse"
@@ -877,14 +820,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#ramSizeCollapse" aria-expanded="true"
                                                                 aria-controls="totalUsersCollapse">
                                                             <strong>RAM Size</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="ramSizeCollapse" class="accordion-collapse collapse"
@@ -925,14 +865,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#dateTimeZoneCollapse" aria-expanded="true"
                                                                 aria-controls="totalUsersCollapse">
                                                             <strong>Schoolbox Config - Production Server Date / Timezone</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="dateTimeZoneCollapse" class="accordion-collapse collapse"
@@ -973,14 +910,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#externalDbCollapse" aria-expanded="true"
                                                                 aria-controls="totalUsersCollapse">
                                                             <strong>Schoolbox Config - Production External DB Types</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="externalDbCollapse" class="accordion-collapse collapse"
@@ -1021,14 +955,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#firstFileCollapse" aria-expanded="true"
                                                                 aria-controls="totalUsersCollapse">
                                                             <strong>Schoolbox - First File Upload Year</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="firstFileCollapse" class="accordion-collapse collapse"

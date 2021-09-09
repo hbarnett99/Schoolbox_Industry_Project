@@ -61,3 +61,13 @@ option {
     color: #cb0c9f;
     text-decoration: underline;
 }
+
+button[data-bs-toggle="collapse"] .fa:before {
+    content: "\f068";
+    color: #67748e;
+}
+
+button[data-bs-toggle="collapse"].collapsed .fa:before {
+    content: "\f067";
+    color: #67748e;
+}
