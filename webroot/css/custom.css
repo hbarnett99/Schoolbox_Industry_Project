@@ -49,8 +49,8 @@
     padding: 5px;
 }
 
-.card-logo{
-    padding: 1.0rem; !important;
+.card-logo {
+    padding: 1.0rem !important;
 }
 
 /*Animated BG*/
@@ -127,4 +127,27 @@
         transform: translateY(-800px) rotate(360deg);
         opacity: 0;
     }
+}
+
+select {
+    appearance: auto !important;
+}
+
+option {
+    font-family: "Open Sans";
+}
+
+.accordion table td a, .accordion-results-link {
+    color: #cb0c9f;
+    text-decoration: underline;
+}
+
+button[data-bs-toggle="collapse"] .fa:before {
+    content: "\f068";
+    color: #67748e;
+}
+
+button[data-bs-toggle="collapse"].collapsed .fa:before {
+    content: "\f067";
+    color: #67748e;
 }

@@ -107,7 +107,7 @@ class QueryServerCommand extends Command
             case "schoolbox_config_site_version":
                 return schoolbox_config_site_version($this->sendRequest('schoolbox_config_site_version'));
             case "virtual":
-                return virtual($this->sendRequest('virtual'));
+                return virtualEnv($this->sendRequest('virtual'));
             case "lsbdistdescription":
                 return lsbdistdescription($this->sendRequest('lsbdistdescription'));
             case "kernelmajversion":

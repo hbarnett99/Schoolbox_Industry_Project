@@ -24,6 +24,11 @@
                             <div class="row px-5 mx-3">
                                 <h3 class="card-header text-center pb-3"> Login with Google </h3>
                                 <?php
+                                $redirectUrl = '';
+                                foreach($this->request->getQueryParams() as $param => $key) {
+                                    $redirectUrl .= '&' . $param . '=' .$key;
+                                }
+                                $redirectUrl = str_replace('&redirect=', '', $redirectUrl);
                                 echo $this->Form->postLink(
                                     $this->Html->Image('google_logo.svg'),
                                     [
@@ -32,7 +37,7 @@
                                         'controller' => 'Auth',
                                         'action' => 'login',
                                         'provider' => 'google',
-                                        '?' => ['redirect' => $this->request->getQuery('redirect')]
+                                        '?' => ['redirect' => $redirectUrl]
                                     ],
                                     [
                                         'class' => 'nav-link active btn btn-outline-light w-100 bg-white ml-3',

@@ -73,10 +73,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                                 data-bs-target="#totalUsersCollapse" aria-expanded="true"
                                                                 aria-controls="totalUsersCollapse">
                                                             <strong>Total Users</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="totalUsersCollapse" class="accordion-collapse collapse show"
@@ -84,7 +81,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
                                                             <?=
-                                                            number_format(intval(json_decode($historicalFact->schoolbox_totalusers, JSON_PRETTY_PRINT)['totalUsersFleetCount']));
+                                                            $this->Html->link(number_format(intval(json_decode($historicalFact->schoolbox_totalusers, JSON_PRETTY_PRINT)['totalUsersFleetCount'])), ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_totalusers']], ['class' => 'accordion-results-link']);
                                                             ?>
                                                         </div>
                                                     </div>
@@ -95,14 +92,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#totalUserCountDistributionCollapse"
                                                                 aria-expanded="true" aria-controls="totalUsersCollapse">
                                                             <strong>User Count Distribution</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="totalUserCountDistributionCollapse"
@@ -145,14 +139,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#totalStudentsCollapse" aria-expanded="true"
                                                                 aria-controls="totalUsersCollapse">
                                                             <strong>Total Students</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="totalStudentsCollapse" class="accordion-collapse collapse"
@@ -160,7 +151,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
                                                             <?=
-                                                            number_format(intval(json_decode($historicalFact->schoolbox_users_student, JSON_PRETTY_PRINT)['totalStudentCount']));
+                                                            $this->Html->link(number_format(intval(json_decode($historicalFact->schoolbox_users_student, JSON_PRETTY_PRINT)['totalStudentCount'])), ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_users_student']], ['class' => 'accordion-results-link']);
                                                             ?>
                                                         </div>
                                                     </div>
@@ -171,14 +162,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#totalStaffCollapse" aria-expanded="true"
                                                                 aria-controls="totalUsersCollapse">
                                                             <strong>Total Staff</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="totalStaffCollapse" class="accordion-collapse collapse"
@@ -186,7 +174,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
                                                             <?=
-                                                            number_format(intval(json_decode($historicalFact->schoolbox_users_staff, JSON_PRETTY_PRINT)['totalStaffCount']));
+                                                            $this->Html->link(number_format(intval(json_decode($historicalFact->schoolbox_users_staff, JSON_PRETTY_PRINT)['totalStaffCount'])), ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_users_staff']], ['class' => 'accordion-results-link']);
                                                             ?>
                                                         </div>
                                                     </div>
@@ -197,14 +185,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#totalParentsCollapse" aria-expanded="true"
                                                                 aria-controls="totalUsersCollapse">
                                                             <strong>Total Parents</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="totalParentsCollapse" class="accordion-collapse collapse"
@@ -212,7 +197,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
                                                             <?=
-                                                            number_format(intval(json_decode($historicalFact->schoolbox_users_parent, JSON_PRETTY_PRINT)['totalParentCount']));
+                                                            $this->Html->link(number_format(intval(json_decode($historicalFact->schoolbox_users_parent, JSON_PRETTY_PRINT)['totalParentCount'])), ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_users_parent']], ['class' => 'accordion-results-link']);
                                                             ?>
                                                         </div>
                                                     </div>
@@ -223,14 +208,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#totalCampusCollapse" aria-expanded="true"
                                                                 aria-controls="totalUsersCollapse">
                                                             <strong>Total Campuses</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="totalCampusCollapse" class="accordion-collapse collapse"
@@ -238,7 +220,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
                                                             <?=
-                                                            number_format(intval(json_decode($historicalFact->schoolbox_totalcampus, JSON_PRETTY_PRINT)['totalCampus']));
+                                                            $this->Html->link(number_format(intval(json_decode($historicalFact->schoolbox_totalcampus, JSON_PRETTY_PRINT)['totalCampus'])), ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_totalcampus']], ['class' => 'accordion-results-link']);
                                                             ?>
                                                         </div>
                                                     </div>
@@ -249,14 +231,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#schoolboxPackageVersionsCollapse"
                                                                 aria-expanded="true" aria-controls="totalUsersCollapse">
                                                             <strong>Production 'Schoolbox' Package Versions</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="schoolboxPackageVersionsCollapse"
@@ -280,7 +259,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
 
                                                                 foreach ($details as $key => $detail) {
                                                                     echo "<tr>
-                                                                            <td>". $key . "</td>
+                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_package_version', 'value' => $key, 'environment' => 'production']]) .  "</td>
                                                                             <td>" . $detail['count'] . "</td>
                                                                             <td>" . $detail['percent'] . "%" . "</td>
                                                                           </tr>";
@@ -298,14 +277,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#schoolboxDevPackageVersionsCollapse"
                                                                 aria-expanded="true" aria-controls="totalUsersCollapse">
                                                             <strong>Production 'Schoolboxdev' Package Versions</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="schoolboxDevPackageVersionsCollapse"
@@ -330,7 +306,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
 
                                                                     foreach ($details as $key => $detail) {
                                                                         echo "<tr>
-                                                                            <td>". $key . "</td>
+                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolboxdev_package_version', 'value' => $key, 'environment' => 'production']]) .  "</td>
                                                                             <td>" . $detail['count'] . "</td>
                                                                             <td>" . $detail['percent'] . "%" . "</td>
                                                                           </tr>";
@@ -347,14 +323,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#stagingSchoolboxPackageVersionsCollapse"
                                                                 aria-expanded="true" aria-controls="totalUsersCollapse">
                                                             <strong>Staging 'Schoolbox' Package Versions</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="stagingSchoolboxPackageVersionsCollapse"
@@ -379,7 +352,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                                             $details = sortByCountDescending($details);
 
                                                             echo "<tr>
-                                                                            <td>". $key . "</td>
+                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_package_version', 'value' => $key, 'environment' => 'staging']]) .  "</td>
                                                                             <td>" . $detail['count'] . "</td>
                                                                             <td>" . $detail['percent'] . "%" . "</td>
                                                                           </tr>";
@@ -395,14 +368,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#stagingSchoolboxDevPackageVersionsCollapse"
                                                                 aria-expanded="true" aria-controls="totalUsersCollapse">
                                                             <strong>Staging 'Schoolboxdev' Package Versions</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="stagingSchoolboxDevPackageVersionsCollapse"
@@ -427,7 +397,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
 
                                                             foreach ($details as $key => $detail) {
                                                                 echo "<tr>
-                                                                            <td>". $key . "</td>
+                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolboxdev_package_version', 'value' => $key, 'environment' => 'staging']], ['target' => '_blank']) .  "</td>
                                                                             <td>" . $detail['count'] . "</td>
                                                                             <td>" . $detail['percent'] . "%" . "</td>
                                                                           </tr>";                                                            }
@@ -443,14 +413,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#productionSiteVersionsCollapse"
                                                                 aria-expanded="true" aria-controls="totalUsersCollapse">
                                                             <strong>Production Site Versions</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="productionSiteVersionsCollapse" class="accordion-collapse collapse"
@@ -474,7 +441,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
 
                                                             foreach ($details as $key => $detail) {
                                                                 echo "<tr>
-                                                                            <td>". $key . "</td>
+                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_config_site_version', 'value' => $key, 'environment' => 'production']], ['target' => '_blank']) .  "</td>
                                                                             <td>" . $detail['count'] . "</td>
                                                                             <td>" . $detail['percent'] . "%" . "</td>
                                                                           </tr>";                                                                 }
@@ -492,15 +459,12 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#stagingSiteVersionsCollapse"
                                                                 aria-expanded="true"
                                                                 aria-controls="totalUsersCollapse">
                                                             <strong>Staging Site Versions</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="stagingSiteVersionsCollapse"
@@ -525,7 +489,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
 
                                                             foreach ($details as $key => $detail) {
                                                                 echo "<tr>
-                                                                            <td>". $key . "</td>
+                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_config_site_version', 'value' => $key, 'environment' => 'staging']], ['target' => '_blank']) .  "</td>
                                                                             <td>" . $detail['count'] . "</td>
                                                                             <td>" . $detail['percent'] . "%" . "</td>
                                                                           </tr>";                                                                }
@@ -541,14 +505,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#virtualCollapse" aria-expanded="true"
                                                                 aria-controls="totalUsersCollapse">
                                                             <strong>Virtual</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="virtualCollapse" class="accordion-collapse collapse"
@@ -572,7 +533,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
 
                                                             foreach ($details as $key => $detail) {
                                                                 echo "<tr>
-                                                                            <td>". $key . "</td>
+                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'virtual', 'value' => $key]], ['target' => '_blank']) .  "</td>
                                                                             <td>" . $detail['count'] . "</td>
                                                                             <td>" . $detail['percent'] . "%" . "</td>
                                                                           </tr>";
@@ -589,14 +550,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#linuxVersionsCollapse" aria-expanded="true"
                                                                 aria-controls="totalUsersCollapse">
                                                             <strong>Linux Versions</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="linuxVersionsCollapse" class="accordion-collapse collapse"
@@ -620,7 +578,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
 
                                                             foreach ($details as $key => $detail) {
                                                                 echo "<tr>
-                                                                            <td>". $key . "</td>
+                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'lsbdistdescription', 'value' => $key]], ['target' => '_blank']) .  "</td>
                                                                             <td>" . $detail['count'] . "</td>
                                                                             <td>" . $detail['percent'] . "%" . "</td>
                                                                           </tr>";
@@ -637,14 +595,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#kernelVersionsCollapse" aria-expanded="true"
                                                                 aria-controls="totalUsersCollapse">
                                                             <strong>Kernel Major Versions</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="kernelVersionsCollapse" class="accordion-collapse collapse"
@@ -668,7 +623,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
 
                                                             foreach ($details as $key => $detail) {
 																echo "<tr>
-                                                                            <td>". $key . "</td>
+                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'kernelmajversion', 'value' => $key]], ['target' => '_blank']) .  "</td>
                                                                             <td>" . $detail['count'] . "</td>
                                                                             <td>" . $detail['percent'] . "%" . "</td>
                                                                           </tr>";
@@ -685,14 +640,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#kernelReleasesCollapse" aria-expanded="true"
                                                                 aria-controls="totalUsersCollapse">
                                                             <strong>Kernel Releases</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="kernelReleasesCollapse" class="accordion-collapse collapse"
@@ -716,7 +668,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
 
                                                             foreach ($details as $key => $detail) {
                                                                 echo "<tr>
-                                                                            <td>". $key . "</td>
+                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'kernelrelease', 'value' => $key]], ['target' => '_blank']) .  "</td>
                                                                             <td>" . $detail['count'] . "</td>
                                                                             <td>" . $detail['percent'] . "%" . "</td>
                                                                           </tr>";
@@ -733,14 +685,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#phpVersionsCollapse" aria-expanded="true"
                                                                 aria-controls="totalUsersCollapse">
                                                             <strong>PHP CLI Versions</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="phpVersionsCollapse" class="accordion-collapse collapse"
@@ -764,7 +713,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
 
                                                             foreach ($details as $key => $detail) {
                                                                 echo "<tr>
-                                                                            <td>". $key . "</td>
+                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'php_cli_version', 'value' => $key]], ['target' => '_blank']) .  "</td>
                                                                             <td>" . $detail['count'] . "</td>
                                                                             <td>" . $detail['percent'] . "%" . "</td>
                                                                           </tr>";
@@ -781,14 +730,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#mysqlVersionsCollapse" aria-expanded="true"
                                                                 aria-controls="totalUsersCollapse">
                                                             <strong>MySQL Versions</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="mysqlVersionsCollapse" class="accordion-collapse collapse"
@@ -812,7 +758,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
 
                                                             foreach ($details as $key => $detail) {
                                                                 echo "<tr>
-                                                                            <td>". $key . "</td>
+                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'mysql_extra_version', 'value' => $key]], ['target' => '_blank']) .  "</td>
                                                                             <td>" . $detail['count'] . "</td>
                                                                             <td>" . $detail['percent'] . "%" . "</td>
                                                                           </tr>";
@@ -829,14 +775,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#processorsCollapse" aria-expanded="true"
                                                                 aria-controls="totalUsersCollapse">
                                                             <strong>Number of Processors</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="processorsCollapse" class="accordion-collapse collapse"
@@ -860,7 +803,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
 
                                                             foreach ($details as $key => $detail) {
 																echo "<tr>
-                                                                            <td>". $key . "</td>
+                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'processorcount', 'value' => $key]], ['target' => '_blank']) .  "</td>
                                                                             <td>" . $detail['count'] . "</td>
                                                                             <td>" . $detail['percent'] . "%" . "</td>
                                                                           </tr>";
@@ -877,14 +820,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#ramSizeCollapse" aria-expanded="true"
                                                                 aria-controls="totalUsersCollapse">
                                                             <strong>RAM Size</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="ramSizeCollapse" class="accordion-collapse collapse"
@@ -908,7 +848,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
 
                                                             foreach ($details as $key => $detail) {
                                                                 echo "<tr>
-                                                                            <td>". $key . "GB" . "</td>
+                                                                            <td>" . $key .  "</td>
                                                                             <td>" . $detail['count'] . "</td>
                                                                             <td>" . $detail['percent'] . "%" . "</td>
                                                                           </tr>";
@@ -925,14 +865,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#dateTimeZoneCollapse" aria-expanded="true"
                                                                 aria-controls="totalUsersCollapse">
-                                                            <strong>Schoolbox Config - Date / Timezone</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <strong>Schoolbox Config - Production Server Date / Timezone</strong>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="dateTimeZoneCollapse" class="accordion-collapse collapse"
@@ -956,7 +893,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
 
                                                             foreach ($details as $key => $detail) {
                                                                 echo "<tr>
-                                                                            <td>". $key . "</td>
+                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_config_date_timezone', 'value' => $key, 'environment' => 'production']], ['target' => '_blank']) .  "</td>
                                                                             <td>" . $detail['count'] . "</td>
                                                                             <td>" . $detail['percent'] . "%" . "</td>
                                                                           </tr>";
@@ -973,14 +910,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#externalDbCollapse" aria-expanded="true"
                                                                 aria-controls="totalUsersCollapse">
-                                                            <strong>Schoolbox Config - External DB Type</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <strong>Schoolbox Config - Production External DB Types</strong>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="externalDbCollapse" class="accordion-collapse collapse"
@@ -1004,7 +938,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
 
                                                             foreach ($details as $key => $detail) {
                                                                 echo "<tr>
-                                                                            <td>". $key . "</td>
+                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_config_external_type', 'value' => $key, 'environment' => 'production']], ['target' => '_blank']) .  "</td>
                                                                             <td>" . $detail['count'] . "</td>
                                                                             <td>" . $detail['percent'] . "%" . "</td>
                                                                           </tr>";
@@ -1021,14 +955,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="totalUsersHeading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#firstFileCollapse" aria-expanded="true"
                                                                 aria-controls="totalUsersCollapse">
                                                             <strong>Schoolbox - First File Upload Year</strong>
-                                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
-                                                            <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
-                                                               aria-hidden="true"></i>
+                                                            <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
                                                     <div id="firstFileCollapse" class="accordion-collapse collapse"
@@ -1052,7 +983,7 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
 
                                                             foreach ($details as $key => $detail) {
                                                                 echo "<tr>
-                                                                            <td>". $key . "</td>
+                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_first_file_upload_year', 'value' => $key]], ['target' => '_blank']) .  "</td>
                                                                             <td>" . $detail['count'] . "</td>
                                                                             <td>" . $detail['percent'] . "%" . "</td>
                                                                           </tr>";
@@ -1097,6 +1028,11 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
             });
         }());
 
+        /*
+            'scrollX: true' doesn't actually handle resizing according to the size of the container
+            So, we use "initComplete" to wrap the table in a container that is relatively positioned
+         */
+
         // DataTable configuration
         $(document).ready(() => {
             $('#totalUserCountDistributionTable').DataTable({
@@ -1107,88 +1043,139 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
             $('#schoolboxPackageVersionsTable').DataTable({
                 paging: false,
                 order: [[2, 'desc']],
-                info: false
+                info: false,
+                "initComplete": function (settings, json) {
+                    $("#schoolboxPackageVersionsTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                },
             })
             $('#schoolboxDevPackageVersionsTable').DataTable({
                 paging: false,
                 order: [[2, 'desc']],
-                info: false
+                info: false,
+                "initComplete": function (settings, json) {
+                    $("#schoolboxDevPackageVersionsTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                },
             })
             $('#stagingSchoolboxPackageVersionsTable').DataTable({
                 paging: false,
                 order: [[2, 'desc']],
-                info: false
+                info: false,
+                "initComplete": function (settings, json) {
+                    $("#stagingSchoolboxPackageVersionsTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                },
             })
             $('#stagingSchoolboxDevPackageVersionsTable').DataTable({
                 paging: false,
                 order: [[2, 'desc']],
-                info: false
+                info: false,
+                "initComplete": function (settings, json) {
+                    $("#stagingSchoolboxDevPackageVersionsTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                },
             })
             $('#productionSiteVersionsTable').DataTable({
                 paging: false,
                 order: [[2, 'desc']],
-                info: false
+                info: false,
+                "initComplete": function (settings, json) {
+                    $("#productionSiteVersionsTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                },
             })
             $('#stagingSiteVersionsTable').DataTable({
                 paging: false,
                 order: [[2, 'desc']],
-                info: false
+                info: false,
+                "initComplete": function (settings, json) {
+                    $("#stagingSiteVersionsTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                },
             })
             $('#virtualTable').DataTable({
                 paging: false,
                 order: [[2, 'desc']],
-                info: false
+                info: false,
+                "initComplete": function (settings, json) {
+                    $("#virtualTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                },
             })
             $('#linuxVersionsTable').DataTable({
                 paging: false,
                 order: [[2, 'desc']],
-                info: false
+                info: false,
+                "initComplete": function (settings, json) {
+                    $("#linuxVersionsTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                },
             })
             $('#kernelVersionsTable').DataTable({
                 paging: false,
                 order: [[2, 'desc']],
-                info: false
+                info: false,
+                "initComplete": function (settings, json) {
+                    $("#kernelVersionsTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                },
             })
             $('#kernelReleasesTable').DataTable({
                 paging: false,
                 order: [[2, 'desc']],
-                info: false
+                info: false,
+                "initComplete": function (settings, json) {
+                    $("#kernelReleasesTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                },
             })
             $('#phpVersionsTable').DataTable({
                 paging: false,
                 order: [[2, 'desc']],
-                info: false
+                info: false,
+                "initComplete": function (settings, json) {
+                    $("#phpVersionsTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                },
             })
             $('#mysqlVersionsTable').DataTable({
                 paging: false,
                 order: [[2, 'desc']],
-                info: false
+                info: false,
+                "initComplete": function (settings, json) {
+                    $("#mysqlVersionsTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                },
             })
             $('#processorsTable').DataTable({
                 paging: false,
                 order: [[2, 'desc']],
-                info: false
+                info: false,
+                "initComplete": function (settings, json) {
+                    $("#processorsTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                },
             })
             $('#ramSizeTable').DataTable({
                 paging: false,
                 order: [[2, 'desc']],
                 columnDefs: [ { targets: 0, type: 'natural' } ],
-                info: false
+                info: false,
+                "initComplete": function (settings, json) {
+                    $("#ramSizeTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                },
             })
             $('#dateTimeZoneTable').DataTable({
                 paging: false,
                 order: [[2, 'desc']],
-                info: false
+                info: false,
+                "initComplete": function (settings, json) {
+                    $("#dateTimeZoneTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                },
             })
             $('#externalDbTable').DataTable({
                 paging: false,
                 order: [[2, 'desc']],
-                info: false
+                info: false,
+                "initComplete": function (settings, json) {
+                    $("#externalDbTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                },
             })
             $('#firstFileTable').DataTable({
                 paging: false,
                 order: [[2, 'desc']],
-                info: false
+                info: false,
+                "initComplete": function (settings, json) {
+                    $("#firstFileTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                },
             })
 
         })
