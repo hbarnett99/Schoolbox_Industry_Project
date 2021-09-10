@@ -8,6 +8,9 @@ $this->Breadcrumbs->add([
     ['title' => 'Historical Facts', 'url' => ['controller' => 'historical-facts', 'action' => 'index']]
 ]);
 
+// Set page title
+$this->assign('title', 'All Historical Facts');
+
 ?>
 <div class="row">
     <div class="col-12">

@@ -1,5 +1,6 @@
 <?php
     // $this->disableAutoLayout();
+    $this->assign('title', 'Login');
 ?>
 
 <!DOCTYPE html>

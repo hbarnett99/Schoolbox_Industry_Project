@@ -24,6 +24,13 @@ if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
     ]);
 }
 
+// Set page title depending on if we're on the dashboard or just a regular view
+if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
+    $this->assign('title', 'Newest Data Set');
+} else {
+    $this->assign('title', 'Fact Set at ' . $this->Time->format($historicalFact->timestamp, \IntlDateFormatter::MEDIUM, null));
+}
+
 ?>
 <div class="row">
     <div class="col-12">
