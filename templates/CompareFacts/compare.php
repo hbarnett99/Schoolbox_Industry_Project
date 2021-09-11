@@ -1,5 +1,20 @@
 <?php
 
+// List of facts that only have numerical responses
+$numericalOnlyFacts = [
+    'schoolbox_users_student',
+    'schoolbox_users_staff',
+    'schoolbox_users_parent',
+    'schoolbox_totalcampus'
+];
+
+// List of non-standard facts (i.e. require specific data wrangling to display properly)
+$nonStandardFacts = [
+    'schoolbox_config_site_type',
+    'schoolbox_package_version',
+    'schoolboxdev_package_version',
+    'schoolbox_totalusers'
+]
 ?>
 
 <div class="row">
@@ -22,8 +37,39 @@
                                                     <h6>' . $timeStampOne . '</h6>
                                                     <hr />
                                                     <div id="factValueOne">';
-                                                       foreach ($factSetOne as $key => $detail) {
-                                                            echo $key . ' : ' . $detail->count . "<br />" ;
+                                                       // If the value is numeric only, display as numeric only
+                                                       if (in_array($selectedFact, $numericalOnlyFacts)) {
+                                                           echo current((array) $factSetOne);
+                                                       // If not numeric, then handle on case-by-case
+                                                       } else {
+                                                           if (in_array($selectedFact, $nonStandardFacts)) {
+                                                               switch ($selectedFact) {
+                                                                   case 'schoolbox_totalusers':
+                                                                       echo $factSetOne->totalUsersFleetCount;
+                                                                       break;
+                                                                   case 'schoolboxdev_package_version':
+                                                                   case 'schoolbox_package_version':
+                                                                       echo "<b>Production Schoolbox Packages</b><br />";
+                                                                       foreach ($factSetOne->productionPackageVersions as $key => $value) {
+                                                                           echo $key . ' : ' . $value->count . "<br />";
+                                                                       }
+                                                                       echo "<br /><b>Development Schoolbox Packages</b><br />";
+                                                                       foreach ($factSetOne->developmentPackageVersions as $key => $value) {
+                                                                           echo $key . ' : ' . $value->count . "<br />";
+                                                                       }
+                                                                       break;
+                                                                   case 'schoolbox_config_site_type':
+                                                                       foreach ($factSetOne as $server => $value) {
+                                                                           echo $server . ' : ' . $value . "<br />";
+                                                                       }
+                                                                       break;
+                                                               }
+                                                           } else {
+                                                               // If not in the non-standard factset, then just render as usual
+                                                               foreach ($factSetOne as $key => $detail) {
+                                                                   echo $key . ' : ' . $detail->count . "<br />" ;
+                                                               }
+                                                           }
                                                        }
                                                     echo '</div>
                                                 </div>
@@ -31,8 +77,39 @@
                                                     <h6>' . $timeStampTwo . '</h6>
                                                     <hr />
                                                     <div id="factValueTwo">';
-                                                        foreach ($factSetTwo as $key => $detail) {
-                                                            echo $key . ' : ' . $detail->count . "<br />" ;
+                                                        // If the value is numeric only, display as numeric only
+                                                        if (in_array($selectedFact, $numericalOnlyFacts)) {
+                                                            echo current((array) $factSetTwo);
+                                                            // If not numeric, then handle on case-by-case
+                                                        } else {
+                                                            if (in_array($selectedFact, $nonStandardFacts)) {
+                                                                switch ($selectedFact) {
+                                                                    case 'schoolbox_totalusers':
+                                                                        echo $factSetTwo->totalUsersFleetCount;
+                                                                        break;
+                                                                    case 'schoolboxdev_package_version':
+                                                                    case 'schoolbox_package_version':
+                                                                        echo "<b>Production Schoolbox Packages</b><br />";
+                                                                        foreach ($factSetTwo->productionPackageVersions as $key => $value) {
+                                                                            echo $key . ' : ' . $value->count . "<br />";
+                                                                        }
+                                                                        echo "<br /><b>Development Schoolbox Packages</b><br />";
+                                                                        foreach ($factSetTwo->developmentPackageVersions as $key => $value) {
+                                                                            echo $key . ' : ' . $value->count . "<br />";
+                                                                        }
+                                                                        break;
+                                                                    case 'schoolbox_config_site_type':
+                                                                        foreach ($factSetTwo as $server => $value) {
+                                                                            echo $server . ' : ' . $value . "<br />";
+                                                                        }
+                                                                        break;
+                                                                }
+                                                            } else {
+                                                                // If not in the non-standard factset, then just render as usual
+                                                                foreach ($factSetTwo as $key => $detail) {
+                                                                    echo $key . ' : ' . $detail->count . "<br />" ;
+                                                                }
+                                                            }
                                                         }
                                                         echo '</div>
                                                 </div>

@@ -70,6 +70,7 @@ class CompareFactsController extends AppController
                 $this->set('factSetTwo', json_decode($factSetTwo));
                 $this->set('timeStampOne', $this->HistoricalFacts->get($idOne)->timestamp);
                 $this->set('timeStampTwo', $this->HistoricalFacts->get($idTwo)->timestamp);
+                $this->set('selectedFact', $selectedFact);
             }
 
         }
