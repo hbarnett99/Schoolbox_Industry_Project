@@ -47,8 +47,10 @@ $nonStandardFacts = [
                                                     <h6>' . $timeStampOne . '</h6>
                                                     <hr />
                                                     <div id="factValueOne">';
-                                                        $factSetOne = json_decode(json_encode(sortByCountDescending($factSetOne)));
-                                                        $factSetTwo = json_decode(json_encode(sortByCountDescending($factSetTwo)));
+                                                        if ($selectedFact != 'schoolbox_config_site_type' && $selectedFact != 'schoolbox_totalusers') {
+                                                            $factSetOne = json_decode(json_encode(sortByCountDescending($factSetOne)));
+                                                            $factSetTwo = json_decode(json_encode(sortByCountDescending($factSetTwo)));
+                                                        }
 
                                                         // If the value is numeric only, display as numeric only
                                                        if (in_array($selectedFact, $numericalOnlyFacts)) {
@@ -62,25 +64,25 @@ $nonStandardFacts = [
                                                                        break;
                                                                    case 'schoolboxdev_package_version':
                                                                    case 'schoolbox_package_version':
-                                                                       echo "<b>Production Schoolbox Packages</b><br />";
+                                                                       echo "<b>Production Schoolbox Packages</b>ä";
                                                                        foreach ($factSetOne->productionPackageVersions as $key => $value) {
-                                                                           echo $key . ' : ' . $value->count . "<br />";
+                                                                           echo $key . ' : ' . $value->count . "ä";
                                                                        }
                                                                        echo "<br /><b>Development Schoolbox Packages</b><br />";
                                                                        foreach ($factSetOne->developmentPackageVersions as $key => $value) {
-                                                                           echo $key . ' : ' . $value->count . "<br />";
+                                                                           echo $key . ' : ' . $value->count . "ä>";
                                                                        }
                                                                        break;
                                                                    case 'schoolbox_config_site_type':
                                                                        foreach ($factSetOne as $server => $value) {
-                                                                           echo $server . ' : ' . $value . "<br />";
+                                                                           echo $server . ' : ' . $value . "ä";
                                                                        }
                                                                        break;
                                                                }
                                                            } else {
                                                                // If not in the non-standard factset, then just render as usual
                                                                foreach ($factSetOne as $key => $detail) {
-                                                                   echo $key . ' : ' . $detail->count . "<br />" ;
+                                                                   echo $key . ' : ' . $detail->count . "ä" ;
                                                                }
                                                            }
                                                        }
@@ -102,30 +104,47 @@ $nonStandardFacts = [
                                                                         break;
                                                                     case 'schoolboxdev_package_version':
                                                                     case 'schoolbox_package_version':
-                                                                        echo "<b>Production Schoolbox Packages</b><br />";
+                                                                        echo "<b>Production Schoolbox Packages</b>ä";
                                                                         foreach ($factSetTwo->productionPackageVersions as $key => $value) {
-                                                                            echo $key . ' : ' . $value->count . "<br />";
+                                                                            echo $key . ' : ' . $value->count . "ä";
                                                                         }
                                                                         echo "<br /><b>Development Schoolbox Packages</b><br />";
                                                                         foreach ($factSetTwo->developmentPackageVersions as $key => $value) {
-                                                                            echo $key . ' : ' . $value->count . "<br />";
+                                                                            echo $key . ' : ' . $value->count . "ä";
                                                                         }
                                                                         break;
                                                                     case 'schoolbox_config_site_type':
                                                                         foreach ($factSetTwo as $server => $value) {
-                                                                            echo $server . ' : ' . $value . "<br />";
+                                                                            echo $server . ' : ' . $value . "ä";
                                                                         }
                                                                         break;
                                                                 }
                                                             } else {
                                                                 // If not in the non-standard factset, then just render as usual
                                                                 foreach ($factSetTwo as $key => $detail) {
-                                                                    echo $key . ' : ' . $detail->count . "<br />" ;
+                                                                    echo $key . ' : ' . $detail->count . "ä" ;
                                                                 }
                                                             }
                                                         }
                                                         echo '</div>
                                                 </div>
+                                                <script>
+                                                    function highlight(newElem, oldElem){
+                                                        var oldText = oldElem.text(),
+                                                            text = "";
+                                                        newElem.text().split("").forEach(function(val, i) {
+                                                            if (val != oldText.charAt(i)) {
+                                                                text += "<span class=\"highlight\">"+val+"</span>";
+                                                            } else {
+                                                                text += val;
+                                                            }
+                                                        });
+                                                        newElem.html(text);
+                                                    }
+                                                    highlight($("#factValueTwo"), $("#factValueOne"));
+                                                    $("#factValueOne").html($("#factValueOne").html().replace(/ä/g, "<br />"));
+                                                    $("#factValueTwo").html($("#factValueTwo").html().replace(/ä/g, "<br />"));
+                                                </script>
                                             </div>
                                         ';
                                 }
