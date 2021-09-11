@@ -23,7 +23,7 @@
                                 <?= $this->Html->image('../favicon.ico', ['class' => 'img-fluid']); ?>
                             </div>
                             <div class="row px-5 mx-3">
-                                <h3 class="card-header text-center pb-3"> Login with Google </h3>
+                                <h3 class="card-header text-center pt-0 pb-3"> Login with Google </h3>
                                 <?php
                                 $redirectUrl = '';
                                 foreach($this->request->getQueryParams() as $param => $key) {

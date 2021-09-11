@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Cake\Event\EventInterface;
+use Cake\I18n\FrozenTime;
 
 /**
  * Facts Controller
@@ -85,12 +86,13 @@ class CompareFactsController extends AppController
     protected function getHistoricalFactTimeStamps() {
         // Get all the HistoricalFacts
         $this->loadModel('HistoricalFacts');
-        $historicalFacts = $this->HistoricalFacts->find()->all();
+        $historicalFacts = $this->HistoricalFacts->find()->order(['timestamp' => 'desc'])->all();
         $historicalFactsTimeStamps = [];
 
         // Iterate over all of them to get their timestamps
         foreach($historicalFacts as $historicalFact) {
-            $historicalFactsTimeStamps[$historicalFact->id] = $historicalFact->timestamp;
+            $time = new FrozenTime($historicalFact->timestamp);
+            $historicalFactsTimeStamps[$historicalFact->id] = $time->i18nFormat('dd/MM/yyyy HH:mm:ss');
         }
         return $historicalFactsTimeStamps;
     }

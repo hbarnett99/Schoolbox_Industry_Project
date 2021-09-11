@@ -24,14 +24,40 @@ $nonStandardFacts = [
     'schoolbox_package_version',
     'schoolboxdev_package_version',
     'schoolbox_totalusers'
-]
+];
+
+// Only show breadcrumbs when not on default page
+if (isset($selectedFact)) {
+    $this->Breadcrumbs->add([
+        ['title' => 'Compare Facts', 'url' => ['controller' => 'CompareFacts', 'action' => 'compare']],
+        ['title' => $selectedFact . ' between ' . $this->Time->format($timeStampOne, \IntlDateFormatter::MEDIUM, null)  . " and " . $this->Time->format($timeStampTwo, \IntlDateFormatter::MEDIUM, null), 'url' => ['controller' => 'CompareFacts', 'action' => 'compare']]
+    ]);
+}
+
+// Set page title depending on if a fact has been selected to be compared
+if (isset($selectedFact)) {
+    $this->assign('title', 'Comparing ' . $selectedFact);
+} else {
+    $this->assign('title', 'Compare Fact Sets');
+}
 ?>
 
 <div class="row">
     <div class="col-12">
+        <?php
+        echo $this->Breadcrumbs->render(
+            ['class' => 'breadcrumb'],
+            ['separator' => '<i id="breadcrumb-divider" class="fa fa-angle-right"> </i>']
+        );
+        ?>
         <div class="card mb-4">
             <div class="card-header pb-0">
                 <h5>Compare Cached Facts</h5>
+                <?php
+                    if (isset($selectedFact)) {
+                        echo "<em>Comparing values for: '<b>" . $selectedFact . "</b>', between <b>" . $this->Time->format($timeStampOne, \IntlDateFormatter::MEDIUM, null)  . "</b> and <b>" . $this->Time->format($timeStampTwo, \IntlDateFormatter::MEDIUM, null), "</b></em>";
+                    }
+                ?>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 <div class="row">
@@ -60,7 +86,7 @@ $nonStandardFacts = [
                                                            if (in_array($selectedFact, $nonStandardFacts)) {
                                                                switch ($selectedFact) {
                                                                    case 'schoolbox_totalusers':
-                                                                       echo $factSetOne->totalUsersFleetCount;
+                                                                       echo number_format(intval($factSetOne->totalUsersFleetCount));
                                                                        break;
                                                                    case 'schoolboxdev_package_version':
                                                                    case 'schoolbox_package_version':
@@ -100,7 +126,7 @@ $nonStandardFacts = [
                                                             if (in_array($selectedFact, $nonStandardFacts)) {
                                                                 switch ($selectedFact) {
                                                                     case 'schoolbox_totalusers':
-                                                                        echo $factSetTwo->totalUsersFleetCount;
+                                                                        echo number_format(intval($factSetTwo->totalUsersFleetCount));
                                                                         break;
                                                                     case 'schoolboxdev_package_version':
                                                                     case 'schoolbox_package_version':
