@@ -1,5 +1,15 @@
 <?php
 
+// Helper sort function. Takes an array and returns it in descending order of a 'count' value.
+function sortByCountDescending($array)
+{
+    $array = json_decode(json_encode($array), true);
+    uasort($array, function ($a, $b) {
+        return $b['count'] - $a['count'];
+    });
+    return $array;
+}
+
 // List of facts that only have numerical responses
 $numericalOnlyFacts = [
     'schoolbox_users_student',
@@ -37,7 +47,10 @@ $nonStandardFacts = [
                                                     <h6>' . $timeStampOne . '</h6>
                                                     <hr />
                                                     <div id="factValueOne">';
-                                                       // If the value is numeric only, display as numeric only
+                                                        $factSetOne = json_decode(json_encode(sortByCountDescending($factSetOne)));
+                                                        $factSetTwo = json_decode(json_encode(sortByCountDescending($factSetTwo)));
+
+                                                        // If the value is numeric only, display as numeric only
                                                        if (in_array($selectedFact, $numericalOnlyFacts)) {
                                                            echo current((array) $factSetOne);
                                                        // If not numeric, then handle on case-by-case
