@@ -90,25 +90,25 @@ if (isset($selectedFact)) {
                                                                        break;
                                                                    case 'schoolboxdev_package_version':
                                                                    case 'schoolbox_package_version':
-                                                                       echo "<b>Production Schoolbox Packages</b>ä";
+                                                                       echo "<b>Production Schoolbox Packages</b>";
                                                                        foreach ($factSetOne->productionPackageVersions as $key => $value) {
-                                                                           echo $key . ' : ' . $value->count . "ä";
+                                                                           echo "<p class='comparedFactValue' id='" . $key . "'>" . $key . ' : ' . $value->count . "</p>";
                                                                        }
                                                                        echo "<br /><b>Development Schoolbox Packages</b><br />";
                                                                        foreach ($factSetOne->developmentPackageVersions as $key => $value) {
-                                                                           echo $key . ' : ' . $value->count . "ä>";
+                                                                           echo "<p class='comparedFactValue' id='" . $key . "'>" . $key . ' : ' . $value->count . "</p>";
                                                                        }
                                                                        break;
                                                                    case 'schoolbox_config_site_type':
                                                                        foreach ($factSetOne as $server => $value) {
-                                                                           echo $server . ' : ' . $value . "ä";
+                                                                           echo "<p class='comparedFactValue' id='" . $server . "'>" . $server . ' : ' . $value . "</p>";
                                                                        }
                                                                        break;
                                                                }
                                                            } else {
                                                                // If not in the non-standard factset, then just render as usual
                                                                foreach ($factSetOne as $key => $detail) {
-                                                                   echo $key . ' : ' . $detail->count . "ä" ;
+                                                                   echo "<p class='comparedFactValue' id='" . $key . "'>" . $key . ' : ' . $detail->count . "</p>";
                                                                }
                                                            }
                                                        }
@@ -130,46 +130,52 @@ if (isset($selectedFact)) {
                                                                         break;
                                                                     case 'schoolboxdev_package_version':
                                                                     case 'schoolbox_package_version':
-                                                                        echo "<b>Production Schoolbox Packages</b>ä";
+                                                                        echo "<b>Production Schoolbox Packages</b>";
                                                                         foreach ($factSetTwo->productionPackageVersions as $key => $value) {
-                                                                            echo $key . ' : ' . $value->count . "ä";
+                                                                            echo "<p class='comparedFactValue' id='" . $key . "'>" . $key . ' : ' . $value->count . "</p>";
                                                                         }
                                                                         echo "<br /><b>Development Schoolbox Packages</b><br />";
                                                                         foreach ($factSetTwo->developmentPackageVersions as $key => $value) {
-                                                                            echo $key . ' : ' . $value->count . "ä";
+                                                                            echo "<p class='comparedFactValue' id='" . $key . "'>" . $key . ' : ' . $value->count . "</p>";
                                                                         }
                                                                         break;
                                                                     case 'schoolbox_config_site_type':
                                                                         foreach ($factSetTwo as $server => $value) {
-                                                                            echo $server . ' : ' . $value . "ä";
+                                                                            echo "<p class='comparedFactValue' id='" . $server . "'>" . $server . ' : ' . $value . "</p>";
                                                                         }
                                                                         break;
                                                                 }
                                                             } else {
                                                                 // If not in the non-standard factset, then just render as usual
                                                                 foreach ($factSetTwo as $key => $detail) {
-                                                                    echo $key . ' : ' . $detail->count . "ä" ;
+                                                                    echo "<p class='comparedFactValue' id='" . $key . "'>" . $key . ' : ' . $detail->count . "</p>";
                                                                 }
                                                             }
                                                         }
                                                         echo '</div>
                                                 </div>
                                                 <script>
-                                                    function highlight(newElem, oldElem){
-                                                        var oldText = oldElem.text(),
-                                                            text = "";
-                                                        newElem.text().split("").forEach(function(val, i) {
-                                                            if (val != oldText.charAt(i)) {
-                                                                text += "<span class=\"highlight\">"+val+"</span>";
-                                                            } else {
-                                                                text += val;
+                                                    let factSetOne = $("#factValueOne").find("p");
+                                                    let factSetTwo = $("#factValueTwo").find("p");
+
+                                                    factSetTwo.each((index, value) => {
+                                                        // Get the ID of the item on the right (newest set of data)
+                                                        let itemOneId = factSetTwo[index].id;
+                                                        let itemOne =  factSetTwo[index];
+
+                                                        // Check if that ID exists for the first fact set
+                                                        let itemTwo = $("#factValueOne").find("#" + itemOneId);
+                                                        if (itemTwo.length !== 0) {
+                                                            itemTwo = itemTwo[0];
+                                                            if (itemTwo.innerHTML !== itemOne.innerText) {
+                                                                console.log("Item Two: " + itemTwo.innerText);
+                                                                console.log("Item One: " + itemOne.innerText);
                                                             }
-                                                        });
-                                                        newElem.html(text);
-                                                    }
-                                                    highlight($("#factValueTwo"), $("#factValueOne"));
-                                                    $("#factValueOne").html($("#factValueOne").html().replace(/ä/g, "<br />"));
-                                                    $("#factValueTwo").html($("#factValueTwo").html().replace(/ä/g, "<br />"));
+                                                        }
+                                                    })
+
+//                                                    console.log(factSetOne);
+//                                                    console.log(factSetTwo);
                                                 </script>
                                             </div>
                                         ';

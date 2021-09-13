@@ -153,5 +153,12 @@ button[data-bs-toggle="collapse"].collapsed .fa:before {
 }
 
 .highlight {
-    color: red;
+    background-color: red;
+    color: white;
+    border-radius: 3px;
+}
+
+.comparedFactValue {
+    margin-bottom: 1px;
+    padding-left: 5px;
 }
