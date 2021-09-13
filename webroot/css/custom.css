@@ -158,6 +158,17 @@ button[data-bs-toggle="collapse"].collapsed .fa:before {
     border-radius: 3px;
 }
 
+.highlight-green {
+    background-color: green;
+    color: white;
+    border-radius: 3px;
+}
+
+.fact-difference-stats {
+    color: lightgray;
+    font-style: italic;
+}
+
 .comparedFactValue {
     margin-bottom: 1px;
     padding-left: 5px;
