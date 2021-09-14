@@ -173,3 +173,26 @@ button[data-bs-toggle="collapse"].collapsed .fa:before {
     margin-bottom: 1px;
     padding-left: 5px;
 }
+
+/* Overflow Styling for Compare Facts Page */
+input[type="checkbox"] {
+    display:none;
+}
+
+.overflowLabel:after {
+    content:"more";
+}
+
+input:checked ~ .overflowLabel:after {
+    content:"less";
+}
+
+.inner {
+    max-height: 250px;
+    overflow: hidden;
+    transition: all .5s ease;
+}
+
+input:checked + .inner {
+    max-height: 100%;
+}

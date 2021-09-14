@@ -72,7 +72,8 @@ if (isset($selectedFact)) {
                                                 <div class="col border-0 p-4 mb-2 mx-1 bg-gray-100 rounded">
                                                     <h6>' . $this->Time->format($timeStampOne, \IntlDateFormatter::MEDIUM, null) . '</h6>
                                                     <hr />
-                                                    <div id="factValueOne">';
+                                                    <input type="checkbox" id="readMoreFirst" />
+                                                    <div id="factValueOne" class="inner">';
                                                         if ($selectedFact != 'schoolbox_config_site_type' && $selectedFact != 'schoolbox_totalusers'  && $selectedFact != 'schoolboxdev_package_version'  && $selectedFact != 'schoolbox_package_version') {
                                                             $factSetOne = json_decode(json_encode(sortByCountDescending($factSetOne)));
                                                             $factSetTwo = json_decode(json_encode(sortByCountDescending($factSetTwo)));
@@ -112,12 +113,13 @@ if (isset($selectedFact)) {
                                                                }
                                                            }
                                                        }
-                                                    echo '</div>
+                                                    echo '</div><label class="overflowLabel" for="readMoreFirst">Read </label>
                                                 </div>
                                                 <div class="col border-0 p-4 mb-2 mx-1 bg-gray-100 rounded">
                                                     <h6>' . $this->Time->format($timeStampTwo, \IntlDateFormatter::MEDIUM, null) . '</h6>
                                                     <hr />
-                                                    <div id="factValueTwo">';
+                                                    <input type="checkbox" id="readMoreSecond" />
+                                                    <div id="factValueTwo" class="inner">';
                                                         // If the value is numeric only, display as numeric only
                                                         if (in_array($selectedFact, $numericalOnlyFacts)) {
                                                             if (current((array) $factSetOne) != current((array) $factSetTwo)) {
@@ -192,7 +194,6 @@ if (isset($selectedFact)) {
                                                             } else {
                                                                 // If not in the non-standard factset, then just render as usual
                                                                 foreach ($factSetTwo as $key => $detail) {
-//                                                                    echo "<p class='comparedFactValue' id='" . $key . "'>" . $key . ' : ' . $detail->count . "</p>";
                                                                     // Check if the first set contains the current key
                                                                     if(isset($factSetOne->$key)) {
                                                                         $firstFactSetValue = $factSetOne->$key;
@@ -209,7 +210,7 @@ if (isset($selectedFact)) {
                                                                 }
                                                             }
                                                         }
-                                                        echo '</div>
+                                                        echo '</div><label class="overflowLabel" for="readMoreSecond">Read </label>
                                                 </div>
                                             </div>
                                         ';
@@ -258,5 +259,11 @@ if (isset($selectedFact)) {
                 </div>
             </div>
         </div>
+        <script>
+            let containerHeight = $(".inner")[0].scrollHeight;
+            if (containerHeight < 250) {
+                $('label').hide();
+            }
+        </script>
     </div>
 </div>
