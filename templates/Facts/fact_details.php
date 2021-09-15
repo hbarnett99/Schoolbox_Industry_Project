@@ -63,7 +63,12 @@ if (isset($fact)) {
     }
 }
 
-
+// If a fact value is set, then update the page title
+if (isset($fact)) {
+    $this->assign('title', $fact . ' Details');
+} else {
+    $this->assign('title', 'Individual Fact Details');
+}
 ?>
 
 <div class="row">
