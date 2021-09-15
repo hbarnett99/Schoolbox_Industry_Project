@@ -52,30 +52,35 @@ class CompareFactsController extends AppController
         // Set the dropdown box option variables
         $this->set('historicalFactTimeStampOptions', $this->getHistoricalFactTimeStamps());
         $this->set('knownFacts', $this->getKnownFactsArray());
+        $this->loadModel('HistoricalFacts');
 
-        // If a POST request, handle passed data
+        // Convert POST request into a GET request with parameters
         if ($this->request->is('post')) {
-            $this->loadModel('HistoricalFacts');
             $idOne = $this->request->getData('timestamp_one');
             $idTwo = $this->request->getData('timestamp_two');
             $selectedFact = $this->request->getData('fact');
 
-            // Ensure all data is here before continuing
-            if ($idOne && $idTwo && $selectedFact) {
-                // Get the selected fact data for the given HistoricalFact set
-                $factSetOne = $this->HistoricalFacts->get($idOne)->$selectedFact;
-                $factSetTwo = $this->HistoricalFacts->get($idTwo)->$selectedFact;
-
-                // Set view variables
-                $this->set('factSetOne', json_decode($factSetOne));
-                $this->set('factSetTwo', json_decode($factSetTwo));
-                $this->set('timeStampOne', $this->HistoricalFacts->get($idOne)->timestamp);
-                $this->set('timeStampTwo', $this->HistoricalFacts->get($idTwo)->timestamp);
-                $this->set('selectedFact', $selectedFact);
-            }
-
+            $this->redirect(['action' => 'compare', '?' => ['timestamp_one' => $idOne, 'timestamp_two' => $idTwo, 'fact' => $selectedFact]]);
         }
 
+        // Get parameters from query
+        $idOne = $this->request->getQuery('timestamp_one');
+        $idTwo = $this->request->getQuery('timestamp_two');
+        $selectedFact = $this->request->getQuery('fact');
+
+        // Ensure all data is here before continuing
+        if ($idOne && $idTwo && $selectedFact) {
+            // Get the selected fact data for the given HistoricalFact set
+            $factSetOne = $this->HistoricalFacts->get($idOne)->$selectedFact;
+            $factSetTwo = $this->HistoricalFacts->get($idTwo)->$selectedFact;
+
+            // Set view variables
+            $this->set('factSetOne', json_decode($factSetOne));
+            $this->set('factSetTwo', json_decode($factSetTwo));
+            $this->set('timeStampOne', $this->HistoricalFacts->get($idOne)->timestamp);
+            $this->set('timeStampTwo', $this->HistoricalFacts->get($idTwo)->timestamp);
+            $this->set('selectedFact', $selectedFact);
+        }
 
     }
 

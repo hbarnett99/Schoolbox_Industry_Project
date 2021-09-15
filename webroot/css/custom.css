@@ -179,12 +179,16 @@ input[type="checkbox"] {
     display:none;
 }
 
+.overflowLabel {
+    cursor: pointer;
+}
+
 .overflowLabel:after {
-    content:"more";
+    content: "more";
 }
 
 input:checked ~ .overflowLabel:after {
-    content:"less";
+    content: "less";
 }
 
 .inner {

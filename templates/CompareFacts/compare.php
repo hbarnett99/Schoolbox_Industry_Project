@@ -81,7 +81,7 @@ if (isset($selectedFact)) {
 
                                                         // If the value is numeric only, display as numeric only
                                                        if (in_array($selectedFact, $numericalOnlyFacts)) {
-                                                           echo current((array) $factSetOne);
+                                                           echo number_format(intval(current((array) $factSetOne)));
                                                        // If not numeric, then handle on case-by-case
                                                        } else {
                                                            if (in_array($selectedFact, $nonStandardFacts)) {
@@ -123,9 +123,9 @@ if (isset($selectedFact)) {
                                                         // If the value is numeric only, display as numeric only
                                                         if (in_array($selectedFact, $numericalOnlyFacts)) {
                                                             if (current((array) $factSetOne) != current((array) $factSetTwo)) {
-                                                                echo "<p class='comparedFactValue highlight'>" . current((array) $factSetTwo) . "<span class='float-end pe-1 fact-difference-stats'>(Change of " . abs(current((array) $factSetOne) - current((array) $factSetTwo)) . ")</span></p>";
+                                                                echo "<p class='comparedFactValue highlight'>" . number_format(intval(current((array) $factSetTwo))) . "<span class='float-end pe-1 fact-difference-stats'>(Change of " . abs(current((array) $factSetOne) - current((array) $factSetTwo)) . ")</span></p>";
                                                             } else {
-                                                                echo "<p class='comparedFactValue'>" . current((array) $factSetTwo) . "</p>";
+                                                                echo "<p class='comparedFactValue'>" . number_format(intval(current((array) $factSetTwo))) . "</p>";
                                                             }
                                                             // If not numeric, then handle on case-by-case
                                                         } else {
@@ -228,7 +228,8 @@ if (isset($selectedFact)) {
                                 [
                                     'type' => 'select',
                                     'options' => $historicalFactTimeStampOptions,
-                                    'class' => 'form-control'
+                                    'class' => 'form-control',
+                                    'default' => $this->request->getQuery('timestamp_one')
                                 ]
                             );
                             echo '</div><div class="col-md-auto">';
@@ -237,7 +238,8 @@ if (isset($selectedFact)) {
                                 [
                                     'type' => 'select',
                                     'options' => $historicalFactTimeStampOptions,
-                                    'class' => 'form-control'
+                                    'class' => 'form-control',
+                                    'default' => $this->request->getQuery('timestamp_two')
                                 ]
                             );
                             echo '</div><div class="col-md-auto">';
@@ -246,7 +248,8 @@ if (isset($selectedFact)) {
                                 [
                                     'type' => 'select',
                                     'options' => $knownFacts,
-                                    'class' => 'form-control'
+                                    'class' => 'form-control',
+                                    'default' => (isset($selectedFact)) ? $selectedFact : 0
                                 ]
                             );
                             echo '</div><div class="col-md-auto mt-2 mt-md-0">';
