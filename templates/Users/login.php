@@ -1,5 +1,6 @@
 <?php
     // $this->disableAutoLayout();
+    $this->assign('title', 'Login');
 ?>
 
 <!DOCTYPE html>
@@ -27,6 +28,11 @@
 								</div>
                                 <h3 class="card-header text-center pb-3"> Login with Google </h3>
                                 <?php
+                                $redirectUrl = '';
+                                foreach($this->request->getQueryParams() as $param => $key) {
+                                    $redirectUrl .= '&' . $param . '=' .$key;
+                                }
+                                $redirectUrl = str_replace('&redirect=', '', $redirectUrl);
                                 echo $this->Form->postLink(
                                     $this->Html->Image('google_logo.svg'),
                                     [

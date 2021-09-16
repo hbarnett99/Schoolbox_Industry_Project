@@ -49,8 +49,8 @@
     padding: 5px;
 }
 
-.card-logo{
-    padding: 1.0rem; !important;
+.card-logo {
+    padding: 1.0rem !important;
 }
 
 /*Animated BG*/
@@ -127,4 +127,76 @@
         transform: translateY(-800px) rotate(360deg);
         opacity: 0;
     }
+}
+
+select {
+    appearance: auto !important;
+}
+
+option {
+    font-family: "Open Sans";
+}
+
+.accordion table td a, .accordion-results-link {
+    color: #cb0c9f;
+    text-decoration: underline;
+}
+
+button[data-bs-toggle="collapse"] .fa:before {
+    content: "\f068";
+    color: #67748e;
+}
+
+button[data-bs-toggle="collapse"].collapsed .fa:before {
+    content: "\f067";
+    color: #67748e;
+}
+
+.highlight {
+    background-color: red;
+    color: white;
+    border-radius: 3px;
+}
+
+.highlight-green {
+    background-color: green;
+    color: white;
+    border-radius: 3px;
+}
+
+.fact-difference-stats {
+    color: lightgray;
+    font-style: italic;
+}
+
+.comparedFactValue {
+    margin-bottom: 1px;
+    padding-left: 5px;
+}
+
+/* Overflow Styling for Compare Facts Page */
+input[type="checkbox"] {
+    display:none;
+}
+
+.overflowLabel {
+    cursor: pointer;
+}
+
+.overflowLabel:after {
+    content: "more";
+}
+
+input:checked ~ .overflowLabel:after {
+    content: "less";
+}
+
+.inner {
+    max-height: 250px;
+    overflow: hidden;
+    transition: all .5s ease;
+}
+
+input:checked + .inner {
+    max-height: 100%;
 }
