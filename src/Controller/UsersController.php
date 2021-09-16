@@ -35,10 +35,6 @@ class UsersController extends AppController
     public function login() {
         // This is a stub that has to be here for the route to connect.
         $this->viewBuilder()->setLayout('login');
-		
-		// !!! WARNING !!! - THIS IS A TEST VERSION OF THE CODE THAT DISABLES LOGIN FUNCTIONALITY
-		// NEVER USE THIS IN ANY KIND OF PRODUCTION ENVIRONMENT
-		$this->request->getSession()->write('Auth.email', 'fakeemail@gmail.com');
     }
 
     /**
