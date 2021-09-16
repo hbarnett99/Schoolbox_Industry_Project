@@ -122,8 +122,10 @@ if (isset($selectedFact)) {
                                                     <div id="factValueTwo" class="inner">';
                                                         // If the value is numeric only, display as numeric only
                                                         if (in_array($selectedFact, $numericalOnlyFacts)) {
-                                                            if (current((array) $factSetOne) != current((array) $factSetTwo)) {
-                                                                echo "<p class='comparedFactValue highlight'>" . number_format(intval(current((array) $factSetTwo))) . "<span class='float-end pe-1 fact-difference-stats'>(Change of " . abs(current((array) $factSetOne) - current((array) $factSetTwo)) . ")</span></p>";
+                                                            if (current((array) $factSetOne) > current((array) $factSetTwo)) {
+                                                                echo "<p class='comparedFactValue highlight-minus'>" . number_format(intval(current((array)$factSetTwo))) . "<span class='float-end pe-1 fact-difference-stats'>- " . abs(current((array)$factSetOne) - current((array)$factSetTwo)) . "</span></p>";
+                                                            } elseif (current((array) $factSetOne) < current((array) $factSetTwo)) {
+                                                                    echo "<p class='comparedFactValue highlight-plus'>" . number_format(intval(current((array) $factSetTwo))) . "<span class='float-end pe-1 fact-difference-stats'>+ " . abs(current((array) $factSetOne) - current((array) $factSetTwo)) . "</span></p>";
                                                             } else {
                                                                 echo "<p class='comparedFactValue'>" . number_format(intval(current((array) $factSetTwo))) . "</p>";
                                                             }
@@ -132,8 +134,11 @@ if (isset($selectedFact)) {
                                                             if (in_array($selectedFact, $nonStandardFacts)) {
                                                                 switch ($selectedFact) {
                                                                     case 'schoolbox_totalusers':
-                                                                        if ($factSetTwo->totalUsersFleetCount != $factSetOne->totalUsersFleetCount) {
-                                                                            echo "<p class='comparedFactValue highlight' id='totalUsersFleetCount'>" . number_format(intval($factSetTwo->totalUsersFleetCount)) . "<span class='float-end pe-1 fact-difference-stats'>(Change of " . abs($factSetTwo->totalUsersFleetCount - $factSetOne->totalUsersFleetCount) . ")</span></p>";
+                                                                        // First case compares if less than, show red & "-", second shows green and "+", third is unchanged
+                                                                        if ($factSetTwo->totalUsersFleetCount < $factSetOne->totalUsersFleetCount) {
+                                                                            echo "<p class='comparedFactValue highlight-minus' id='totalUsersFleetCount'>" . number_format(intval($factSetTwo->totalUsersFleetCount)) . "<span class='float-end pe-1 fact-difference-stats'>- " . abs($factSetTwo->totalUsersFleetCount - $factSetOne->totalUsersFleetCount) . "</span></p>";
+                                                                        } elseif ($factSetTwo->totalUsersFleetCount > $factSetOne->totalUsersFleetCount) {
+                                                                                echo "<p class='comparedFactValue highlight-plus' id='totalUsersFleetCount'>" . number_format(intval($factSetTwo->totalUsersFleetCount)) . "<span class='float-end pe-1 fact-difference-stats'>+ " . abs($factSetTwo->totalUsersFleetCount - $factSetOne->totalUsersFleetCount) . "</span></p>";
                                                                         } else {
                                                                             echo "<p class='comparedFactValue' id='totalUsersFleetCount'>" . number_format(intval($factSetTwo->totalUsersFleetCount)) . "</p>";
                                                                         }
@@ -146,14 +151,16 @@ if (isset($selectedFact)) {
                                                                             if(isset($factSetOne->productionPackageVersions->$key)) {
                                                                                 $firstFactSetValue = $factSetOne->productionPackageVersions->$key;
                                                                                 // Check if the first set's value is different to the second set's value, and if it is, then display with red highlight
-                                                                                if ($firstFactSetValue->count != $value->count) {
-                                                                                    echo "<p class='comparedFactValue highlight' id='" . $key . "'>" . $key . ' : ' . $value->count . "<span class='float-end pe-1 fact-difference-statas'>(Change of " . abs($firstFactSetValue->count - $value->count)  . ")</span></p>";
+                                                                                if ($firstFactSetValue->count > $value->count) {
+                                                                                    echo "<p class='comparedFactValue highlight-minus' id='" . $key . "'>" . $key . ' : ' . $value->count . "<span class='float-end pe-1 fact-difference-stats'>- " . abs($firstFactSetValue->count - $value->count)  . "</span></p>";
+                                                                                } elseif ($firstFactSetValue->count < $value->count) {
+                                                                                    echo "<p class='comparedFactValue highlight-plus' id='" . $key . "'>" . $key . ' : ' . $value->count . "<span class='float-end pe-1 fact-difference-stats'>+ " . abs($firstFactSetValue->count - $value->count)  . "</span></p>";
                                                                                 } else { // If it's the same, then display with no change
                                                                                     echo "<p class='comparedFactValue' id='" . $key . "'>" . $key . ' : ' . $value->count . "</p>";
                                                                                 }
                                                                             // If it does not, then display with green highlight
                                                                             } else {
-                                                                                echo "<p class='comparedFactValue highlight-green' id='" . $key . "'>" . $key . ' : ' . $value->count . "<span class='float-end pe-1 fact-difference-statas'>(New value)</span></p>";
+                                                                                echo "<p class='comparedFactValue highlight-new' id='" . $key . "'>" . $key . ' : ' . $value->count . "<span class='float-end pe-1 fact-difference-stats'>New value</span></p>";
                                                                             }
                                                                         }
                                                                         echo "<br /><b>Development Schoolbox Packages</b><br />";
@@ -161,15 +168,17 @@ if (isset($selectedFact)) {
                                                                             // Check if the first set contains the current key
                                                                             if(isset($factSetOne->developmentPackageVersions->$key)) {
                                                                                 $firstFactSetValue = $factSetOne->developmentPackageVersions->$key;
-                                                                                // Check if the first set's value is different to the second set's value, and if it is, then display with red highlight
-                                                                                if ($firstFactSetValue->count != $value->count) {
-                                                                                    echo "<p class='comparedFactValue highlight' id='" . $key . "'>" . $key . ' : ' . $value->count . "<span class='float-end pe-1 fact-difference-statas'>(Change of " . abs($firstFactSetValue->count - $value->count)  . ")</span></p>";
+                                                                                // First case compares if less than, show red & "-", second shows green and "+", third is unchanged
+                                                                                if ($firstFactSetValue->count > $value->count) {
+                                                                                    echo "<p class='comparedFactValue highlight-minus' id='" . $key . "'>" . $key . ' : ' . $value->count . "<span class='float-end pe-1 fact-difference-stats'>- " . abs($firstFactSetValue->count - $value->count)  . "</span></p>";
+                                                                                } elseif ($firstFactSetValue->count < $value->count) {
+                                                                                    echo "<p class='comparedFactValue highlight-plus' id='" . $key . "'>" . $key . ' : ' . $value->count . "<span class='float-end pe-1 fact-difference-stats'>+ " . abs($firstFactSetValue->count - $value->count)  . "</span></p>";
                                                                                 } else { // If it's the same, then display with no change
                                                                                     echo "<p class='comparedFactValue' id='" . $key . "'>" . $key . ' : ' . $value->count . "</p>";
                                                                                 }
                                                                                 // If it does not, then display with green highlight
                                                                             } else {
-                                                                                echo "<p class='comparedFactValue highlight-green' id='" . $key . "'>" . $key . ' : ' . $value->count . "<span class='float-end pe-1 fact-difference-statas'>(New value)</span></p>";
+                                                                                echo "<p class='comparedFactValue highlight-new' id='" . $key . "'>" . $key . ' : ' . $value->count . "<span class='float-end pe-1 fact-difference-stats'>New value</span></p>";
                                                                             }
                                                                         }
                                                                         break;
@@ -178,15 +187,15 @@ if (isset($selectedFact)) {
                                                                             // Check if the first set contains the current key
                                                                             if(isset($factSetOne->$server)) {
                                                                                 $firstFactSetValue = $factSetOne->$server;
-                                                                                // Check if the first set's value is different to the second set's value, and if it is, then display with red highlight
+                                                                                // First case compares if less than, show red & "-", second shows green and "+", third is unchanged
                                                                                 if ($firstFactSetValue != $value) {
-                                                                                    echo "<p class='comparedFactValue highlight' id='" . $server . "'>" . $server . ' : ' . $value . "<span class='float-end pe-1 fact-difference-statas'>(Change of " . abs($firstFactSetValue - $value)  . ")</span></p>";
+                                                                                    echo "<p class='comparedFactValue highlight-new' id='" . $server . "'>" . $server . ' : ' . $value . "<span class='float-end pe-1 fact-difference-stats'>(Change of " . abs($firstFactSetValue - $value)  . ")</span></p>";
                                                                                 } else { // If it's the same, then display with no change
                                                                                     echo "<p class='comparedFactValue' id='" . $server . "'>" . $server . ' : ' . $value . "</p>";
                                                                                 }
                                                                                 // If it does not, then display with green highlight
                                                                             } else {
-                                                                                echo "<p class='comparedFactValue highlight-green' id='" . $server . "'>" . $server . ' : ' . $value . "<span class='float-end pe-1 fact-difference-statas'>(New value)</span></p>";
+                                                                                echo "<p class='comparedFactValue highlight-new' id='" . $server . "'>" . $server . ' : ' . $value . "<span class='float-end pe-1 fact-difference-stats'>New value</span></p>";
                                                                             }
                                                                         }
                                                                         break;
@@ -197,15 +206,17 @@ if (isset($selectedFact)) {
                                                                     // Check if the first set contains the current key
                                                                     if(isset($factSetOne->$key)) {
                                                                         $firstFactSetValue = $factSetOne->$key;
-                                                                        // Check if the first set's value is different to the second set's value, and if it is, then display with red highlight
-                                                                        if ($firstFactSetValue->count != $detail->count) {
-                                                                            echo "<p class='comparedFactValue highlight' id='" . $key . "'>" . $key . ' : ' . $detail->count . "<span class='float-end pe-1 fact-difference-statas'>(Change of " . abs($firstFactSetValue->count - $detail->count)  . ")</span></p>";
+                                                                        // First case compares if less than, show red & "-", second shows green and "+", third is unchanged
+                                                                        if ($firstFactSetValue->count > $detail->count) {
+                                                                            echo "<p class='comparedFactValue highlight-minus' id='" . $key . "'>" . $key . ' : ' . $detail->count . "<span class='float-end pe-1 fact-difference-stats'>- " . abs($firstFactSetValue->count - $detail->count) . "</span></p>";
+                                                                        } elseif ($firstFactSetValue->count < $detail->count) {
+                                                                                echo "<p class='comparedFactValue highlight-plus' id='" . $key . "'>" . $key . ' : ' . $detail->count . "<span class='float-end pe-1 fact-difference-stats'>+ " . abs($firstFactSetValue->count - $detail->count)  . "</span></p>";
                                                                         } else { // If it's the same, then display with no change
                                                                             echo "<p class='comparedFactValue' id='" . $key . "'>" . $key . ' : ' . $detail->count . "</p>";
                                                                         }
-                                                                        // If it does not, then display with green highlight
+                                                                        // If it does not, then display with blue highlight
                                                                     } else {
-                                                                        echo "<p class='comparedFactValue highlight-green' id='" . $key . "'>" . $key . ' : ' . $detail->count . "<span class='float-end pe-1 fact-difference-statas'>(New value)</span></p>";
+                                                                        echo "<p class='comparedFactValue highlight-new' id='" . $key . "'>" . $key . ' : ' . $detail->count . "<span class='float-end pe-1 fact-difference-stats'>New value</span></p>";
                                                                     }
                                                                 }
                                                             }

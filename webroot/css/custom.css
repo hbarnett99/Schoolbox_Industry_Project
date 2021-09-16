@@ -152,20 +152,23 @@ button[data-bs-toggle="collapse"].collapsed .fa:before {
     color: #67748e;
 }
 
-.highlight {
-    background-color: red;
-    color: white;
+.highlight-minus {
+    background-color: #f9d7dc;
     border-radius: 3px;
 }
 
-.highlight-green {
-    background-color: green;
-    color: white;
+.highlight-plus {
+    background-color: #ddfbe6;
+    border-radius: 3px;
+}
+
+.highlight-new {
+    background-color: #ded7fc;
     border-radius: 3px;
 }
 
 .fact-difference-stats {
-    color: lightgray;
+    color: #67748e;
     font-style: italic;
 }
 
