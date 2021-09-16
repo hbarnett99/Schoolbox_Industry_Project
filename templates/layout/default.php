@@ -18,7 +18,7 @@
  * Written by Henry Barnett, 19/08/2021
  */
 
-$pageDescription = 'Server Health - Schoolbox';
+$pageDescription = 'Schoolbox - Server Health';
 ?>
 <!DOCTYPE html>
 <html lang="en">

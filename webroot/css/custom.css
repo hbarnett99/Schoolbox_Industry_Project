@@ -7,6 +7,11 @@
     background-color: #ED5562 !important;
     border-color: #ED5562 !important;
 }
+
+.alert-danger {
+    color: white;
+}
+
 .navbar {
     overflow-y: hidden !important;
 }
@@ -17,19 +22,19 @@
     margin-left: 15px;
     margin-right: 15px;
 }
-.login-backsplash{
+.login-backsplash {
     background-image: url('../img/abstact.jpg')
 }
 
-.login-backsplash-animate{
+.login-backsplash-animate {
     background-image: url('../img/animate.gif')
 }
 
-.all-auto{
+.all-auto {
     margin: auto !important;
 }
 
-.bg-white{
+.bg-white {
     background-color: white;
 }
 
@@ -42,4 +47,156 @@
 
 #breadcrumb-divider {
     padding: 5px;
+}
+
+.card-logo {
+    padding: 1.0rem !important;
+}
+
+/*Animated BG*/
+
+* {
+    margin: 0;
+    padding: 0;
+}
+.animation-area {
+    background: linear-gradient(to left, #69a2ea, #27515c);
+}
+.box-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.box-area li {
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 25px;
+    height: 25px;
+    background: rgba(255, 255, 255, 0.2);
+    animation: animate 20s linear infinite;
+    bottom: -150px;
+}
+.box-area li:nth-child(1) {
+    left: 86%;
+    width: 80px;
+    height: 80px;
+    animation-delay: 0s;
+}
+.box-area li:nth-child(2) {
+    left: 12%;
+    width: 30px;
+    height: 30px;
+    animation-delay: 1.5s;
+    animation-duration: 10s;
+}
+.box-area li:nth-child(3) {
+    left: 70%;
+    width: 100px;
+    height: 100px;
+    animation-delay: 5.5s;
+}
+.box-area li:nth-child(4) {
+    left: 42%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 0s;
+    animation-duration: 15s;
+}
+.box-area li:nth-child(5) {
+    left: 65%;
+    width: 40px;
+    height: 40px;
+    animation-delay: 0s;
+}
+.box-area li:nth-child(6) {
+    left: 15%;
+    width: 110px;
+    height: 110px;
+    animation-delay: 3.5s;
+}
+@keyframes animate {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-800px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+select {
+    appearance: auto !important;
+}
+
+option {
+    font-family: "Open Sans";
+}
+
+.accordion table td a, .accordion-results-link {
+    color: #cb0c9f;
+    text-decoration: underline;
+}
+
+button[data-bs-toggle="collapse"] .fa:before {
+    content: "\f068";
+    color: #67748e;
+}
+
+button[data-bs-toggle="collapse"].collapsed .fa:before {
+    content: "\f067";
+    color: #67748e;
+}
+
+.highlight {
+    background-color: red;
+    color: white;
+    border-radius: 3px;
+}
+
+.highlight-green {
+    background-color: green;
+    color: white;
+    border-radius: 3px;
+}
+
+.fact-difference-stats {
+    color: lightgray;
+    font-style: italic;
+}
+
+.comparedFactValue {
+    margin-bottom: 1px;
+    padding-left: 5px;
+}
+
+/* Overflow Styling for Compare Facts Page */
+input[type="checkbox"] {
+    display:none;
+}
+
+.overflowLabel {
+    cursor: pointer;
+}
+
+.overflowLabel:after {
+    content: "more";
+}
+
+input:checked ~ .overflowLabel:after {
+    content: "less";
+}
+
+.inner {
+    max-height: 250px;
+    overflow: hidden;
+    transition: all .5s ease;
+}
+
+input:checked + .inner {
+    max-height: 100%;
 }

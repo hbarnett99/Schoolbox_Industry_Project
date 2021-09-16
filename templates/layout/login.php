@@ -18,7 +18,7 @@
  * Written by Henry Barnett, 19/08/2021
  */
 
-$pageDescription = 'Server Health - Schoolbox';
+$pageDescription = 'Schoolbox - Server Health';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,12 +53,9 @@ $pageDescription = 'Server Health - Schoolbox';
 <body>
     <main class="main">
         <div class="container-fluid">
-            <?= $this->Flash->render() ?>
             <?= $this->fetch('content') ?>
         </div>
     </main>
-    <?= $this->element('footer')?>
-
     <!--   Core JS Files   -->
     <?= $this->Html->script('core/popper.min.js') ?>
     <?= $this->Html->script('core/bootstrap.min.js') ?>
