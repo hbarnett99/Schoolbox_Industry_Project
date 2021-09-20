@@ -34,6 +34,9 @@ if (isset($selectedFact)) {
     ]);
 }
 
+// Sort the list of known facts alphabetically according to their values
+asort($knownFacts);
+
 // Set page title depending on if a fact has been selected to be compared
 if (isset($selectedFact)) {
     $this->assign('title', 'Comparing ' . $selectedFact);

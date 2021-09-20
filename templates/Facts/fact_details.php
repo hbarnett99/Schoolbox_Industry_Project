@@ -63,6 +63,9 @@ if (isset($fact)) {
     }
 }
 
+// Sort the list of fact names alphabetically according to their values
+asort($factNamesList);
+
 // If a fact value is set, then update the page title
 if (isset($fact)) {
     $this->assign('title', $fact . ' Details');
