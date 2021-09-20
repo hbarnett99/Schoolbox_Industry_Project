@@ -40,9 +40,12 @@ class CleanupCachedDataCommand extends Command
         // Iterate through all historical fact sets
         foreach ($allHistoricalFacts as $factSet) {
             $timestamp = $factSet->timestamp->format('Y-m-d');
+            if (($timestamp >= $currentTimeMinusThreeMonths) && ($timestamp < $currentTimeMinusSixMonths)) {
+                debug($timestamp); die;
+            }
 
             // If timestamp is within the range of a month ago to today's date
-            if ($timestamp >= $currentTimeMinusOneMonth && $timestamp <= $currentTime) {
+            if ($timestamp <= $currentTimeMinusOneMonth && $timestamp > $currentTimeMinusThreeMonths) {
                 // Add to the array of dates, indexed by key (date stamp)
                 if (!array_key_exists($timestamp, $withinMonthDateIds)) {
                     $withinMonthDateIds[$timestamp] = [$factSet->id];
@@ -50,7 +53,7 @@ class CleanupCachedDataCommand extends Command
                     array_push($withinMonthDateIds[$timestamp], $factSet->id);
                 }
             // If timestamp is within the range of three months ago to a month ago (from current date)
-            } else if ($timestamp >= $currentTimeMinusThreeMonths && $timestamp <= $currentTimeMinusOneMonth) {
+            } else if ($timestamp >= $currentTimeMinusThreeMonths && $timestamp > $currentTimeMinusSixMonths) {
                 // Add to the array of dates, indexed by key (date stamp)
                 if (!array_key_exists($timestamp, $withinThreeMonthsDateIds)) {
                     $withinThreeMonthsDateIds[$timestamp] = [$factSet->id];
@@ -58,7 +61,7 @@ class CleanupCachedDataCommand extends Command
                     array_push($withinThreeMonthsDateIds[$timestamp], $factSet->id);
                 }
             // If the timestamp is greater than six months old (from current date)
-            } else if ($timestamp >= $currentTimeMinusSixMonths) {
+            } else if ($timestamp <= $currentTimeMinusSixMonths) {
                 // Add to the array of dates, indexed by key (date stamp)
                 if (!array_key_exists($timestamp, $greaterThanSixMonthsDateIds)) {
                     $greaterThanSixMonthsDateIds[$timestamp] = [$factSet->id];
@@ -68,9 +71,9 @@ class CleanupCachedDataCommand extends Command
             }
         }
 
-        debug($withinMonthDateIds);
-        debug($withinThreeMonthsDateIds);
-        debug($greaterThanSixMonthsDateIds);
+//        debug($withinMonthDateIds);
+//        debug($withinThreeMonthsDateIds);
+//        debug($greaterThanSixMonthsDateIds);
         die;
 
     }
