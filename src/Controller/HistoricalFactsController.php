@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use Cake\Event\EventInterface;
 use Cake\I18n\FrozenTime;
+use DateTime;
 
 /**
  * HistoricalFacts Controller
@@ -42,11 +43,24 @@ class HistoricalFactsController extends AppController
      */
     public function index()
     {
-        $historicalFacts = $this->paginate($this->HistoricalFacts, [
-            'order' => ['HistoricalFacts.id' => 'desc']
-        ]);
+        if ($this->request->is('POST')) {
+            $historicalFacts = $this->paginate(
+                $this->HistoricalFacts->find('all')->where(['HistoricalFacts.timestamp LIKE' => "%" . $this->request->getData('date') . "%"]),
+                [
+                    'order' => ['HistoricalFacts.id' => 'desc'],
+                    'limit' => 48
+                ]
+            );
+            $this->set(compact('historicalFacts'));
+        } else {
+            $historicalFacts = $this->paginate($this->HistoricalFacts, [
+                'order' => ['HistoricalFacts.id' => 'desc']
+            ]);
+            $this->set(compact('historicalFacts'));
+        }
 
-        $this->set(compact('historicalFacts'));
+        // Get the earliest timestamp in the entire list of historical facts
+        $this->set('earliestDate', $this->HistoricalFacts->find('all')->first()->timestamp->format('Y-m-d'));
     }
 
     /**

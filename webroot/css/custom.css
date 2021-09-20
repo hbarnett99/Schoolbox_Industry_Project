@@ -211,3 +211,18 @@ input:checked + .inner {
     padding: 10px 10px 10px 10px;
     width: 500px;
 }
+
+/* Override input group text from SoftUI Dashboard themes */
+.input-group-text {
+    display: flex !important;
+    align-items: center !important;
+    font-size: 1rem !important;
+    font-weight: 400 !important;
+    line-height: 1.5 !important;
+    color: #212529 !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    background-color: #e9ecef !important;
+    border: 1px solid #ced4da !important;
+    border-radius: 0.25rem !important;
+}

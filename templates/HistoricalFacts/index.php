@@ -17,7 +17,6 @@ $this->assign('title', 'All Historical Facts');
             );
         ?>
         <div class="card mb-4">
-
             <div class="card-header pb-0">
                 <h5><?= __('Historical Facts') ?></h5>
             </div>
@@ -26,6 +25,29 @@ $this->assign('title', 'All Historical Facts');
                     <div class="col-12">
                         <div class="table-responsive p-4">
                             <p>Please select the historical fact set you would like to see:</p>
+                            <div class="form-group">
+                                <?php echo $this->Form->create(); ?>
+                                <div class="input-group">
+                                        <?php
+                                            echo $this->Form->date('date', [
+                                                'value' => date('Y-m-d'),
+                                                'min' => $earliestDate,
+                                                'max' => date("Y-m-d", strtotime('tomorrow')),
+                                                'required' => true,
+                                                'class' => 'form-control'
+                                            ]);
+                                        ?>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text fa fa-calendar"></span>
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <?php
+                                    echo $this->Form->submit('go');
+                                    echo $this->Form->end();
+                                    ?>
+                                </div>
+                            </div>
                             <table class="table align-items-center justify-content-center mb-0">
                                 <thead>
                                 <tr>
