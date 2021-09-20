@@ -110,7 +110,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                          class="accordion-collapse collapse" aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <table id="totalUserCountDistributionTable" class="table table-responsive">
+                                                            <table id="totalUserCountDistributionTable" class="table table-responsive table-striped">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Value</th>
@@ -249,7 +249,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                          class="accordion-collapse collapse" aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <table id="schoolboxPackageVersionsTable" class="table table-responsive">
+                                                            <table id="schoolboxPackageVersionsTable" class="table table-responsive table-striped">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Value</th>
@@ -296,7 +296,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                     >
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <table id="schoolboxDevPackageVersionsTable" class="table table-responsive">
+                                                            <table id="schoolboxDevPackageVersionsTable" class="table table-responsive table-striped">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Value</th>
@@ -342,7 +342,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                     >
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <table id="stagingSchoolboxPackageVersionsTable" class="table table-responsive">
+                                                            <table id="stagingSchoolboxPackageVersionsTable" class="table table-responsive table-striped">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Value</th>
@@ -387,7 +387,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                     >
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <table id="stagingSchoolboxDevPackageVersionsTable" class="table table-responsive">
+                                                            <table id="stagingSchoolboxDevPackageVersionsTable" class="table table-responsive table-striped">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Value</th>
@@ -431,7 +431,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                          aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <table id="productionSiteVersionsTable" class="table table-responsive">
+                                                            <table id="productionSiteVersionsTable" class="table table-responsive table-striped">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Value</th>
@@ -479,7 +479,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                          aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <table id="stagingSiteVersionsTable" class="table table-responsive">
+                                                            <table id="stagingSiteVersionsTable" class="table table-responsive table-striped">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Value</th>
@@ -523,7 +523,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                          aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <table id="virtualTable" class="table table-responsive">
+                                                            <table id="virtualTable" class="table table-responsive table-striped">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Value</th>
@@ -568,7 +568,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                          aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <table id="linuxVersionsTable" class="table table-responsive">
+                                                            <table id="linuxVersionsTable" class="table table-responsive table-striped">
                                                                 <thead>
                                                                 <tr>
                                                                     <th>Value</th>
@@ -613,7 +613,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                          aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <table id="kernelVersionsTable" class="table table-responsive">
+                                                            <table id="kernelVersionsTable" class="table table-responsive table-striped">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Value</th>
@@ -658,7 +658,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                          aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <table id="kernelReleasesTable" class="table table-responsive">
+                                                            <table id="kernelReleasesTable" class="table table-responsive table-striped">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Value</th>
@@ -703,7 +703,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                          aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <table id="phpVersionsTable" class="table table-responsive">
+                                                            <table id="phpVersionsTable" class="table table-responsive table-striped">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Value</th>
@@ -748,7 +748,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                          aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <table id="mysqlVersionsTable" class="table table-responsive">
+                                                            <table id="mysqlVersionsTable" class="table table-responsive table-striped">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Value</th>
@@ -793,7 +793,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                          aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <table id="processorsTable" class="table table-responsive">
+                                                            <table id="processorsTable" class="table table-responsive table-striped">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Value</th>
@@ -838,7 +838,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                          aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <table id="ramSizeTable" class="table table-responsive">
+                                                            <table id="ramSizeTable" class="table table-responsive table-striped">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Value</th>
@@ -883,7 +883,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                          aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <table id="dateTimeZoneTable" class="table table-responsive">
+                                                            <table id="dateTimeZoneTable" class="table table-responsive table-striped">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Value</th>
@@ -928,7 +928,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                          aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <table id="externalDbTable" class="table table-responsive">
+                                                            <table id="externalDbTable" class="table table-responsive table-striped">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Value</th>
@@ -973,7 +973,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                          aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <table id="firstFileTable" class="table table-responsive">
+                                                            <table id="firstFileTable" class="table table-responsive table-striped">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Value</th>

@@ -133,7 +133,7 @@ if (isset($fact)) {
                                     }
 
                                     // Start creating the table
-                                    echo '<table id="factTable" class="table table-responsive w-100"><thead><tr>';
+                                    echo '<table id="factTable" class="table table-responsive table-striped w-100"><thead><tr>';
 
 
                                     // If in the array of known facts, render entirely different table + skip data processing
