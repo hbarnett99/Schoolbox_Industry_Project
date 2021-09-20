@@ -4,10 +4,6 @@
  * @var \App\Model\Entity\HistoricalFact[]|\Cake\Collection\CollectionInterface $historicalFacts
  */
 
-$this->Breadcrumbs->add([
-    ['title' => 'Historical Facts', 'url' => ['controller' => 'historical-facts', 'action' => 'index']]
-]);
-
 // Set page title
 $this->assign('title', 'All Historical Facts');
 
