@@ -49,16 +49,21 @@ class HistoricalFactsController extends AppController
             $this->redirect(['action' => 'index', '?' => ['date' => $date]]);
         }
 
+        // Get the date value and check if it's set
         $date = $this->request->getQuery('date');
+
+        // If date value is provided, then paginate only that date provided
         if (isset($date)) {
             $historicalFacts = $this->paginate(
                 $this->HistoricalFacts->find('all')->where(['HistoricalFacts.timestamp LIKE' => "%" . $this->request->getQuery('date') . "%"]),
                 [
                     'order' => ['HistoricalFacts.id' => 'desc'],
-                    'limit' => 48
+                    'limit' => 48 // 30 min intervals = max of 48 records a day, easiest to show them all on one page
                 ]
             );
             $this->set(compact('historicalFacts'));
+
+            // Display a flash message to make it clear that this is not all the records.
             $this->Flash->success("You are viewing the fact sets for " . date('d/m/Y', strtotime($date)) . ".", ['params' =>
                     [
                         'text' => 'View all facts?',
@@ -67,6 +72,7 @@ class HistoricalFactsController extends AppController
                     ]
                 ]
             );
+        // If no date provided, paginate all data and send it to the view as usual
         } else {
             $historicalFacts = $this->paginate($this->HistoricalFacts, [
                 'order' => ['HistoricalFacts.id' => 'desc']
