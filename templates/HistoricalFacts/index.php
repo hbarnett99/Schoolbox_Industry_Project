@@ -23,31 +23,44 @@ $this->assign('title', 'All Historical Facts');
             <div class="card-body px-0 pt-0 pb-2">
                 <div class="row">
                     <div class="col-12">
-                        <div class="table-responsive p-4">
-                            <p>Please select the historical fact set you would like to see:</p>
-                            <div class="form-group">
-                                <?php echo $this->Form->create(); ?>
-                                <div class="input-group">
-                                        <?php
-                                            echo $this->Form->date('date', [
-                                                'value' => date('Y-m-d'),
-                                                'min' => $earliestDate,
-                                                'max' => date("Y-m-d", strtotime('tomorrow')),
-                                                'required' => true,
-                                                'class' => 'form-control'
-                                            ]);
-                                        ?>
-                                    <div class="input-group-append">
-                                        <span class="input-group-text fa fa-calendar"></span>
+                        <!-- Splash text and date picker -->
+                        <div class="row mx-3">
+                            <div class="col">
+                                <p>Please select the historical fact set you would like to see from the list below, or select a specific date on the right:</p>
+                            </div>
+                            <div class="col d-flex justify-content-center">
+                                <div class="form-group">
+                                    <?php echo $this->Form->create(); ?>
+                                    <div class="form-row align-items-center">
+                                        <div class="col-auto">
+                                            <div class="input-group">
+                                                <?php
+                                                echo $this->Form->date('date', [
+                                                    'value' => isset($date) ? $date : date('Y-m-d'),
+                                                    'min' => $earliestDate,
+                                                    'max' => date("Y-m-d", strtotime('tomorrow')),
+                                                    'required' => true,
+                                                    'class' => 'form-control'
+                                                ]);
+                                                ?>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text fa fa-calendar"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="input-group">
+                                                <?php
+                                                echo $this->Form->submit('See Date', ['class' => 'btn btn-primary mb-0 mx-2']);
+                                                echo $this->Form->end();
+                                                ?>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="input-group">
-                                    <?php
-                                    echo $this->Form->submit('go');
-                                    echo $this->Form->end();
-                                    ?>
-                                </div>
                             </div>
+                        </div>
+                        <div class="table-responsive p-4">
                             <table class="table align-items-center justify-content-center mb-0">
                                 <thead>
                                 <tr>

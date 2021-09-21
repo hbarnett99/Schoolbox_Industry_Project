@@ -43,15 +43,30 @@ class HistoricalFactsController extends AppController
      */
     public function index()
     {
+        // Redirect POST to GET
         if ($this->request->is('POST')) {
+            $date = $this->request->getData('date');
+            $this->redirect(['action' => 'index', '?' => ['date' => $date]]);
+        }
+
+        $date = $this->request->getQuery('date');
+        if (isset($date)) {
             $historicalFacts = $this->paginate(
-                $this->HistoricalFacts->find('all')->where(['HistoricalFacts.timestamp LIKE' => "%" . $this->request->getData('date') . "%"]),
+                $this->HistoricalFacts->find('all')->where(['HistoricalFacts.timestamp LIKE' => "%" . $this->request->getQuery('date') . "%"]),
                 [
                     'order' => ['HistoricalFacts.id' => 'desc'],
                     'limit' => 48
                 ]
             );
             $this->set(compact('historicalFacts'));
+            $this->Flash->success("You are viewing the fact sets for " . date('d/m/Y', strtotime($date)) . ".", ['params' =>
+                    [
+                        'text' => 'View all facts?',
+                        'controller' => 'HistoricalFacts',
+                        'action' => 'index'
+                    ]
+                ]
+            );
         } else {
             $historicalFacts = $this->paginate($this->HistoricalFacts, [
                 'order' => ['HistoricalFacts.id' => 'desc']
@@ -61,6 +76,9 @@ class HistoricalFactsController extends AppController
 
         // Get the earliest timestamp in the entire list of historical facts
         $this->set('earliestDate', $this->HistoricalFacts->find('all')->first()->timestamp->format('Y-m-d'));
+
+        // Get the date provided in the query and set is a view variable
+        $this->set('date', $date);
     }
 
     /**
