@@ -27,53 +27,76 @@ class CleanupCachedDataCommand extends Command
         ]);
 
         // Get current timestamp, and timestamps from previous time periods
-        $currentTime = date('Y-m-d');
-        $currentTimeMinusSixMonths = date('Y-m-d', strtotime("-6 months", strtotime($currentTime)));
-        $currentTimeMinusThreeMonths = date('Y-m-d', strtotime("-3 months", strtotime($currentTime)));
-        $currentTimeMinusOneMonth = date('Y-m-d', strtotime("-1 month", strtotime($currentTime)));
+        $currentTime = new DateTime();
+        $currentTime = $currentTime->format('Y-m-d');
+
+        $currentTimeMinusSixMonths = new DateTime($currentTime);
+        $currentTimeMinusSixMonths = $currentTimeMinusSixMonths->modify("-6 months");
+        $currentTimeMinusSixMonths = $currentTimeMinusSixMonths->format('Y-m-d');
+
+        $currentTimeMinusThreeMonths = new DateTime($currentTime);
+        $currentTimeMinusThreeMonths = $currentTimeMinusThreeMonths->modify("-3 months");
+        $currentTimeMinusThreeMonths = $currentTimeMinusThreeMonths->format('Y-m-d');
+
+
+        $currentTimeMinusOneMonth = new DateTime($currentTime);
+        $currentTimeMinusOneMonth = $currentTimeMinusOneMonth->modify("-1 month");
+        $currentTimeMinusOneMonth = $currentTimeMinusOneMonth->format('Y-m-d');
+
 
         // Create arrays for IDs that are contained within the relevant time period
-        $withinMonthDateIds = [];
-        $withinThreeMonthsDateIds = [];
-        $greaterThanSixMonthsDateIds = [];
+        $greaterThanAMonthLessThanThreeMonthsIds = [];
+        $greaterThanThreeMonthsLessThanSixMonthsIds = [];
+        $greaterThanSixMonthsIds = [];
+
+//        // Add to the array of dates, indexed by key (date stamp)
+//        if (!array_key_exists($timestamp, $withinMonthDateIds)) {
+//            $withinMonthDateIds[$timestamp] = [$factSet->id];
+//        } else {
+//            array_push($withinMonthDateIds[$timestamp], $factSet->id);
+//        }
 
         // Iterate through all historical fact sets
         foreach ($allHistoricalFacts as $factSet) {
-            $timestamp = $factSet->timestamp->format('Y-m-d');
-            if (($timestamp >= $currentTimeMinusThreeMonths) && ($timestamp < $currentTimeMinusSixMonths)) {
-                debug($timestamp); die;
+            $timestamp = new DateTime($factSet->timestamp);
+            $timestamp = $timestamp->format('Y-m-d');
+
+            // Get all the dates between >1 month ago and <3 months ago
+            if (($currentTimeMinusOneMonth >= $timestamp) && ($timestamp >= $currentTimeMinusThreeMonths)) {
+                if (!array_key_exists($timestamp, $greaterThanAMonthLessThanThreeMonthsIds)) {
+                    $greaterThanAMonthLessThanThreeMonthsIds[$timestamp] = [$factSet->id];
+                } else {
+                    array_push($greaterThanAMonthLessThanThreeMonthsIds[$timestamp], $factSet->id);
+                }
             }
 
-            // If timestamp is within the range of a month ago to today's date
-            if ($timestamp <= $currentTimeMinusOneMonth && $timestamp > $currentTimeMinusThreeMonths) {
-                // Add to the array of dates, indexed by key (date stamp)
-                if (!array_key_exists($timestamp, $withinMonthDateIds)) {
-                    $withinMonthDateIds[$timestamp] = [$factSet->id];
+            // Get all the dates between >3 months ago and <6 months ago
+            if (($currentTimeMinusThreeMonths >= $timestamp) && ($timestamp >= $currentTimeMinusSixMonths)) {
+                if (!array_key_exists($timestamp, $greaterThanThreeMonthsLessThanSixMonthsIds)) {
+                    $greaterThanThreeMonthsLessThanSixMonthsIds[$timestamp] = [$factSet->id];
                 } else {
-                    array_push($withinMonthDateIds[$timestamp], $factSet->id);
+                    array_push($greaterThanThreeMonthsLessThanSixMonthsIds[$timestamp], $factSet->id);
                 }
-            // If timestamp is within the range of three months ago to a month ago (from current date)
-            } else if ($timestamp >= $currentTimeMinusThreeMonths && $timestamp > $currentTimeMinusSixMonths) {
-                // Add to the array of dates, indexed by key (date stamp)
-                if (!array_key_exists($timestamp, $withinThreeMonthsDateIds)) {
-                    $withinThreeMonthsDateIds[$timestamp] = [$factSet->id];
+            }
+
+            // Get all the dates >6 months ago
+            if ($currentTimeMinusSixMonths >= $timestamp) {
+                if (!array_key_exists($timestamp, $greaterThanSixMonthsIds)) {
+                    $greaterThanSixMonthsIds[$timestamp] = [$factSet->id];
                 } else {
-                    array_push($withinThreeMonthsDateIds[$timestamp], $factSet->id);
-                }
-            // If the timestamp is greater than six months old (from current date)
-            } else if ($timestamp <= $currentTimeMinusSixMonths) {
-                // Add to the array of dates, indexed by key (date stamp)
-                if (!array_key_exists($timestamp, $greaterThanSixMonthsDateIds)) {
-                    $greaterThanSixMonthsDateIds[$timestamp] = [$factSet->id];
-                } else {
-                    array_push($greaterThanSixMonthsDateIds[$timestamp], $factSet->id);
+                    array_push($greaterThanSixMonthsIds[$timestamp], $factSet->id);
                 }
             }
         }
 
-//        debug($withinMonthDateIds);
-//        debug($withinThreeMonthsDateIds);
-//        debug($greaterThanSixMonthsDateIds);
+        echo "Greater than one month, less than 3 months: \n";
+        echo json_encode($greaterThanAMonthLessThanThreeMonthsIds);
+
+        echo "Greater than three months, less than 6 months: \n";
+        echo json_encode($greaterThanThreeMonthsLessThanSixMonthsIds);
+
+        echo "Greater than six months: \n";
+        echo json_encode($greaterThanSixMonthsIds);
         die;
 
     }
