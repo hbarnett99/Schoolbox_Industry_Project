@@ -21,6 +21,9 @@ class CleanupCachedDataCommand extends Command
      * @return int|void|null 1 if successful, 0 if failure
      */
     public function execute(Arguments $args, ConsoleIo $io) {
+
+        echo "Beginning historical data set cleanup \n";
+
         // Get all Historical Facts, with timestamps descending
         $allHistoricalFacts = $this->HistoricalFacts->find('all', [
             'order' => ['timestamp' => 'DESC']
@@ -82,9 +85,11 @@ class CleanupCachedDataCommand extends Command
                 }
             }
         }
+        echo "Obtained all timestamps and sorted into arrays.\n";
 
-        // ==== DELETING > 1 MONTH DATA ==== //
+        // ==== DELETING > 1 MONTH, < 3 MONTHS DATA ==== //
 
+        echo "Deleting values for >1 month, but < 3 months.\n";
         // Leave only one per day after a month, but less than three months
         foreach ($greaterThanAMonthLessThanThreeMonthsIds as $day) {
             // Remove the latest entry for each day
@@ -97,9 +102,35 @@ class CleanupCachedDataCommand extends Command
             }
         }
 
-//        debug($greaterThanThreeMonthsLessThanSixMonthsIds);
-//        die;
+        // ==== DELETING > 3 MONTHS, < 6 MONTHS DATA ==== //
 
+        echo "Deleting values for >3 months, but < 6 months.\n";
+        $weeks = [];
+        foreach($greaterThanThreeMonthsLessThanSixMonthsIds as $date => $value) {
+            $date = new DateTime($date);
+            $date = $date->format('W');
+            if (!array_key_exists($date, $weeks)) {
+                $weeks[$date] = $value;
+            } else {
+                array_push($weeks[$date], $value[0]);
+            }
+        }
+
+        // Leave only one value per week after 3 months
+        foreach ($weeks as $week) {
+            // Remove the latest entry for each day
+            $week = array_splice($week, 1);
+
+            // Iterate through and delete every other value
+            foreach ($week as $value) {
+                $historicalFact = $this->HistoricalFacts->get($value);
+                $this->HistoricalFacts->delete($historicalFact);
+            }
+        }
+
+        // ==== DELETING > 6 MONTHS DATA ==== //
+
+        echo "Deleting values for >6 months.\n";
         // Create an array of months containing the IDs of each date within the month
         $months = [];
         foreach ($greaterThanSixMonthsIds as $date => $value) {
@@ -124,6 +155,7 @@ class CleanupCachedDataCommand extends Command
             }
         }
 
+        echo "Successfully cleaned up historical datasets\n";
     }
 
     public static function defaultName(): string {
