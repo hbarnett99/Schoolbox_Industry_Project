@@ -51,7 +51,9 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                     <div class="col">
                         <div class="action-buttons pb-2 float-end">
                             <?php if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
-                                echo $this->Form->postLink(__('<i class="fas fa-trash"></i> Delete'), ['action' => 'delete', $historicalFact->id], ['confirm' => __('Are you sure you want to delete the historical fact set for {0}?', $this->Time->format($historicalFact->timestamp, \IntlDateFormatter::MEDIUM, null)), 'class' => 'btn btn-danger mx-1', 'escape' => false]);
+                                if ($this->request->getSession()->read('Auth.isAdmin')) {
+                                    echo $this->Form->postLink(__('<i class="fas fa-trash"></i> Delete'), ['action' => 'delete', $historicalFact->id], ['confirm' => __('Are you sure you want to delete the historical fact set for {0}?', $this->Time->format($historicalFact->timestamp, \IntlDateFormatter::MEDIUM, null)), 'class' => 'btn btn-danger mx-1', 'escape' => false]);
+                                }
                                 echo $this->Html->link(__('<i class="fas fa-list"></i> View all Facts'), ['action' => 'index'], ['class' => 'btn btn-info', 'escape' => false]);
                             } ?>
                         </div>

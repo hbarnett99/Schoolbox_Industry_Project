@@ -75,7 +75,9 @@ $this->assign('title', 'All Historical Facts');
                                         <td class="actions">
                                             <div class="action-buttons p-2">
                                                 <?= $this->Html->link(__('<i class="fas fa-edit"></i> View'), ['action' => 'view', $historicalFact->id], ['class' => 'btn btn-info mr-1 mb-0', 'escape' => false]) ?>
-                                                <?= $this->Form->postLink(__('<i class="fas fa-trash"></i> Delete'), ['action' => 'delete', $historicalFact->id], ['confirm' => __('Are you sure you want to delete the historical fact set for {0}?', $this->Time->format($historicalFact->timestamp, \IntlDateFormatter::MEDIUM, null)), 'class' => 'btn btn-danger ml-1 mb-0', 'escape' => false]) ?>
+                                                <?php if ($this->request->getSession()->read('Auth.isAdmin')) {
+                                                    echo $this->Form->postLink(__('<i class="fas fa-trash"></i> Delete'), ['action' => 'delete', $historicalFact->id], ['confirm' => __('Are you sure you want to delete the historical fact set for {0}?', $this->Time->format($historicalFact->timestamp, \IntlDateFormatter::MEDIUM, null)), 'class' => 'btn btn-danger ml-1 mb-0', 'escape' => false]);
+                                                } ?>
                                             </div>
                                         </td>
                                     </tr>

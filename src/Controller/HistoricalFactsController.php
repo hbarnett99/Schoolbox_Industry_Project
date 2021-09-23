@@ -113,12 +113,22 @@ class HistoricalFactsController extends AppController
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $historicalFact = $this->HistoricalFacts->get($id);
-        if ($this->HistoricalFacts->delete($historicalFact)) {
-            $this->Flash->success(__('The historical fact has been deleted.'));
+
+        // Obtain user type from session object
+        $userIsAdmin = $this->request->getSession()->read('Auth.isAdmin');
+
+        // If the user is an admin, allow delete, otherwise flash an error
+        if ($userIsAdmin) {
+            $historicalFact = $this->HistoricalFacts->get($id);
+            if ($this->HistoricalFacts->delete($historicalFact)) {
+                $this->Flash->success(__('The historical fact has been deleted.'));
+            } else {
+                $this->Flash->error(__('The historical fact could not be deleted. Please, try again.'));
+            }
         } else {
-            $this->Flash->error(__('The historical fact could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Deleting historical fact sets requires administrator rights. Please contact an administrator if you think this is an error.'));
         }
+
 
         return $this->redirect(['action' => 'index']);
     }
