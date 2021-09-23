@@ -30,31 +30,25 @@ class CleanupCachedDataCommand extends Command
         $currentTime = new DateTime();
         $currentTime = $currentTime->format('Y-m-d');
 
+        // Generate current date, minus 6 months
         $currentTimeMinusSixMonths = new DateTime($currentTime);
         $currentTimeMinusSixMonths = $currentTimeMinusSixMonths->modify("-6 months");
         $currentTimeMinusSixMonths = $currentTimeMinusSixMonths->format('Y-m-d');
 
+        // Generate current date, minus 3 months
         $currentTimeMinusThreeMonths = new DateTime($currentTime);
         $currentTimeMinusThreeMonths = $currentTimeMinusThreeMonths->modify("-3 months");
         $currentTimeMinusThreeMonths = $currentTimeMinusThreeMonths->format('Y-m-d');
 
-
+        // Generate current date, minus a month
         $currentTimeMinusOneMonth = new DateTime($currentTime);
         $currentTimeMinusOneMonth = $currentTimeMinusOneMonth->modify("-1 month");
         $currentTimeMinusOneMonth = $currentTimeMinusOneMonth->format('Y-m-d');
-
 
         // Create arrays for IDs that are contained within the relevant time period
         $greaterThanAMonthLessThanThreeMonthsIds = [];
         $greaterThanThreeMonthsLessThanSixMonthsIds = [];
         $greaterThanSixMonthsIds = [];
-
-//        // Add to the array of dates, indexed by key (date stamp)
-//        if (!array_key_exists($timestamp, $withinMonthDateIds)) {
-//            $withinMonthDateIds[$timestamp] = [$factSet->id];
-//        } else {
-//            array_push($withinMonthDateIds[$timestamp], $factSet->id);
-//        }
 
         // Iterate through all historical fact sets
         foreach ($allHistoricalFacts as $factSet) {
@@ -89,15 +83,46 @@ class CleanupCachedDataCommand extends Command
             }
         }
 
-        echo "Greater than one month, less than 3 months: \n";
-        echo json_encode($greaterThanAMonthLessThanThreeMonthsIds);
+        // ==== DELETING > 1 MONTH DATA ==== //
 
-        echo "Greater than three months, less than 6 months: \n";
-        echo json_encode($greaterThanThreeMonthsLessThanSixMonthsIds);
+        // Leave only one per day after a month, but less than three months
+        foreach ($greaterThanAMonthLessThanThreeMonthsIds as $day) {
+            // Remove the latest entry for each day
+            $day = array_splice($day, 1);
 
-        echo "Greater than six months: \n";
-        echo json_encode($greaterThanSixMonthsIds);
-        die;
+            // Iterate through and delete every other value
+            foreach ($day as $value) {
+                $historicalFact = $this->HistoricalFacts->get($value);
+                $this->HistoricalFacts->delete($historicalFact);
+            }
+        }
+
+//        debug($greaterThanThreeMonthsLessThanSixMonthsIds);
+//        die;
+
+        // Create an array of months containing the IDs of each date within the month
+        $months = [];
+        foreach ($greaterThanSixMonthsIds as $date => $value) {
+            $date = new DateTime($date);
+            $date = $date->format('m');
+            if (!array_key_exists($date, $months)) {
+                $months[$date] = $value;
+            } else {
+                array_push($months[$date], $value[0]);
+            }
+        }
+
+        // Leave only one value per month after 6 months
+        foreach ($months as $month) {
+            // Remove the latest entry for each day
+            $month = array_splice($month, 1);
+
+            // Iterate through and delete every other value
+            foreach ($month as $value) {
+                $historicalFact = $this->HistoricalFacts->get($value);
+                $this->HistoricalFacts->delete($historicalFact);
+            }
+        }
 
     }
 
