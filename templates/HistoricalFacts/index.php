@@ -4,10 +4,6 @@
  * @var \App\Model\Entity\HistoricalFact[]|\Cake\Collection\CollectionInterface $historicalFacts
  */
 
-$this->Breadcrumbs->add([
-    ['title' => 'Historical Facts', 'url' => ['controller' => 'historical-facts', 'action' => 'index']]
-]);
-
 // Set page title
 $this->assign('title', 'All Historical Facts');
 
@@ -21,15 +17,50 @@ $this->assign('title', 'All Historical Facts');
             );
         ?>
         <div class="card mb-4">
-
             <div class="card-header pb-0">
                 <h5><?= __('Historical Facts') ?></h5>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 <div class="row">
                     <div class="col-12">
+                        <!-- Splash text and date picker -->
+                        <div class="row mx-3">
+                            <div class="col">
+                                <p>Please select the historical fact set you would like to see from the list below, or select a specific date on the right:</p>
+                            </div>
+                            <div class="col d-flex justify-content-center">
+                                <div class="form-group">
+                                    <?php echo $this->Form->create(); ?>
+                                    <div class="form-row align-items-center">
+                                        <div class="col-auto">
+                                            <div class="input-group">
+                                                <?php
+                                                echo $this->Form->date('date', [
+                                                    'value' => isset($date) ? $date : date('Y-m-d'),
+                                                    'min' => $earliestDate,
+                                                    'max' => date("Y-m-d", strtotime('tomorrow')),
+                                                    'required' => true,
+                                                    'class' => 'form-control'
+                                                ]);
+                                                ?>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text fa fa-calendar"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="input-group">
+                                                <?php
+                                                echo $this->Form->submit('See Date', ['class' => 'btn btn-primary mb-0 mx-2']);
+                                                echo $this->Form->end();
+                                                ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="table-responsive p-4">
-                            <p>Please select the historical fact set you would like to see:</p>
                             <table class="table align-items-center justify-content-center mb-0">
                                 <thead>
                                 <tr>
@@ -44,7 +75,9 @@ $this->assign('title', 'All Historical Facts');
                                         <td class="actions">
                                             <div class="action-buttons p-2">
                                                 <?= $this->Html->link(__('<i class="fas fa-edit"></i> View'), ['action' => 'view', $historicalFact->id], ['class' => 'btn btn-info mr-1 mb-0', 'escape' => false]) ?>
-                                                <?= $this->Form->postLink(__('<i class="fas fa-trash"></i> Delete'), ['action' => 'delete', $historicalFact->id], ['confirm' => __('Are you sure you want to delete the historical fact set for {0}?', $this->Time->format($historicalFact->timestamp, \IntlDateFormatter::MEDIUM, null)), 'class' => 'btn btn-danger ml-1 mb-0', 'escape' => false]) ?>
+                                                <?php if ($this->request->getSession()->read('Auth.isAdmin')) {
+                                                    echo $this->Form->postLink(__('<i class="fas fa-trash"></i> Delete'), ['action' => 'delete', $historicalFact->id], ['confirm' => __('Are you sure you want to delete the historical fact set for {0}?', $this->Time->format($historicalFact->timestamp, \IntlDateFormatter::MEDIUM, null)), 'class' => 'btn btn-danger ml-1 mb-0', 'escape' => false]);
+                                                } ?>
                                             </div>
                                         </td>
                                     </tr>

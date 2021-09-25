@@ -51,7 +51,9 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                     <div class="col">
                         <div class="action-buttons pb-2 float-end">
                             <?php if ($this->getRequest()->getPath() != '/historical-facts/newest-data') {
-                                echo $this->Form->postLink(__('<i class="fas fa-trash"></i> Delete'), ['action' => 'delete', $historicalFact->id], ['confirm' => __('Are you sure you want to delete the historical fact set for {0}?', $this->Time->format($historicalFact->timestamp, \IntlDateFormatter::MEDIUM, null)), 'class' => 'btn btn-danger mx-1', 'escape' => false]);
+                                if ($this->request->getSession()->read('Auth.isAdmin')) {
+                                    echo $this->Form->postLink(__('<i class="fas fa-trash"></i> Delete'), ['action' => 'delete', $historicalFact->id], ['confirm' => __('Are you sure you want to delete the historical fact set for {0}?', $this->Time->format($historicalFact->timestamp, \IntlDateFormatter::MEDIUM, null)), 'class' => 'btn btn-danger mx-1', 'escape' => false]);
+                                }
                                 echo $this->Html->link(__('<i class="fas fa-list"></i> View all Facts'), ['action' => 'index'], ['class' => 'btn btn-info', 'escape' => false]);
                             } ?>
                         </div>
@@ -88,7 +90,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
                                                             <?=
-                                                            $this->Html->link(number_format(intval(json_decode($historicalFact->schoolbox_totalusers, JSON_PRETTY_PRINT)['totalUsersFleetCount'])), ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_totalusers']], ['class' => 'accordion-results-link']);
+                                                            $this->Html->link(number_format(intval(json_decode($historicalFact->schoolbox_totalusers, JSON_PRETTY_PRINT)['totalUsersFleetCount'])), ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_totalusers']], ['class' => 'accordion-results-link', 'target' => '_blank']);
                                                             ?>
                                                         </div>
                                                     </div>
@@ -110,7 +112,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                          class="accordion-collapse collapse" aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <table id="totalUserCountDistributionTable" class="table table-responsive">
+                                                            <table id="totalUserCountDistributionTable" class="table table-responsive table-striped">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Value</th>
@@ -158,7 +160,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
                                                             <?=
-                                                            $this->Html->link(number_format(intval(json_decode($historicalFact->schoolbox_users_student, JSON_PRETTY_PRINT)['totalStudentCount'])), ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_users_student']], ['class' => 'accordion-results-link']);
+                                                            $this->Html->link(number_format(intval(json_decode($historicalFact->schoolbox_users_student, JSON_PRETTY_PRINT)['totalStudentCount'])), ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_users_student']], ['class' => 'accordion-results-link', 'target' => '_blank']);
                                                             ?>
                                                         </div>
                                                     </div>
@@ -181,7 +183,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
                                                             <?=
-                                                            $this->Html->link(number_format(intval(json_decode($historicalFact->schoolbox_users_staff, JSON_PRETTY_PRINT)['totalStaffCount'])), ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_users_staff']], ['class' => 'accordion-results-link']);
+                                                            $this->Html->link(number_format(intval(json_decode($historicalFact->schoolbox_users_staff, JSON_PRETTY_PRINT)['totalStaffCount'])), ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_users_staff']], ['class' => 'accordion-results-link', 'target' => '_blank']);
                                                             ?>
                                                         </div>
                                                     </div>
@@ -204,7 +206,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
                                                             <?=
-                                                            $this->Html->link(number_format(intval(json_decode($historicalFact->schoolbox_users_parent, JSON_PRETTY_PRINT)['totalParentCount'])), ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_users_parent']], ['class' => 'accordion-results-link']);
+                                                            $this->Html->link(number_format(intval(json_decode($historicalFact->schoolbox_users_parent, JSON_PRETTY_PRINT)['totalParentCount'])), ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_users_parent']], ['class' => 'accordion-results-link', 'target' => '_blank']);
                                                             ?>
                                                         </div>
                                                     </div>
@@ -227,7 +229,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
                                                             <?=
-                                                            $this->Html->link(number_format(intval(json_decode($historicalFact->schoolbox_totalcampus, JSON_PRETTY_PRINT)['totalCampus'])), ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_totalcampus']], ['class' => 'accordion-results-link']);
+                                                            $this->Html->link(number_format(intval(json_decode($historicalFact->schoolbox_totalcampus, JSON_PRETTY_PRINT)['totalCampus'])), ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_totalcampus']], ['class' => 'accordion-results-link', 'target' => '_blank']);
                                                             ?>
                                                         </div>
                                                     </div>
@@ -249,7 +251,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                          class="accordion-collapse collapse" aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <table id="schoolboxPackageVersionsTable" class="table table-responsive">
+                                                            <table id="schoolboxPackageVersionsTable" class="table table-responsive table-striped">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Value</th>
@@ -266,7 +268,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
 
                                                                 foreach ($details as $key => $detail) {
                                                                     echo "<tr>
-                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_package_version', 'value' => $key, 'environment' => 'production']]) .  "</td>
+                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_package_version', 'value' => $key, 'environment' => 'production']], ['target' => '_blank']) .  "</td>
                                                                             <td>" . $detail['count'] . "</td>
                                                                             <td>" . $detail['percent'] . "%" . "</td>
                                                                           </tr>";
@@ -296,7 +298,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                     >
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <table id="schoolboxDevPackageVersionsTable" class="table table-responsive">
+                                                            <table id="schoolboxDevPackageVersionsTable" class="table table-responsive table-striped">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Value</th>
@@ -313,7 +315,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
 
                                                                     foreach ($details as $key => $detail) {
                                                                         echo "<tr>
-                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolboxdev_package_version', 'value' => $key, 'environment' => 'production']]) .  "</td>
+                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolboxdev_package_version', 'value' => $key, 'environment' => 'production']], ['target' => '_blank']) .  "</td>
                                                                             <td>" . $detail['count'] . "</td>
                                                                             <td>" . $detail['percent'] . "%" . "</td>
                                                                           </tr>";
@@ -342,7 +344,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                     >
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <table id="stagingSchoolboxPackageVersionsTable" class="table table-responsive">
+                                                            <table id="stagingSchoolboxPackageVersionsTable" class="table table-responsive table-striped">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Value</th>
@@ -359,7 +361,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                             $details = sortByCountDescending($details);
 
                                                             echo "<tr>
-                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_package_version', 'value' => $key, 'environment' => 'staging']]) .  "</td>
+                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_package_version', 'value' => $key, 'environment' => 'staging']], ['target' => '_blank']) .  "</td>
                                                                             <td>" . $detail['count'] . "</td>
                                                                             <td>" . $detail['percent'] . "%" . "</td>
                                                                           </tr>";
@@ -387,7 +389,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                     >
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <table id="stagingSchoolboxDevPackageVersionsTable" class="table table-responsive">
+                                                            <table id="stagingSchoolboxDevPackageVersionsTable" class="table table-responsive table-striped">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Value</th>
@@ -431,7 +433,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                          aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <table id="productionSiteVersionsTable" class="table table-responsive">
+                                                            <table id="productionSiteVersionsTable" class="table table-responsive table-striped">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Value</th>
@@ -479,7 +481,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                          aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <table id="stagingSiteVersionsTable" class="table table-responsive">
+                                                            <table id="stagingSiteVersionsTable" class="table table-responsive table-striped">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Value</th>
@@ -523,7 +525,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                          aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <table id="virtualTable" class="table table-responsive">
+                                                            <table id="virtualTable" class="table table-responsive table-striped">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Value</th>
@@ -568,7 +570,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                          aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <table id="linuxVersionsTable" class="table table-responsive">
+                                                            <table id="linuxVersionsTable" class="table table-responsive table-striped">
                                                                 <thead>
                                                                 <tr>
                                                                     <th>Value</th>
@@ -613,7 +615,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                          aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <table id="kernelVersionsTable" class="table table-responsive">
+                                                            <table id="kernelVersionsTable" class="table table-responsive table-striped">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Value</th>
@@ -658,7 +660,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                          aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <table id="kernelReleasesTable" class="table table-responsive">
+                                                            <table id="kernelReleasesTable" class="table table-responsive table-striped">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Value</th>
@@ -703,7 +705,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                          aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <table id="phpVersionsTable" class="table table-responsive">
+                                                            <table id="phpVersionsTable" class="table table-responsive table-striped">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Value</th>
@@ -748,7 +750,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                          aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <table id="mysqlVersionsTable" class="table table-responsive">
+                                                            <table id="mysqlVersionsTable" class="table table-responsive table-striped">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Value</th>
@@ -793,7 +795,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                          aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <table id="processorsTable" class="table table-responsive">
+                                                            <table id="processorsTable" class="table table-responsive table-striped">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Value</th>
@@ -838,7 +840,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                          aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <table id="ramSizeTable" class="table table-responsive">
+                                                            <table id="ramSizeTable" class="table table-responsive table-striped">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Value</th>
@@ -883,7 +885,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                          aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <table id="dateTimeZoneTable" class="table table-responsive">
+                                                            <table id="dateTimeZoneTable" class="table table-responsive table-striped">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Value</th>
@@ -928,7 +930,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                          aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <table id="externalDbTable" class="table table-responsive">
+                                                            <table id="externalDbTable" class="table table-responsive table-striped">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Value</th>
@@ -973,7 +975,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                          aria-labelledby="totalUsersHeading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <table id="firstFileTable" class="table table-responsive">
+                                                            <table id="firstFileTable" class="table table-responsive table-striped">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Value</th>
@@ -1048,138 +1050,240 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                 info: false
             })
             $('#schoolboxPackageVersionsTable').DataTable({
-                paging: false,
+                paging: true,
+                language: {
+                    'paginate': {
+                        'next': '>',
+                        'previous': '<'
+                    }
+                },
                 order: [[2, 'desc']],
-                info: false,
+                info: true,
                 "initComplete": function (settings, json) {
                     $("#schoolboxPackageVersionsTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
                 },
             })
             $('#schoolboxDevPackageVersionsTable').DataTable({
-                paging: false,
+                paging: true,
+                language: {
+                    'paginate': {
+                        'next': '>',
+                        'previous': '<'
+                    }
+                },
                 order: [[2, 'desc']],
-                info: false,
+                info: true,
                 "initComplete": function (settings, json) {
                     $("#schoolboxDevPackageVersionsTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
                 },
             })
             $('#stagingSchoolboxPackageVersionsTable').DataTable({
-                paging: false,
+                paging: true,
+                language: {
+                    'paginate': {
+                        'next': '>',
+                        'previous': '<'
+                    }
+                },
                 order: [[2, 'desc']],
-                info: false,
+                info: true,
                 "initComplete": function (settings, json) {
                     $("#stagingSchoolboxPackageVersionsTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
                 },
             })
             $('#stagingSchoolboxDevPackageVersionsTable').DataTable({
-                paging: false,
+                paging: true,
+                language: {
+                    'paginate': {
+                        'next': '>',
+                        'previous': '<'
+                    }
+                },
                 order: [[2, 'desc']],
-                info: false,
+                info: true,
                 "initComplete": function (settings, json) {
                     $("#stagingSchoolboxDevPackageVersionsTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
                 },
             })
             $('#productionSiteVersionsTable').DataTable({
-                paging: false,
+                paging: true,
+                language: {
+                    'paginate': {
+                        'next': '>',
+                        'previous': '<'
+                    }
+                },
                 order: [[2, 'desc']],
-                info: false,
+                info: true,
                 "initComplete": function (settings, json) {
                     $("#productionSiteVersionsTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
                 },
             })
             $('#stagingSiteVersionsTable').DataTable({
-                paging: false,
+                paging: true,
+                language: {
+                    'paginate': {
+                        'next': '>',
+                        'previous': '<'
+                    }
+                },
                 order: [[2, 'desc']],
-                info: false,
+                info: true,
                 "initComplete": function (settings, json) {
                     $("#stagingSiteVersionsTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
                 },
             })
             $('#virtualTable').DataTable({
-                paging: false,
+                paging: true,
+                language: {
+                    'paginate': {
+                        'next': '>',
+                        'previous': '<'
+                    }
+                },
                 order: [[2, 'desc']],
-                info: false,
+                info: true,
                 "initComplete": function (settings, json) {
                     $("#virtualTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
                 },
             })
             $('#linuxVersionsTable').DataTable({
-                paging: false,
+                paging: true,
+                language: {
+                    'paginate': {
+                        'next': '>',
+                        'previous': '<'
+                    }
+                },
                 order: [[2, 'desc']],
-                info: false,
+                info: true,
                 "initComplete": function (settings, json) {
                     $("#linuxVersionsTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
                 },
             })
             $('#kernelVersionsTable').DataTable({
-                paging: false,
+                paging: true,
+                language: {
+                    'paginate': {
+                        'next': '>',
+                        'previous': '<'
+                    }
+                },
                 order: [[2, 'desc']],
-                info: false,
+                info: true,
                 "initComplete": function (settings, json) {
                     $("#kernelVersionsTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
                 },
             })
             $('#kernelReleasesTable').DataTable({
-                paging: false,
+                paging: true,
+                language: {
+                    'paginate': {
+                        'next': '>',
+                        'previous': '<'
+                    }
+                },
                 order: [[2, 'desc']],
-                info: false,
+                info: true,
                 "initComplete": function (settings, json) {
                     $("#kernelReleasesTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
                 },
             })
             $('#phpVersionsTable').DataTable({
-                paging: false,
+                paging: true,
+                language: {
+                    'paginate': {
+                        'next': '>',
+                        'previous': '<'
+                    }
+                },
                 order: [[2, 'desc']],
-                info: false,
+                info: true,
                 "initComplete": function (settings, json) {
                     $("#phpVersionsTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
                 },
             })
             $('#mysqlVersionsTable').DataTable({
-                paging: false,
+                paging: true,
+                language: {
+                    'paginate': {
+                        'next': '>',
+                        'previous': '<'
+                    }
+                },
                 order: [[2, 'desc']],
-                info: false,
+                info: true,
                 "initComplete": function (settings, json) {
                     $("#mysqlVersionsTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
                 },
             })
             $('#processorsTable').DataTable({
-                paging: false,
+                paging: true,
+                language: {
+                    'paginate': {
+                        'next': '>',
+                        'previous': '<'
+                    }
+                },
                 order: [[2, 'desc']],
-                info: false,
+                info: true,
                 "initComplete": function (settings, json) {
                     $("#processorsTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
                 },
             })
             $('#ramSizeTable').DataTable({
-                paging: false,
+                paging: true,
+                language: {
+                    'paginate': {
+                        'next': '>',
+                        'previous': '<'
+                    }
+                },
                 order: [[2, 'desc']],
+                info: true,
                 columnDefs: [ { targets: 0, type: 'natural' } ],
-                info: false,
                 "initComplete": function (settings, json) {
                     $("#ramSizeTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
                 },
             })
             $('#dateTimeZoneTable').DataTable({
-                paging: false,
+                paging: true,
+                language: {
+                    'paginate': {
+                        'next': '>',
+                        'previous': '<'
+                    }
+                },
                 order: [[2, 'desc']],
-                info: false,
+                info: true,
                 "initComplete": function (settings, json) {
                     $("#dateTimeZoneTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
                 },
             })
             $('#externalDbTable').DataTable({
-                paging: false,
+                paging: true,
+                language: {
+                    'paginate': {
+                        'next': '>',
+                        'previous': '<'
+                    }
+                },
                 order: [[2, 'desc']],
-                info: false,
+                info: true,
                 "initComplete": function (settings, json) {
                     $("#externalDbTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
                 },
             })
             $('#firstFileTable').DataTable({
-                paging: false,
+                paging: true,
+                language: {
+                    'paginate': {
+                        'next': '>',
+                        'previous': '<'
+                    }
+                },
                 order: [[2, 'desc']],
-                info: false,
+                info: true,
                 "initComplete": function (settings, json) {
                     $("#firstFileTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
                 },

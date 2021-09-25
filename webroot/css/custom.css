@@ -203,3 +203,36 @@ input:checked ~ .overflowLabel:after {
 input:checked + .inner {
     max-height: 100%;
 }
+
+.code-block {
+    background-color: rgb(22, 27, 34);
+    color: white;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    padding: 10px 10px 10px 10px;
+    width: 500px;
+}
+
+/* Override input group text from SoftUI Dashboard themes */
+.input-group-text {
+    display: flex !important;
+    align-items: center !important;
+    font-size: 1rem !important;
+    font-weight: 400 !important;
+    line-height: 1.5 !important;
+    color: #212529 !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    background-color: #e9ecef !important;
+    border: 1px solid #ced4da !important;
+    border-radius: 0.25rem !important;
+}
+
+.form-row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -5px;
+    margin-left: -5px;
+}

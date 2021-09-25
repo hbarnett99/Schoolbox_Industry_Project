@@ -91,7 +91,7 @@ class CompareFactsController extends AppController
     protected function getHistoricalFactTimeStamps() {
         // Get all the HistoricalFacts
         $this->loadModel('HistoricalFacts');
-        $historicalFacts = $this->HistoricalFacts->find()->order(['timestamp' => 'desc'])->all();
+        $historicalFacts = $this->HistoricalFacts->find()->select(['id', 'timestamp'])->order(['timestamp' => 'desc'])->all();
         $historicalFactsTimeStamps = [];
 
         // Iterate over all of them to get their timestamps

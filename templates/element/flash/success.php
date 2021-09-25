@@ -13,7 +13,7 @@ if (!isset($params['escape']) || $params['escape'] !== false) {
         <?= $message ?>
     </span>
     <?php if (isset($params['controller'])){ ?>
-        <?= $this->Html->link($params['text'], ['controller' => $params['controller'], 'action' => $params['action']], array('escape' => false)); ?>
+        <?= $this->Html->link($params['text'], ['controller' => $params['controller'], 'action' => $params['action']], array('escape' => false, 'class' => 'text-white font-weight-bold font-italic text-decoration-underline')); ?>
     <?php } ?>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>

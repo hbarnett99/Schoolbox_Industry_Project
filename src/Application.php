@@ -28,6 +28,8 @@ use Cake\Http\MiddlewareQueue;
 use Cake\ORM\Locator\TableLocator;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
+use Cake\Event\EventManager;
+use App\Event\SocialAuthListener;
 
 /**
  * Application setup class.
@@ -65,8 +67,6 @@ class Application extends BaseApplication
         if (Configure::read('debug')) {
             $this->addPlugin('DebugKit');
         }
-
-        // Load more plugins here
     }
 
     /**
@@ -77,6 +77,9 @@ class Application extends BaseApplication
      */
     public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
     {
+        // Load the SocialAuthListener
+        EventManager::instance()->on(new SocialAuthListener());
+
         $middlewareQueue
             // Catch any exceptions in the lower layers,
             // and make an error page/response

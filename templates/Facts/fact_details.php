@@ -63,6 +63,9 @@ if (isset($fact)) {
     }
 }
 
+// Sort the list of fact names alphabetically according to their values
+asort($factNamesList);
+
 // If a fact value is set, then update the page title
 if (isset($fact)) {
     $this->assign('title', $fact . ' Details');
@@ -128,10 +131,12 @@ if (isset($fact)) {
                                             }
                                         }
                                     }
+                                    echo '<div class="input-group px-4 pb-3">
+                                              <input type="search" id="individual_facts_search" class="form-control" placeholder="Type here to search!">
+                                          </div>';
 
                                     // Start creating the table
-                                    echo '<table id="factTable" class="table table-responsive w-100"><thead><tr>';
-
+                                    echo '<table id="factTable" class="table table-responsive table-striped w-100"><thead><tr>';
 
                                     // If in the array of known facts, render entirely different table + skip data processing
                                     if (in_array($fact, $knownFacts)) {
@@ -288,17 +293,18 @@ if (isset($fact)) {
             ],
             info: false,
             scrollX: true,
-            <?php
-                if (isset($searchVal)) {
-                    echo 'dom: "ti",';
-                }
-            ?>
+            dom: "ti"
         })
 
         // Set search value
         table.columns("#value")
             .search(<?= "'" . $searchVal . "'" ?>)
             .draw();
+
+        $('#individual_facts_search').keyup(function(){
+            table.search($(this).val()).draw() ;
+        })
+        $('#individual_facts_search').val(<?= "'" . $searchVal . "'" ?>);
 
     });
 
