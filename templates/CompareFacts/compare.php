@@ -317,23 +317,26 @@ if (isset($selectedFact)) {
                 $('label').hide();
             }
         </script>
-        <?php if ($selectedFact != 'schoolbox_package_version' && $selectedFact != 'schoolboxdev_package_version') {
-            echo "<script>
-            $('#comparedFactsTable').DataTable({
-                paging: true,
-                language: {
-                    'paginate': {
-                        'next': '>',
-                        'previous': '<'
-                    }
-                },
-                info: true,
-                order: [[0, 'desc']],
-                'initComplete': function (settings, json) {
-                    $('#comparedFactsTable').wrap('<div style=\'overflow:auto; width:100%;position:relative;\'></div>');
+        <?php
+            if (isset($selectedFact)) {
+                if ($selectedFact != 'schoolbox_package_version' && $selectedFact != 'schoolboxdev_package_version') {
+                    echo "<script>
+                        $('#comparedFactsTable').DataTable({
+                            paging: true,
+                            language: {
+                                'paginate': {
+                                    'next': '>',
+                                    'previous': '<'
+                                }
+                            },
+                            info: true,
+                            order: [[0, 'desc']],
+                            'initComplete': function (settings, json) {
+                                $('#comparedFactsTable').wrap('<div style=\'overflow:auto; width:100%;position:relative;\'></div>');
+                            }
+                        });
+                        </script>";
                 }
-            });
-            </script>";
-        } ?>
+            } ?>
     </div>
 </div>
