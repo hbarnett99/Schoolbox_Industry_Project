@@ -70,11 +70,12 @@ if (isset($selectedFact)) {
                                 if (!isset($factSetOne)) {
                                     echo 'Welcome to the Fact Comparison page. Please select your timestamps and fact from below dropdown:';
                                 } else {
-                                    if ($selectedFact != 'schoolbox_config_site_type' && $selectedFact != 'schoolbox_totalusers'  && $selectedFact != 'schoolboxdev_package_version'  && $selectedFact != 'schoolbox_package_version') {
+                                    if ($selectedFact != 'schoolbox_config_site_type' && $selectedFact != 'schoolbox_totalusers' && $selectedFact != 'schoolboxdev_package_version' && $selectedFact != 'schoolbox_package_version') {
                                         $factSetOne = json_decode(json_encode(sortByCountDescending($factSetOne)), true);
                                         $factSetTwo = json_decode(json_encode(sortByCountDescending($factSetTwo)), true);
                                     }
 
+                                    // Begin building generic table structure
                                     echo '<table class="table table-responsive table-striped" id="comparedFactsTable">';
                                     echo "
                                         <thead>
@@ -88,7 +89,7 @@ if (isset($selectedFact)) {
                                         <tbody>
                                         ";
 
-                                    // If the value is numeric only, display as numeric only
+                                    // If the selected fact value is numeric only, display as numeric only
                                     if (in_array($selectedFact, $numericalOnlyFacts)) {
                                         $factOneValue = (intval(current((array)$factSetOne)));
                                         $factTwoValue = (intval(current((array)$factSetTwo)));
@@ -111,7 +112,7 @@ if (isset($selectedFact)) {
 
                                         // If not numeric, handle depending on selected fact
                                     } else {
-
+                                        // If it's a non-standard fact type (i.e. requires more data wrangling)
                                         if (in_array($selectedFact, $nonStandardFacts)) {
                                             // Handle depending on which non-standard fact needs to be rendered
                                             switch ($selectedFact) {
@@ -124,14 +125,14 @@ if (isset($selectedFact)) {
                                                                 <td>" . number_format($factOneValue) . "</td>
                                                                 <td>" . number_format($factTwoValue) . "</td>
                                                                 <td>";
-                                                                    if ($factTwoValue > $factOneValue) {
-                                                                        echo "+ " . abs($factTwoValue - $factOneValue);
-                                                                    } else if ($factTwoValue < $factOneValue) {
-                                                                        echo "- " . abs($factTwoValue - $factOneValue);
-                                                                    } else if ($factTwoValue == $factOneValue) {
-                                                                        echo "";
-                                                                    }
-                                                                    echo "</td>
+                                                    if ($factTwoValue > $factOneValue) {
+                                                        echo "+ " . abs($factTwoValue - $factOneValue);
+                                                    } else if ($factTwoValue < $factOneValue) {
+                                                        echo "- " . abs($factTwoValue - $factOneValue);
+                                                    } else if ($factTwoValue == $factOneValue) {
+                                                        echo "";
+                                                    }
+                                                    echo "</td>
                                                             </tr>
                                                             ";
                                                     break;
@@ -153,23 +154,24 @@ if (isset($selectedFact)) {
                                                                 <td>" . $key . "</td>
                                                                 <td>" . $factOneValue . "</td>
                                                                 <td>" . $value->count . "</td>
-                                                                <td>"; if (is_int($factOneValue)) {
-                                                                            if ($value->count > $factOneValue) {
-                                                                                echo "+ " . abs($value->count - $factOneValue);
-                                                                            } else if ($value->count < $factOneValue) {
-                                                                                echo "- " . abs($value->count - $factOneValue);
-                                                                            } else if ($value->count == $factOneValue) {
-                                                                                echo "";
-                                                                            }
-                                                                        } else {
-                                                                            echo "New value!";
-                                                                        }
-                                                            echo "
+                                                                <td>";
+                                                        if (is_int($factOneValue)) {
+                                                            if ($value->count > $factOneValue) {
+                                                                echo "+ " . abs($value->count - $factOneValue);
+                                                            } else if ($value->count < $factOneValue) {
+                                                                echo "- " . abs($value->count - $factOneValue);
+                                                            } else if ($value->count == $factOneValue) {
+                                                                echo "";
+                                                            }
+                                                        } else {
+                                                            echo "New value!";
+                                                        }
+                                                        echo "
                                                                 </td>
                                                             </tr>
                                                             ";
                                                     }
-                                                echo "
+                                                    echo "
                                                             <tr>
                                                                 <td colspan='4' class='text-center font-weight-bolder'>Development Packages</td>
                                                             </tr>
@@ -185,7 +187,8 @@ if (isset($selectedFact)) {
                                                                 <td>" . $key . "</td>
                                                                 <td>" . $factOneValue . "</td>
                                                                 <td>" . $value->count . "</td>
-                                                                <td>"; if (is_int($factOneValue)) {
+                                                                <td>";
+                                                        if (is_int($factOneValue)) {
                                                             if ($value->count > $factOneValue) {
                                                                 echo "+ " . abs($value->count - $factOneValue);
                                                             } else if ($value->count < $factOneValue) {
@@ -212,20 +215,20 @@ if (isset($selectedFact)) {
                                                         echo "
                                                             <tr>
                                                                 <td>" . $server . "</td>
-                                                                <td>" . $factOneValue  . "</td>
+                                                                <td>" . $factOneValue . "</td>
                                                                     <td>" . $value . "</td>
                                                                     <td>";
-                                                                        if ($factOneValue != $value) {
-                                                                            echo "New value!";
-                                                                        } else {
-                                                                            echo "";
-                                                                        }
-                                                                        echo "</td></tr>";
+                                                        if ($factOneValue != $value) {
+                                                            echo "New value!";
+                                                        } else {
+                                                            echo "";
+                                                        }
+                                                        echo "</td></tr>";
                                                     }
                                                     break;
                                             }
 
-                                        // Otherwise, just render using default settings
+                                            // If it doesn't require specific data wrangling, just render using default settings
                                         } else {
                                             foreach ($factSetTwo as $key => $value) {
                                                 if (isset($factSetOne[$key]['count'])) {
@@ -258,168 +261,8 @@ if (isset($selectedFact)) {
                                         }
                                     }
 
-
-
+                                    // Finish building table
                                     echo '</tbody></table>';
-
-                                    echo '
-                                            <div class="row">
-                                                <div class="col border-0 p-4 mb-2 mx-1 bg-gray-100 rounded">
-                                                    <h6>' . $this->Time->format($timeStampOne, \IntlDateFormatter::MEDIUM, null) . '</h6>
-                                                    <hr />
-                                                    <input type="checkbox" id="readMoreFirst" />
-                                                    <div id="factValueOne" class="inner">';
-                                                        if ($selectedFact != 'schoolbox_config_site_type' && $selectedFact != 'schoolbox_totalusers'  && $selectedFact != 'schoolboxdev_package_version'  && $selectedFact != 'schoolbox_package_version') {
-                                                            $factSetOne = json_decode(json_encode(sortByCountDescending($factSetOne)));
-                                                            $factSetTwo = json_decode(json_encode(sortByCountDescending($factSetTwo)));
-                                                        }
-
-                                                        // If the value is numeric only, display as numeric only
-                                                       if (in_array($selectedFact, $numericalOnlyFacts)) {
-                                                           echo number_format(intval(current((array) $factSetOne)));
-                                                       // If not numeric, then handle on case-by-case
-                                                       } else {
-                                                           if (in_array($selectedFact, $nonStandardFacts)) {
-                                                               switch ($selectedFact) {
-                                                                   case 'schoolbox_totalusers':
-                                                                       echo number_format(intval($factSetOne->totalUsersFleetCount));
-                                                                       break;
-                                                                   case 'schoolboxdev_package_version':
-                                                                   case 'schoolbox_package_version':
-                                                                       echo "<b>Production Schoolbox Packages</b>";
-                                                                       foreach ($factSetOne->productionPackageVersions as $key => $value) {
-                                                                           echo "<p class='comparedFactValue' id='" . $key . "'>" . $key . ' : ' . $value->count . "</p>";
-                                                                       }
-                                                                       echo "<br /><b>Development Schoolbox Packages</b><br />";
-                                                                       foreach ($factSetOne->developmentPackageVersions as $key => $value) {
-                                                                           echo "<p class='comparedFactValue' id='" . $key . "'>" . $key . ' : ' . $value->count . "</p>";
-                                                                       }
-                                                                       break;
-                                                                   case 'schoolbox_config_site_type':
-                                                                       foreach ($factSetOne as $server => $value) {
-                                                                           echo "<p class='comparedFactValue' id='" . $server . "'>" . $server . ' : ' . $value . "</p>";
-                                                                       }
-                                                                       break;
-                                                               }
-                                                           } else {
-                                                               // If not in the non-standard factset, then just render as usual
-                                                               foreach ($factSetOne as $key => $detail) {
-                                                                   echo "<p class='comparedFactValue' id='" . $key . "'>" . $key . ' : ' . $detail->count . "</p>";
-                                                               }
-                                                           }
-                                                       }
-                                                    echo '</div><label class="overflowLabel" for="readMoreFirst">Read </label>
-                                                </div>
-                                                <div class="col border-0 p-4 mb-2 mx-1 bg-gray-100 rounded">
-                                                    <h6>' . $this->Time->format($timeStampTwo, \IntlDateFormatter::MEDIUM, null) . '</h6>
-                                                    <hr />
-                                                    <input type="checkbox" id="readMoreSecond" />
-                                                    <div id="factValueTwo" class="inner">';
-                                                        // If the value is numeric only, display as numeric only
-                                                        if (in_array($selectedFact, $numericalOnlyFacts)) {
-                                                            if (current((array) $factSetOne) > current((array) $factSetTwo)) {
-                                                                echo "<p class='comparedFactValue highlight-minus'>" . number_format(intval(current((array)$factSetTwo))) . "<span class='float-end pe-1 fact-difference-stats'>- " . abs(current((array)$factSetOne) - current((array)$factSetTwo)) . "</span></p>";
-                                                            } elseif (current((array) $factSetOne) < current((array) $factSetTwo)) {
-                                                                    echo "<p class='comparedFactValue highlight-plus'>" . number_format(intval(current((array) $factSetTwo))) . "<span class='float-end pe-1 fact-difference-stats'>+ " . abs(current((array) $factSetOne) - current((array) $factSetTwo)) . "</span></p>";
-                                                            } else {
-                                                                echo "<p class='comparedFactValue'>" . number_format(intval(current((array) $factSetTwo))) . "</p>";
-                                                            }
-                                                            // If not numeric, then handle on case-by-case
-                                                        } else {
-                                                            if (in_array($selectedFact, $nonStandardFacts)) {
-                                                                switch ($selectedFact) {
-                                                                    case 'schoolbox_totalusers':
-                                                                        // First case compares if less than, show red & "-", second shows green and "+", third is unchanged
-                                                                        if ($factSetTwo->totalUsersFleetCount < $factSetOne->totalUsersFleetCount) {
-                                                                            echo "<p class='comparedFactValue highlight-minus' id='totalUsersFleetCount'>" . number_format(intval($factSetTwo->totalUsersFleetCount)) . "<span class='float-end pe-1 fact-difference-stats'>- " . abs($factSetTwo->totalUsersFleetCount - $factSetOne->totalUsersFleetCount) . "</span></p>";
-                                                                        } elseif ($factSetTwo->totalUsersFleetCount > $factSetOne->totalUsersFleetCount) {
-                                                                                echo "<p class='comparedFactValue highlight-plus' id='totalUsersFleetCount'>" . number_format(intval($factSetTwo->totalUsersFleetCount)) . "<span class='float-end pe-1 fact-difference-stats'>+ " . abs($factSetTwo->totalUsersFleetCount - $factSetOne->totalUsersFleetCount) . "</span></p>";
-                                                                        } else {
-                                                                            echo "<p class='comparedFactValue' id='totalUsersFleetCount'>" . number_format(intval($factSetTwo->totalUsersFleetCount)) . "</p>";
-                                                                        }
-                                                                        break;
-                                                                    case 'schoolboxdev_package_version':
-                                                                    case 'schoolbox_package_version':
-                                                                        echo "<b>Production Schoolbox Packages</b>";
-                                                                        foreach ($factSetTwo->productionPackageVersions as $key => $value) {
-                                                                            // Check if the first set contains the current key
-                                                                            if(isset($factSetOne->productionPackageVersions->$key)) {
-                                                                                $firstFactSetValue = $factSetOne->productionPackageVersions->$key;
-                                                                                // Check if the first set's value is different to the second set's value, and if it is, then display with red highlight
-                                                                                if ($firstFactSetValue->count > $value->count) {
-                                                                                    echo "<p class='comparedFactValue highlight-minus' id='" . $key . "'>" . $key . ' : ' . $value->count . "<span class='float-end pe-1 fact-difference-stats'>- " . abs($firstFactSetValue->count - $value->count)  . "</span></p>";
-                                                                                } elseif ($firstFactSetValue->count < $value->count) {
-                                                                                    echo "<p class='comparedFactValue highlight-plus' id='" . $key . "'>" . $key . ' : ' . $value->count . "<span class='float-end pe-1 fact-difference-stats'>+ " . abs($firstFactSetValue->count - $value->count)  . "</span></p>";
-                                                                                } else { // If it's the same, then display with no change
-                                                                                    echo "<p class='comparedFactValue' id='" . $key . "'>" . $key . ' : ' . $value->count . "</p>";
-                                                                                }
-                                                                            // If it does not, then display with green highlight
-                                                                            } else {
-                                                                                echo "<p class='comparedFactValue highlight-new' id='" . $key . "'>" . $key . ' : ' . $value->count . "<span class='float-end pe-1 fact-difference-stats'>New value</span></p>";
-                                                                            }
-                                                                        }
-                                                                        echo "<br /><b>Development Schoolbox Packages</b><br />";
-                                                                        foreach ($factSetTwo->developmentPackageVersions as $key => $value) {
-                                                                            // Check if the first set contains the current key
-                                                                            if(isset($factSetOne->developmentPackageVersions->$key)) {
-                                                                                $firstFactSetValue = $factSetOne->developmentPackageVersions->$key;
-                                                                                // First case compares if less than, show red & "-", second shows green and "+", third is unchanged
-                                                                                if ($firstFactSetValue->count > $value->count) {
-                                                                                    echo "<p class='comparedFactValue highlight-minus' id='" . $key . "'>" . $key . ' : ' . $value->count . "<span class='float-end pe-1 fact-difference-stats'>- " . abs($firstFactSetValue->count - $value->count)  . "</span></p>";
-                                                                                } elseif ($firstFactSetValue->count < $value->count) {
-                                                                                    echo "<p class='comparedFactValue highlight-plus' id='" . $key . "'>" . $key . ' : ' . $value->count . "<span class='float-end pe-1 fact-difference-stats'>+ " . abs($firstFactSetValue->count - $value->count)  . "</span></p>";
-                                                                                } else { // If it's the same, then display with no change
-                                                                                    echo "<p class='comparedFactValue' id='" . $key . "'>" . $key . ' : ' . $value->count . "</p>";
-                                                                                }
-                                                                                // If it does not, then display with green highlight
-                                                                            } else {
-                                                                                echo "<p class='comparedFactValue highlight-new' id='" . $key . "'>" . $key . ' : ' . $value->count . "<span class='float-end pe-1 fact-difference-stats'>New value</span></p>";
-                                                                            }
-                                                                        }
-                                                                        break;
-                                                                    case 'schoolbox_config_site_type':
-                                                                        foreach ($factSetTwo as $server => $value) {
-                                                                            // Check if the first set contains the current key
-                                                                            if(isset($factSetOne->$server)) {
-                                                                                $firstFactSetValue = $factSetOne->$server;
-                                                                                // First case compares if less than, show red & "-", second shows green and "+", third is unchanged
-                                                                                if ($firstFactSetValue != $value) {
-                                                                                    echo "<p class='comparedFactValue highlight-new' id='" . $server . "'>" . $server . ' : ' . $value . "<span class='float-end pe-1 fact-difference-stats'>(Change of " . abs($firstFactSetValue - $value)  . ")</span></p>";
-                                                                                } else { // If it's the same, then display with no change
-                                                                                    echo "<p class='comparedFactValue' id='" . $server . "'>" . $server . ' : ' . $value . "</p>";
-                                                                                }
-                                                                                // If it does not, then display with green highlight
-                                                                            } else {
-                                                                                echo "<p class='comparedFactValue highlight-new' id='" . $server . "'>" . $server . ' : ' . $value . "<span class='float-end pe-1 fact-difference-stats'>New value</span></p>";
-                                                                            }
-                                                                        }
-                                                                        break;
-                                                                }
-                                                            } else {
-                                                                // If not in the non-standard factset, then just render as usual
-                                                                foreach ($factSetTwo as $key => $detail) {
-                                                                    // Check if the first set contains the current key
-                                                                    if(isset($factSetOne->$key)) {
-                                                                        $firstFactSetValue = $factSetOne->$key;
-                                                                        // First case compares if less than, show red & "-", second shows green and "+", third is unchanged
-                                                                        if ($firstFactSetValue->count > $detail->count) {
-                                                                            echo "<p class='comparedFactValue highlight-minus' id='" . $key . "'>" . $key . ' : ' . $detail->count . "<span class='float-end pe-1 fact-difference-stats'>- " . abs($firstFactSetValue->count - $detail->count) . "</span></p>";
-                                                                        } elseif ($firstFactSetValue->count < $detail->count) {
-                                                                                echo "<p class='comparedFactValue highlight-plus' id='" . $key . "'>" . $key . ' : ' . $detail->count . "<span class='float-end pe-1 fact-difference-stats'>+ " . abs($firstFactSetValue->count - $detail->count)  . "</span></p>";
-                                                                        } else { // If it's the same, then display with no change
-                                                                            echo "<p class='comparedFactValue' id='" . $key . "'>" . $key . ' : ' . $detail->count . "</p>";
-                                                                        }
-                                                                        // If it does not, then display with blue highlight
-                                                                    } else {
-                                                                        echo "<p class='comparedFactValue highlight-new' id='" . $key . "'>" . $key . ' : ' . $detail->count . "<span class='float-end pe-1 fact-difference-stats'>New value</span></p>";
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                        echo '</div><label class="overflowLabel" for="readMoreSecond">Read </label>
-                                                </div>
-                                            </div>
-                                        ';
                                 }
                             ?>
 
@@ -473,6 +316,9 @@ if (isset($selectedFact)) {
             if (containerHeight < 250) {
                 $('label').hide();
             }
+        </script>
+        <?php if ($selectedFact != 'schoolbox_package_version' && $selectedFact != 'schoolboxdev_package_version') {
+            echo "<script>
             $('#comparedFactsTable').DataTable({
                 paging: true,
                 language: {
@@ -483,10 +329,11 @@ if (isset($selectedFact)) {
                 },
                 info: true,
                 order: [[0, 'desc']],
-                "initComplete": function (settings, json) {
-                    $("#comparedFactsTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                'initComplete': function (settings, json) {
+                    $('#comparedFactsTable').wrap('<div style=\'overflow:auto; width:100%;position:relative;\'></div>');
                 }
             });
-        </script>
+            </script>";
+        } ?>
     </div>
 </div>
