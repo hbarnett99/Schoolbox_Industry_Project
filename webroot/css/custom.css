@@ -236,3 +236,16 @@ input:checked + .inner {
     margin-right: -5px;
     margin-left: -5px;
 }
+
+pre {
+    font-size: inherit !important;
+    margin-bottom: 0 !important;
+}
+
+.code-container {
+    padding: 1em;
+    overflow: auto;
+    border-radius: 0.75rem;
+    background: #494949;
+    color: lightgray;
+}

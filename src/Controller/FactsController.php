@@ -53,7 +53,7 @@ class FactsController extends AppController
      * @param string $factName the name of the fact to query
      * @return array concatenated JSON results from the server query
      */
-    private function getDetailsFromServer($fact) {
+    private function getIndividualFactDetailsFromServer($fact) {
         // List of PuppetDB Servers used by Schoolbox
         $puppetDbServers = ['https://puppetdb.stg.1.schoolbox.com.au', 'https://puppetdb.prd.1.schoolbox.com.au'];
 
@@ -93,46 +93,8 @@ class FactsController extends AppController
      */
     public function performQuery(string $fact): array {
         switch($fact) {
-//            case "schoolbox_totalusers":
-//                return schoolbox_totalusers($this->getDetailsFromServer('schoolbox_totalusers'));
-//            case "schoolbox_config_site_type":
-//                return schoolbox_config_site_type($this->getDetailsFromServer('schoolbox_config_site_type'));
-//            case "schoolbox_users_student":
-//                return schoolbox_users_student($this->getDetailsFromServer('schoolbox_users_student'));
-//            case "schoolbox_users_staff":
-//                return schoolbox_users_staff($this->getDetailsFromServer('schoolbox_users_staff'));
-//            case "schoolbox_users_parent":
-//                return schoolbox_users_parent($this->getDetailsFromServer('schoolbox_users_parent'));
-//            case "schoolbox_totalcampus":
-//                return schoolbox_totalcampus($this->getDetailsFromServer('schoolbox_totalcampus'));
-//            case "schoolbox_package_version":
-//                return schoolbox_package_version($this->getDetailsFromServer('schoolbox_package_version'));
-//            case "schoolboxdev_package_version":
-//                return schoolboxdev_package_version($this->getDetailsFromServer('schoolboxdev_package_version'));
-//            case "virtual":
-//                return virtualEnv($this->getDetailsFromServer('virtual'));
-//            case "lsbdistdescription":
-//                return lsbdistdescription($this->getDetailsFromServer('lsbdistdescription'));
-//            case "kernelmajversion":
-//                return kernelmajversion($this->getDetailsFromServer('kernelmajversion'));
-//            case "kernelrelease":
-//                return kernelrelease($this->getDetailsFromServer('kernelrelease'));
-//            case "php_cli_version":
-//                return php_cli_version($this->getDetailsFromServer('php_cli_version'));
-//            case "mysql_extra_version":
-//                return mysql_extra_version($this->getDetailsFromServer('mysql_extra_version'));
-//            case "processorcount":
-//                return processorcount($this->getDetailsFromServer('processorcount'));
-//            case "memorysize":
-//                return memorysize($this->getDetailsFromServer('memorysize'));
-//            case "schoolbox_config_date_timezone":
-//                return schoolbox_config_date_timezone($this->getDetailsFromServer('schoolbox_config_date_timezone'));
-//            case "schoolbox_config_external_type":
-//                return schoolbox_config_external_type($this->getDetailsFromServer('schoolbox_config_external_type'));
-//            case "schoolbox_first_file_upload_year":
-//                return schoolbox_first_file_upload_year($this->getDetailsFromServer('schoolbox_first_file_upload_year'));
             default:
-                $returnResults = $this->getDetailsFromServer($fact);
+                $returnResults = $this->getIndividualFactDetailsFromServer($fact);
                 return array_merge($returnResults[0], $returnResults[1]);
         }
     }
@@ -289,5 +251,65 @@ class FactsController extends AppController
             $this->set('environmentSpecific', $environment);
         }
 
+    }
+
+    /**
+     * Queries the Schoolbox PuppetDB servers for a given certname.
+     *
+     * @param string $certname the certname to get details for
+     * @return array concatenated JSON results from the server query
+     */
+    private function getIndividualCertNameDetailsFromServer($certname) {
+        // List of PuppetDB Servers used by Schoolbox
+        $puppetDbServers = ['https://puppetdb.stg.1.schoolbox.com.au', 'https://puppetdb.prd.1.schoolbox.com.au'];
+
+        // Fact URL path
+        $path = '/pdb/query/v4/facts?query=';
+
+        // Create a valid queryString
+        $QueryString = urlencode(sprintf('["=", "certname", "%s"]', $certname));
+
+        // Create the HTTP Client
+        $client = new Client();
+
+        $results = [];
+        // For each PuppetDB server, execute a query
+        foreach($puppetDbServers as $server) {
+            $formattedQuery = $server . $path . $QueryString;
+
+            // Execute request and get response
+            $response = $client->get(
+                $formattedQuery,
+                [], // For whatever reason, there is no way to turn off encoding here, so the urlencode() value from above is encoded twice.
+                // For that reason, the queryString is just appended straight to the URL rather than using the query value.
+                ['auth' => ['username' => 'monash', 'password' => 'ywtsghpsqhsbxg']]
+            );
+            array_push($results, $response->getJson());
+        }
+
+        return array_merge($results[0], $results[1]);
+    }
+
+    /**
+     * CertNameFacts method
+     *
+     * @return \Cake\Http\Response|null|void Renders view
+     */
+    public function certnameFacts() {
+        // Get certname from query
+        $certname = $this->request->getQuery('certname');
+
+        // Prioritise requests from form on page
+        if ($this->request->is('post')) {
+            $certname = $this->request->getData('certname');
+            $this->redirect(['action' => 'certnameFacts', '?' => ['certname' => $certname]]);
+        }
+
+        // Check if a certname has been provided, and set it as a variable
+        if ($certname) {
+            $this->set('certname', $certname);
+            // Get the results from the server for this fact and then return details
+            $this->set('results', $this->getIndividualCertNameDetailsFromServer($certname));
+        }
     }
 }
