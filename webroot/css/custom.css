@@ -249,3 +249,12 @@ pre {
     background: #494949;
     color: lightgray;
 }
+
+:not(pre) > code[class*="language-"], pre[class*="language-"] {
+    background-color: #282c34 !important;
+    color: #abb2bf !important;
+}
+
+code[class*="language-"], pre[class*="language-"] {
+    text-shadow: none !important;
+}

@@ -9,15 +9,17 @@ if (isset($certname)) {
 }
 
 // If a fact value is set, then update the page title
-if (isset($fact)) {
+if (isset($certname)) {
     $this->assign('title', $certname . ' Details');
 } else {
     $this->assign('title', 'Individual Certname Details');
 }
+
+echo $this->Html->script('highlight.min.js');
+echo $this->Html->css('default')
+
 ?>
 <div class="row">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/a11y-dark.min.css">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
     <div class="col-12">
         <?php
         echo $this->Breadcrumbs->render(
@@ -70,18 +72,18 @@ if (isset($fact)) {
                                             <div class="card mb-3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header" id="' . $result['name'] . 'Heading">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                                 data-bs-target="#' . $result['name'] . 'Collapse" aria-expanded="true"
                                                                 aria-controls="' . $result['name'] . 'Collapse">
                                                             <strong>' . $result['name'] . '</strong>
                                                             <i class="fa text-xs pt-1 position-absolute end-0 me-3"></i>
                                                         </button>
                                                     </h2>
-                                                    <div id="'. $result['name'] . 'Collapse" class="accordion-collapse collapse show"
+                                                    <div id="'. $result['name'] . 'Collapse" class="accordion-collapse collapse"
                                                          aria-labelledby="'. $result['name'] . 'Heading">
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
-                                                            <pre class="code">' .
+                                                            <pre class="code language-json">' .
                                                                 json_encode($result['value'], JSON_PRETTY_PRINT) .
                                                             '</pre>
                                                         </div>
@@ -100,7 +102,8 @@ if (isset($fact)) {
                                 echo $this->Form->input(
                                     'certname',
                                     [
-                                        'class' => 'form-control'
+                                        'class' => 'form-control',
+                                        'default' => (isset($certname)) ? $certname : ''
                                     ]
                                 );
                                 echo '</div><div class="col-md-auto mt-2 mt-md-0">';
@@ -115,8 +118,24 @@ if (isset($fact)) {
         </div>
     </div>
     <script>
-        document.querySelectorAll('pre.code').forEach(el => {
-            hljs.highlightElement(el);
-        });
+        // Search functionality for accordion
+        $(document).ready(function() {
+            $('#certname_details_search').on('change keyup paste click', function () {
+                var filter = $(this).val().toLowerCase();
+                $("#factsAccordion [data-bs-toggle]").each(function () {
+                    if ($(this).text().toLowerCase().trim().indexOf(filter) < 0) {
+                        $(this).closest(".card").hide();
+
+                    } else {
+                        $(this).closest(".card").show()
+                    }
+                });
+            });
+
+            // Text highlighter without needing to use <pre><code>
+            document.querySelectorAll('pre.code').forEach(el => {
+                hljs.highlightElement(el);
+            });
+        })
     </script>
 </div>
