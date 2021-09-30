@@ -236,3 +236,25 @@ input:checked + .inner {
     margin-right: -5px;
     margin-left: -5px;
 }
+
+pre {
+    font-size: inherit !important;
+    margin-bottom: 0 !important;
+}
+
+.code-container {
+    padding: 1em;
+    overflow: auto;
+    border-radius: 0.75rem;
+    background: #494949;
+    color: lightgray;
+}
+
+:not(pre) > code[class*="language-"], pre[class*="language-"] {
+    background-color: #282c34 !important;
+    color: #abb2bf !important;
+}
+
+code[class*="language-"], pre[class*="language-"] {
+    text-shadow: none !important;
+}

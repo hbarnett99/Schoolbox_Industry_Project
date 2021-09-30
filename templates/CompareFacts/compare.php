@@ -140,7 +140,7 @@ if (isset($selectedFact)) {
                                                 case 'schoolbox_package_version':
                                                     echo "
                                                             <tr>
-                                                                <td colspan='4' class='text-center font-weight-bolder'>Production Packages</td>
+                                                                <td colspan='4' class='text-center font-weight-bolder'>Schoolbox Packages (in Production)</td>
                                                             </tr>
                                                             ";
                                                     foreach ($factSetTwo->productionPackageVersions as $key => $value) {
@@ -173,7 +173,7 @@ if (isset($selectedFact)) {
                                                     }
                                                     echo "
                                                             <tr>
-                                                                <td colspan='4' class='text-center font-weight-bolder'>Development Packages</td>
+                                                                <td colspan='4' class='text-center font-weight-bolder'>Schoolbox Packages (in Staging)</td>
                                                             </tr>
                                                             ";
                                                     foreach ($factSetTwo->developmentPackageVersions as $key => $value) {
