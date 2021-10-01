@@ -97,14 +97,13 @@ if (isset($selectedFact)) {
                                             <tr>
                                                 <td>" . $selectedFact . "</td>
                                                 <td>" . number_format($factOneValue) . "</td>
-                                                <td>" . number_format($factTwoValue) . "</td>
-                                                <td>";
+                                                <td>" . number_format($factTwoValue) . "</td>";
                                         if ($factTwoValue > $factOneValue) {
-                                            echo "+ " . abs($factTwoValue - $factOneValue);
+                                            echo "<td class='highlight-plus'> + " . abs($factTwoValue - $factOneValue);
                                         } else if ($factTwoValue < $factOneValue) {
-                                            echo "- " . abs($factTwoValue - $factOneValue);
+                                            echo "<td class='highlight-minus'> - " . abs($factTwoValue - $factOneValue);
                                         } else if ($factTwoValue == $factOneValue) {
-                                            echo "No change";
+                                            echo "<td> No change";
                                         }
                                         echo "</td>
                                             </tr>
@@ -123,14 +122,13 @@ if (isset($selectedFact)) {
                                                             <tr>
                                                                 <td>" . $selectedFact . "</td>
                                                                 <td>" . number_format($factOneValue) . "</td>
-                                                                <td>" . number_format($factTwoValue) . "</td>
-                                                                <td>";
+                                                                <td>" . number_format($factTwoValue) . "</td>";
                                                     if ($factTwoValue > $factOneValue) {
-                                                        echo "+ " . abs($factTwoValue - $factOneValue);
+                                                        echo "<td class='highlight-plus'> + " . abs($factTwoValue - $factOneValue);
                                                     } else if ($factTwoValue < $factOneValue) {
-                                                        echo "- " . abs($factTwoValue - $factOneValue);
+                                                        echo "<td class='highlight-minus'> - " . abs($factTwoValue - $factOneValue);
                                                     } else if ($factTwoValue == $factOneValue) {
-                                                        echo "";
+                                                        echo "<td> No change";
                                                     }
                                                     echo "</td>
                                                             </tr>
@@ -153,18 +151,17 @@ if (isset($selectedFact)) {
                                                             <tr>
                                                                 <td>" . $key . "</td>
                                                                 <td>" . $factOneValue . "</td>
-                                                                <td>" . $value->count . "</td>
-                                                                <td>";
+                                                                <td>" . $value->count . "</td>";
                                                         if (is_int($factOneValue)) {
                                                             if ($value->count > $factOneValue) {
-                                                                echo "+ " . abs($value->count - $factOneValue);
+                                                                echo "<td class='highlight-plus'> + " . abs($value->count - $factOneValue);
                                                             } else if ($value->count < $factOneValue) {
-                                                                echo "- " . abs($value->count - $factOneValue);
+                                                                echo "<td class='highlight-minus'> - " . abs($value->count - $factOneValue);
                                                             } else if ($value->count == $factOneValue) {
-                                                                echo "";
+                                                                echo "<td> No change";
                                                             }
                                                         } else {
-                                                            echo "New value!";
+                                                            echo "<td class='highlight-new'> New value";
                                                         }
                                                         echo "
                                                                 </td>
@@ -186,18 +183,17 @@ if (isset($selectedFact)) {
                                                             <tr>
                                                                 <td>" . $key . "</td>
                                                                 <td>" . $factOneValue . "</td>
-                                                                <td>" . $value->count . "</td>
-                                                                <td>";
+                                                                <td>" . $value->count . "</td>";
                                                         if (is_int($factOneValue)) {
                                                             if ($value->count > $factOneValue) {
-                                                                echo "+ " . abs($value->count - $factOneValue);
+                                                                echo " <td class='highlight-plus'> + " . abs($value->count - $factOneValue);
                                                             } else if ($value->count < $factOneValue) {
-                                                                echo "- " . abs($value->count - $factOneValue);
+                                                                echo "<td class='highlight-minus'> - " . abs($value->count - $factOneValue);
                                                             } else if ($value->count == $factOneValue) {
-                                                                echo "";
+                                                                echo "<td>";
                                                             }
                                                         } else {
-                                                            echo "New value!";
+                                                            echo "<td class='highlight-new'> New value";
                                                         }
                                                         echo "
                                                                 </td>
@@ -216,12 +212,11 @@ if (isset($selectedFact)) {
                                                             <tr>
                                                                 <td>" . $server . "</td>
                                                                 <td>" . $factOneValue . "</td>
-                                                                    <td>" . $value . "</td>
-                                                                    <td>";
+                                                                    <td>" . $value . "</td>";
                                                         if ($factOneValue != $value) {
-                                                            echo "New value!";
+                                                            echo "<td class='highlight-new'> New value";
                                                         } else {
-                                                            echo "";
+                                                            echo "<td>";
                                                         }
                                                         echo "</td></tr>";
                                                     }
@@ -240,18 +235,17 @@ if (isset($selectedFact)) {
                                                 <tr>
                                                     <td>" . $key . "</td>
                                                     <td>" . $factOneValue . "</td>
-                                                        <td>" . $value['count'] . "</td>
-                                                        <td>";
+                                                        <td>" . $value['count'] . "</td>";
                                                 if (is_int($factOneValue)) {
                                                     if ($value['count'] > $factOneValue) {
-                                                        echo "+ " . abs($value['count'] - $factOneValue);
+                                                        echo "<td class='highlight-plus'> + " . abs($value['count'] - $factOneValue);
                                                     } else if ($value['count'] < $factOneValue) {
-                                                        echo "- " . abs($value['count'] - $factOneValue);
+                                                        echo "<td class='highlight-minus'> - " . abs($value['count'] - $factOneValue);
                                                     } else if ($value['count'] == $factOneValue) {
-                                                        echo "";
+                                                        echo "<td>";
                                                     }
                                                 } else {
-                                                    echo "New value!";
+                                                    echo "<td class='highlight-new'> New value";
                                                 }
 
                                                 echo "</td>

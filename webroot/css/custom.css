@@ -153,17 +153,17 @@ button[data-bs-toggle="collapse"].collapsed .fa:before {
 }
 
 .highlight-minus {
-    background-color: #f9d7dc;
+    background-color: #f9d7dc !important;
     border-radius: 3px;
 }
 
 .highlight-plus {
-    background-color: #ddfbe6;
+    background-color: #ddfbe6 !important;
     border-radius: 3px;
 }
 
 .highlight-new {
-    background-color: #ded7fc;
+    background-color: #ded7fc !important;
     border-radius: 3px;
 }
 
