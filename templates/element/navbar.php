@@ -270,7 +270,7 @@ $currentControllerAction = $this->request->getParam('controller') . '_' . $this-
             <span class="nav-link-text ms-1">Sign Out</span>',
                 ['controller' => 'Users', 'action' => 'logout'], ['class' => 'nav-link', 'escape' => false])
             ?>
-            </li>
+            </ul>
 
             <!-------------------------------------------->
     </div>
