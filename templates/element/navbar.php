@@ -3,19 +3,17 @@ $currentControllerAction = $this->request->getParam('controller') . '_' . $this-
 ?>
 
 <body class="g-sidenav-show  bg-gray-100">
-<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 "
-       id="sidenav-main">
+<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
     <div class="sidenav-header">
-        <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
-           aria-hidden="true" id="iconSidenav"></i>
+        <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0">
             <?= $this->Html->image('../favicon.ico', ['alt' => 'SchoolBox_Logo']) ?>
             <span class="ms-1 font-weight-bold">Schoolbox Dashboard</span>
         </a>
     </div>
     <hr class="horizontal dark mt-0">
-    <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
-        <ul class="navbar-nav">
+    <div class="collapse navbar-collapse w-auto max-height-vh-100" id="sidenav-collapse-main">
+        <ul class="navbar-nav h-100">
             <li class="nav-item">
                 <?php if ($currentControllerAction == 'HistoricalFacts_newestData') {
                     echo $this->Html->link('<div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -53,7 +51,7 @@ $currentControllerAction = $this->request->getParam('controller') . '_' . $this-
             </div>
             <span class="nav-link-text ms-1">Dashboard</span>',
                         ['controller' => 'HistoricalFacts', 'action' => 'newestData'], ['class' => 'nav-link', 'escape' => false]);
-                } ?>
+                }?>
 
             </li>
             <li class="nav-item">
@@ -256,29 +254,17 @@ $currentControllerAction = $this->request->getParam('controller') . '_' . $this-
                         ['controller' => 'Users', 'action' => 'index'], ['class' => 'nav-link', 'escape' => false]);
                 }
             }
-            echo '</li>
-            <li class="position-fixed bottom-1">';
-
-            //<!------------------------------------------------------------------------>
-
-            echo $this->Html->link('<div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 align-items-center">
-            <svg width="12px" height="12px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user" class="svg-inline--fa fa-user mt-1 fa-w-14" role="img"
-                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                <path class="color-background" d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"></path>
-            </svg>
-            </div>
-            <span class="nav-link-text ms-1">Sign Out</span>',
-                ['controller' => 'Users', 'action' => 'logout'], ['class' => 'nav-link', 'escape' => false])
+            echo '</li>';
             ?>
-            </ul>
-
-            <!-------------------------------------------->
+    </div>
+    <div class="sidenav-footer w-100 navbar-bottom-item">
+        <?php echo $this->Html->link('<button class="btn btn-light w-100">Sign out</button>',
+        ['controller' => 'Users', 'action' => 'logout'], ['class' => 'nav-link', 'escape' => false]); ?>
     </div>
 </aside>
 <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
     <!-- Navbar -->
-    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
-         navbar-scroll="true">
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
         <div class="container-fluid py-1 px-3">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
@@ -287,12 +273,9 @@ $currentControllerAction = $this->request->getParam('controller') . '_' . $this-
                 <h6 class="font-weight-bolder mb-0"></h6>
             </nav>
             <ul class="navbar-nav  justify-content-end">
-                <li class="nav-item d-flex align-items-center ">
-                    <a href="javascript:;" class="nav-link text-body font-weight-bold px-1">
-                        <i class="fa fa-user me-sm-1 px-1"></i>
-                        <?=
-                        $this->Html->link("Sign out", ['controller' => 'Users', 'action' => 'logout'], ['class' => 'button btn btn-light py-2 m-0', 'style' => 'margin-left: auto;'])
-                        ?>
+                <li class="nav-item d-flex align-items-center">
+                    <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
+                        <?= $this->Html->link('<button class="btn btn-light mb-0"><i class="fa fa-user me-sm-1"></i>Sign out</button>', ['controller' => 'Users', 'action' => 'logout'], ['class' => 'nav-link', 'escape' => false]); ?>
                     </a>
                 </li>
                 <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
@@ -338,7 +321,7 @@ $currentControllerAction = $this->request->getParam('controller') . '_' . $this-
     function toggleSidenav() {
         if (body.classList.contains(className)) {
             body.classList.remove(className);
-            setTimeout(function () {
+            setTimeout(function() {
                 sidenav.classList.remove('bg-white');
             }, 100);
             sidenav.classList.remove('bg-transparent');
