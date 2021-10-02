@@ -258,3 +258,12 @@ pre {
 code[class*="language-"], pre[class*="language-"] {
     text-shadow: none !important;
 }
+
+#sidenav-collapse-main {
+    height: inherit !important;
+}
+
+.navbar-bottom-item {
+    position: absolute;
+    bottom: 0;
+}
