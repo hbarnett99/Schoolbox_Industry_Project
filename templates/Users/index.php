@@ -45,16 +45,16 @@ $this->assign('title', 'Manage Users');
                                         if ($user->isAdmin) {
                                             // If the admin account is the same as the currently hidden admin account, then disable the option to change their account details
                                             if ($user->id != $this->getRequest()->getSession()->read("Auth.id")) {
-                                                echo $this->Html->link(__('Make Standard User'), ['action' => 'edit', $user->id, 'makeUser'], ['class' => 'btn btn-info mr-1 mb-0 w-100', 'escape' => false]);
+                                                echo $this->Html->link(__('Make Standard User'), ['action' => 'edit', $user->id, 'makeUser'], ['class' => 'btn btn-info btn-sm mr-1 mb-0 w-75', 'escape' => false]);
                                             } else {
                                                 echo "
                                                     <span data-toggle='tooltip' data-placement='top' title='You cannot make your own account a standard user!'>
-                                                        <button class='disabled btn btn-info mr-1 mb-0 w-100' disabled>Make Standard User</button>
+                                                        <button class='disabled btn btn-info btn-sm mr-1 mb-0 w-75' disabled>Make Standard User</button>
                                                     </span>";
                                             }
                                             // If the user is a regular user, then show option to make an admin
                                         } else {
-                                            echo $this->Html->link(__('Make Admin User'), ['action' => 'edit', $user->id, 'makeAdmin'], ['class' => 'btn btn-info mr-1 mb-0 w-100', 'escape' => false]);
+                                            echo $this->Html->link(__('Make Admin User'), ['action' => 'edit', $user->id, 'makeAdmin'], ['class' => 'btn btn-light btn-sm mr-1 mb-0 w-75', 'escape' => false]);
                                         }
                                     ?>
                                 </td>
