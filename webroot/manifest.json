@@ -1,0 +1,13 @@
+{
+    "name": "Schoolbox Server Health Dashboard",
+    "short_name": "SB Server Health",
+    "start_url": "/",
+    "icons": [
+        
+    ],
+    "theme_color": "#d6006c",
+    "background_color": "#FFFFFF",
+    "display": "fullscreen",
+    "orientation": "portrait"
+
+}
