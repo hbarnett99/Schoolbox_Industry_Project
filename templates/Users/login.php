@@ -13,7 +13,7 @@
       <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-5 text-center mx-auto">
-                <h1 class="text-white mb-2 mt-5">Schoolbox Server Health</h1>
+                <h1 class="text-white mb-3 mt-5">Schoolbox Server Health</h1>
             </div>
             <div class="container img-fluid">
                 <div class="">
