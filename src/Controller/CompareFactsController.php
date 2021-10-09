@@ -70,6 +70,14 @@ class CompareFactsController extends AppController
         $idTwo = $this->request->getQuery('timestamp_two');
         $selectedFact = $this->request->getQuery('fact');
 
+        // If both IDs are the same, then display error message and redirect
+        if ($idOne !== null && $idTwo !== null) {
+            if ($idOne === $idTwo) {
+                $this->Flash->error("Please select two different times to compare!");
+                $this->redirect(['action' => 'compare']);
+            }
+        }
+
         // Ensure all data is here before continuing
         if ($idOne && $idTwo && $selectedFact) {
             // Get the selected fact data for the given HistoricalFact set
