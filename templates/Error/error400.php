@@ -1,4 +1,10 @@
 <?php
+
+// If the user is not signed in, display error without any other elements
+if ($this->request->getSession()->read('Auth.email') == null) {
+    $this->layout = 'errornologin';
+}
+
 ?>
 
 <div class="row">

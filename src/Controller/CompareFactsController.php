@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Cake\Datasource\Exception\RecordNotFoundException;
 use Cake\Event\EventInterface;
+use Cake\Http\Exception\InternalErrorException;
 use Cake\I18n\FrozenTime;
 
 /**
@@ -71,8 +73,12 @@ class CompareFactsController extends AppController
         // Ensure all data is here before continuing
         if ($idOne && $idTwo && $selectedFact) {
             // Get the selected fact data for the given HistoricalFact set
-            $factSetOne = $this->HistoricalFacts->get($idOne)->$selectedFact;
-            $factSetTwo = $this->HistoricalFacts->get($idTwo)->$selectedFact;
+            try {
+                $factSetOne = $this->HistoricalFacts->get($idOne)->$selectedFact;
+                $factSetTwo = $this->HistoricalFacts->get($idTwo)->$selectedFact;
+            } catch (RecordNotFoundException $exception) {
+                throw new InternalErrorException(__('Unable to locate record. Please check IDs provided.'));
+            }
 
             // Set view variables
             $this->set('factSetOne', json_decode($factSetOne));
