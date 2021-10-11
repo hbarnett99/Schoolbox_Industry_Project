@@ -1,4 +1,14 @@
 <?php
+
+/**
+ * This page only shows when debug mode is true
+ **/
+
+// If the user is not signed in, display error without any other elements
+if ($this->request->getSession()->read('Auth.email') == null) {
+    $this->viewBuilder()->setLayout('errornologin');
+}
+
 ?>
 
 <div class="row">

@@ -28,7 +28,7 @@ $this->assign('title', 'All Historical Facts');
                             <div class="col">
                                 <p>Please select the historical fact set you would like to see from the list below, or select a specific date on the right:</p>
                             </div>
-                            <div class="col d-flex justify-content-center">
+                            <div class="col-sm-6 d-flex justify-content-center">
                                 <div class="form-group">
                                     <?php echo $this->Form->create(); ?>
                                     <div class="form-row align-items-center">
@@ -40,7 +40,7 @@ $this->assign('title', 'All Historical Facts');
                                                     'min' => $earliestDate,
                                                     'max' => date("Y-m-d", strtotime('tomorrow')),
                                                     'required' => true,
-                                                    'class' => 'form-control'
+                                                    'class' => 'form-control mb-md-0'
                                                 ]);
                                                 ?>
                                                 <div class="input-group-append">
