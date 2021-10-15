@@ -138,4 +138,5 @@ echo $this->Html->css('default')
             });
         })
     </script>
+    </div>
 </div>
