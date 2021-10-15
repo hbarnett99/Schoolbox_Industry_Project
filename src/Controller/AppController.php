@@ -17,6 +17,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Cake\Controller\Controller;
+use Cake\Event\EventInterface;
 
 /**
  * Application Controller
@@ -49,5 +50,21 @@ class AppController extends Controller
          * see https://book.cakephp.org/4/en/controllers/components/form-protection.html
          */
         //$this->loadComponent('FormProtection');
+    }
+
+    // Global beforeFilter, used to ensure that user has correct permissions
+    public function beforeFilter(EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        $this->loadModel('Users');
+
+        $id = $this->getRequest()->getSession()->read('Auth.id');
+        if ($id != null) {
+            // Get the currently signed-in user
+            $user = $this->Users->get($id);
+
+            // Write their Admin status to Session based on their value in the DB (prevents needing to re-login)
+            $this->getRequest()->getSession()->write('Auth.isAdmin', $user->isAdmin);
+        }
     }
 }

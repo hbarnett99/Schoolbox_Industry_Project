@@ -1,45 +1,30 @@
 <?php
-/**
- * @var \App\View\AppView $this
- * @var \Cake\Database\StatementInterface $error
- * @var string $message
- * @var string $url
- */
-use Cake\Core\Configure;
-use Cake\Error\Debugger;
 
-$this->layout = 'error';
+// If the user is not signed in, display error without any other elements
+if ($this->request->getSession()->read('Auth.email') == null) {
+    $this->layout = 'errornologin';
+}
 
-if (Configure::read('debug')) :
-    $this->layout = 'dev_error';
-
-    $this->assign('title', $message);
-    $this->assign('templateName', 'error500.php');
-
-    $this->start('file');
 ?>
-<?php if (!empty($error->queryString)) : ?>
-    <p class="notice">
-        <strong>SQL Query: </strong>
-        <?= h($error->queryString) ?>
-    </p>
-<?php endif; ?>
-<?php if (!empty($error->params)) : ?>
-    <strong>SQL Query Params: </strong>
-    <?php Debugger::dump($error->params) ?>
-<?php endif; ?>
-<?php if ($error instanceof Error) : ?>
-    <strong>Error in: </strong>
-    <?= sprintf('%s, line %s', str_replace(ROOT, 'ROOT', $error->getFile()), $error->getLine()) ?>
-<?php endif; ?>
-<?php
-    echo $this->element('auto_table_warning');
 
-    $this->end();
-endif;
-?>
-<h2><?= __d('cake', 'An Internal Error Has Occurred.') ?></h2>
-<p class="error">
-    <strong><?= __d('cake', 'Error') ?>: </strong>
-    <?= h($message) ?>
-</p>
+<div class="row">
+    <div class="col-12">
+        <div class="card mb-4">
+            <div class="card-header pb-0">
+                <h5><?= __('Internal Error') ?></h5>
+            </div>
+            <div class="card-body pt-1 pb-2">
+                <div class="row">
+                    <div class="col-12">
+                        <p>An internal error occurred:</p>
+                        <div class="code-block rounded-3 mb-3">
+                            <?= "<b>" . $code . "</b> : " . $message ?>
+                        </div>
+                        <p>Please, try again, or contact an administrator if this error occurs again.</p>
+                        <?php echo $this->Html->link('<button class="btn btn-primary">Return home!</button>', ['controller' => 'HistoricalFacts', 'action' => 'newest-data'], ['escape' => false]) ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

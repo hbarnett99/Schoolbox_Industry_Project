@@ -1,22 +1,22 @@
 <?php
-    $currentControllerAction = $this->request->getParam('controller') . '_' . $this->request->getParam('action');
+$currentControllerAction = $this->request->getParam('controller') . '_' . $this->request->getParam('action');
 ?>
 
 <body class="g-sidenav-show  bg-gray-100">
-  <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
+<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
     <div class="sidenav-header">
-      <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0">
-        <?= $this->Html->image('../favicon.ico', ['alt' => 'SchoolBox_Logo']) ?>
-        <span class="ms-1 font-weight-bold">Schoolbox Dashboard</span>
-      </a>
+        <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+        <a class="navbar-brand m-0">
+            <?= $this->Html->image('../favicon.ico', ['alt' => 'SchoolBox_Logo']) ?>
+            <span class="ms-1 font-weight-bold">Schoolbox Dashboard</span>
+        </a>
     </div>
     <hr class="horizontal dark mt-0">
-    <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-            <?php if ($currentControllerAction == 'HistoricalFacts_newestData') {
-                echo $this->Html->link('<div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+    <div class="collapse navbar-collapse w-auto max-height-vh-100" id="sidenav-collapse-main">
+        <ul class="navbar-nav h-100">
+            <li class="nav-item">
+                <?php if ($currentControllerAction == 'HistoricalFacts_newestData') {
+                    echo $this->Html->link('<div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>shop </title>
                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -32,9 +32,9 @@
               </svg>
             </div>
             <span class="nav-link-text ms-1">Dashboard</span>',
-                    ['controller' => 'HistoricalFacts', 'action' => 'newestData'], ['class' => 'nav-link active', 'escape' => false]);
-            } else {
-                echo $this->Html->link('<div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        ['controller' => 'HistoricalFacts', 'action' => 'newestData'], ['class' => 'nav-link active', 'escape' => false]);
+                } else {
+                    echo $this->Html->link('<div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>shop </title>
                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -50,13 +50,13 @@
               </svg>
             </div>
             <span class="nav-link-text ms-1">Dashboard</span>',
-            ['controller' => 'HistoricalFacts', 'action' => 'newestData'], ['class' => 'nav-link', 'escape' => false]);
-            }?>
+                        ['controller' => 'HistoricalFacts', 'action' => 'newestData'], ['class' => 'nav-link', 'escape' => false]);
+                }?>
 
-        </li>
-        <li class="nav-item">
-            <?php if ($currentControllerAction == 'HistoricalFacts_index' || $currentControllerAction == 'HistoricalFacts_view') {
-                echo $this->Html->link('<div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+            </li>
+            <li class="nav-item">
+                <?php if ($currentControllerAction == 'HistoricalFacts_index' || $currentControllerAction == 'HistoricalFacts_view') {
+                    echo $this->Html->link('<div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>office</title>
                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -72,9 +72,9 @@
               </svg>
             </div>
             <span class="nav-link-text ms-1">Historical Data</span>',
-                    ['controller' => 'HistoricalFacts', 'action' => 'index'], ['class' => 'nav-link active', 'escape' => false]);
-            } else {
-                echo $this->Html->link('<div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        ['controller' => 'HistoricalFacts', 'action' => 'index'], ['class' => 'nav-link active', 'escape' => false]);
+                } else {
+                    echo $this->Html->link('<div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>office</title>
                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -90,12 +90,12 @@
               </svg>
             </div>
             <span class="nav-link-text ms-1">Historical Data</span>',
-                    ['controller' => 'HistoricalFacts', 'action' => 'index'], ['class' => 'nav-link', 'escape' => false]);
-            } ?>
-        </li>
-          <li class="nav-item">
-              <?php if ($currentControllerAction == 'Facts_factDetails') {
-                  echo $this->Html->link('<div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        ['controller' => 'HistoricalFacts', 'action' => 'index'], ['class' => 'nav-link', 'escape' => false]);
+                } ?>
+            </li>
+            <li class="nav-item">
+                <?php if ($currentControllerAction == 'Facts_factDetails') {
+                    echo $this->Html->link('<div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>settings</title>
                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -112,9 +112,9 @@
               </svg>
             </div>
             <span class="nav-link-text ms-1">Individual Facts</span>',
-                      ['controller' => 'Facts', 'action' => 'index'], ['class' => 'nav-link active', 'escape' => false]);
-              } else {
-                  echo $this->Html->link('<div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        ['controller' => 'Facts', 'action' => 'index'], ['class' => 'nav-link active', 'escape' => false]);
+                } else {
+                    echo $this->Html->link('<div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>settings</title>
                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -131,12 +131,51 @@
               </svg>
             </div>
             <span class="nav-link-text ms-1">Individual Facts</span>',
-                      ['controller' => 'Facts', 'action' => 'index'], ['class' => 'nav-link', 'escape' => false]);
-              } ?>
-          </li>
-          <li class="nav-item">
-              <?php if ($currentControllerAction == 'CompareFacts_compare') {
-                  echo $this->Html->link('<div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        ['controller' => 'Facts', 'action' => 'index'], ['class' => 'nav-link', 'escape' => false]);
+                } ?>
+            </li>
+            <li class="nav-item">
+                <?php if ($currentControllerAction == 'Facts_certnameFacts') {
+                    echo $this->Html->link('<div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+          <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <title>credit-card</title>
+                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                    <g transform="translate(1716.000000, 291.000000)">
+                      <g transform="translate(453.000000, 454.000000)">
+                        <path class="color-background" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z" opacity="0.593633743"></path>
+                        <path class="color-background" d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <span class="nav-link-text ms-1">Certname Details</span>',
+                        ['controller' => 'Facts', 'action' => 'certnameFacts'], ['class' => 'nav-link active', 'escape' => false]);
+                } else {
+                    echo $this->Html->link('<div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+              <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <title>credit-card</title>
+                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                    <g transform="translate(1716.000000, 291.000000)">
+                      <g transform="translate(453.000000, 454.000000)">
+                        <path class="color-background" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z" opacity="0.593633743"></path>
+                        <path class="color-background" d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <span class="nav-link-text ms-1">Certname Details</span>',
+                        ['controller' => 'Facts', 'action' => 'certnameFacts'], ['class' => 'nav-link', 'escape' => false]);
+                } ?>
+            </li>
+            <li class="nav-item">
+                <?php if ($currentControllerAction == 'CompareFacts_compare') {
+                    echo $this->Html->link('<div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>document</title>
                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -152,9 +191,9 @@
               </svg>
             </div>
             <span class="nav-link-text ms-1">Compare Facts</span>',
-                      ['controller' => 'CompareFacts', 'action' => 'index'], ['class' => 'nav-link active', 'escape' => false]);
-              } else {
-                  echo $this->Html->link('<div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        ['controller' => 'CompareFacts', 'action' => 'index'], ['class' => 'nav-link active', 'escape' => false]);
+                } else {
+                    echo $this->Html->link('<div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>document</title>
                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -170,84 +209,129 @@
               </svg>
             </div>
             <span class="nav-link-text ms-1">Compare Facts</span>',
-                      ['controller' => 'CompareFacts', 'action' => 'index'], ['class' => 'nav-link', 'escape' => false]);
-              } ?>
-          </li>
+                        ['controller' => 'CompareFacts', 'action' => 'index'], ['class' => 'nav-link', 'escape' => false]);
+                } ?>
+            </li>
+            <?php if ($this->request->getSession()->read('Auth.isAdmin')) {
+                echo '<li class="nav-item">';
+                if ($currentControllerAction == 'Users_index') {
+                    echo $this->Html->link('<div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                       <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <title>customer-support</title>
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                          <g transform="translate(-1717.000000, -291.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                            <g transform="translate(1716.000000, 291.000000)">
+                              <g transform="translate(1.000000, 0.000000)">
+                                <path class="color-background opacity-6" d="M45,0 L26,0 C25.447,0 25,0.447 25,1 L25,20 C25,20.379 25.214,20.725 25.553,20.895 C25.694,20.965 25.848,21 26,21 C26.212,21 26.424,20.933 26.6,20.8 L34.333,15 L45,15 C45.553,15 46,14.553 46,14 L46,1 C46,0.447 45.553,0 45,0 Z"></path>
+                                <path class="color-background" d="M22.883,32.86 C20.761,32.012 17.324,31 13,31 C8.676,31 5.239,32.012 3.116,32.86 C1.224,33.619 0,35.438 0,37.494 L0,41 C0,41.553 0.447,42 1,42 L25,42 C25.553,42 26,41.553 26,41 L26,37.494 C26,35.438 24.776,33.619 22.883,32.86 Z"></path>
+                                <path class="color-background" d="M13,28 C17.432,28 21,22.529 21,18 C21,13.589 17.411,10 13,10 C8.589,10 5,13.589 5,18 C5,22.529 8.568,28 13,28 Z"></path>
+                              </g>
+                            </g>
+                          </g>
+                        </g>
+                      </svg>
+                      </div>
+                    <span class="nav-link-text ms-1">Manage Users</span>',
+                        ['controller' => 'Users', 'action' => 'index'], ['class' => 'nav-link active', 'escape' => false]);
+                } else {
+                    echo $this->Html->link('<div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                       <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <title>customer-support</title>
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                          <g transform="translate(-1717.000000, -291.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                            <g transform="translate(1716.000000, 291.000000)">
+                              <g transform="translate(1.000000, 0.000000)">
+                                <path class="color-background opacity-6" d="M45,0 L26,0 C25.447,0 25,0.447 25,1 L25,20 C25,20.379 25.214,20.725 25.553,20.895 C25.694,20.965 25.848,21 26,21 C26.212,21 26.424,20.933 26.6,20.8 L34.333,15 L45,15 C45.553,15 46,14.553 46,14 L46,1 C46,0.447 45.553,0 45,0 Z"></path>
+                                <path class="color-background" d="M22.883,32.86 C20.761,32.012 17.324,31 13,31 C8.676,31 5.239,32.012 3.116,32.86 C1.224,33.619 0,35.438 0,37.494 L0,41 C0,41.553 0.447,42 1,42 L25,42 C25.553,42 26,41.553 26,41 L26,37.494 C26,35.438 24.776,33.619 22.883,32.86 Z"></path>
+                                <path class="color-background" d="M13,28 C17.432,28 21,22.529 21,18 C21,13.589 17.411,10 13,10 C8.589,10 5,13.589 5,18 C5,22.529 8.568,28 13,28 Z"></path>
+                              </g>
+                            </g>
+                          </g>
+                        </g>
+                      </svg>
+                    </div>
+                    <span class="nav-link-text ms-1">Manage Users</span>',
+                        ['controller' => 'Users', 'action' => 'index'], ['class' => 'nav-link', 'escape' => false]);
+                }
+            }
+            echo '</li>';
+            ?>
     </div>
-  </aside>
-  <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
+    <div class="sidenav-footer w-100 navbar-bottom-item">
+        <?php echo $this->Html->link('<button class="btn btn-light w-100">Sign out</button>',
+        ['controller' => 'Users', 'action' => 'logout'], ['class' => 'nav-link', 'escape' => false]); ?>
+    </div>
+</aside>
+<main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
-      <div class="container-fluid py-1 px-3">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+        <div class="container-fluid py-1 px-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
 
-          </ol>
-          <h6 class="font-weight-bolder mb-0"></h6>
-        </nav>
-          <ul class="navbar-nav  justify-content-end">
-            <li class="nav-item d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
-                <i class="fa fa-user me-sm-1"></i>
-                  <?=
-                    $this->Html->link("Sign out", ['controller' => 'Users', 'action' => 'logout'], ['class' => 'button', 'style' => 'margin-left: auto;'])
-                  ?>
-              </a>
-            </li>
-            <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
-                <div class="sidenav-toggler-inner">
-                  <i class="sidenav-toggler-line"></i>
-                  <i class="sidenav-toggler-line"></i>
-                  <i class="sidenav-toggler-line"></i>
-                </div>
-              </a>
-            </li>
-          </ul>
+                </ol>
+                <h6 class="font-weight-bolder mb-0"></h6>
+            </nav>
+            <ul class="navbar-nav  justify-content-end">
+                <li class="nav-item d-flex align-items-center">
+                    <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
+                        <?= $this->Html->link('<button class="btn btn-light mb-0"><i class="fa fa-user me-sm-1"></i>Sign out</button>', ['controller' => 'Users', 'action' => 'logout'], ['class' => 'nav-link', 'escape' => false]); ?>
+                    </a>
+                </li>
+                <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                    <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                        <div class="sidenav-toggler-inner">
+                            <i class="sidenav-toggler-line"></i>
+                            <i class="sidenav-toggler-line"></i>
+                            <i class="sidenav-toggler-line"></i>
+                        </div>
+                    </a>
+                </li>
+            </ul>
         </div>
-      </div>
+        </div>
     </nav>
 </body>
 <!-- End Navbar -->
 
 <script>
-var win = navigator.platform.indexOf('Win') > -1;
-if (win && document.querySelector('#sidenav-scrollbar')) {
-    var options = {
-    damping: '0.5'
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+        var options = {
+            damping: '0.5'
+        }
+        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
-    Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-}
 
-// Toggle Sidenav
-const iconNavbarSidenav = document.getElementById('iconNavbarSidenav');
-const iconSidenav = document.getElementById('iconSidenav');
-const sidenav = document.getElementById('sidenav-main');
-let body = document.getElementsByTagName('body')[0];
-let className = 'g-sidenav-pinned';
+    // Toggle Sidenav
+    const iconNavbarSidenav = document.getElementById('iconNavbarSidenav');
+    const iconSidenav = document.getElementById('iconSidenav');
+    const sidenav = document.getElementById('sidenav-main');
+    let body = document.getElementsByTagName('body')[0];
+    let className = 'g-sidenav-pinned';
 
-if (iconNavbarSidenav) {
-    iconNavbarSidenav.addEventListener("click", toggleSidenav);
-}
-
-if (iconSidenav) {
-    iconSidenav.addEventListener("click", toggleSidenav);
-}
-
-function toggleSidenav() {
-    if (body.classList.contains(className)) {
-        body.classList.remove(className);
-        setTimeout(function() {
-            sidenav.classList.remove('bg-white');
-        }, 100);
-        sidenav.classList.remove('bg-transparent');
-
-    } else {
-        body.classList.add(className);
-        sidenav.classList.add('bg-white');
-        sidenav.classList.remove('bg-transparent');
-        iconSidenav.classList.remove('d-none');
+    if (iconNavbarSidenav) {
+        iconNavbarSidenav.addEventListener("click", toggleSidenav);
     }
-}
+
+    if (iconSidenav) {
+        iconSidenav.addEventListener("click", toggleSidenav);
+    }
+
+    function toggleSidenav() {
+        if (body.classList.contains(className)) {
+            body.classList.remove(className);
+            setTimeout(function() {
+                sidenav.classList.remove('bg-white');
+            }, 100);
+            sidenav.classList.remove('bg-transparent');
+
+        } else {
+            body.classList.add(className);
+            sidenav.classList.add('bg-white');
+            sidenav.classList.remove('bg-transparent');
+            iconSidenav.classList.remove('d-none');
+        }
+    }
 
 </script>

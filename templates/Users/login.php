@@ -8,12 +8,12 @@
 
 <body class="g-sidenav-show bg-gray-100">
   <section class="min-vh-100">
-    <div class="page-header align-items-start min-vh-95 pt-5 m-3 border-radius-lg animation-area">
+    <div class="page-header align-items-start min-vh-95 pt-5 my-3 border-radius-lg animation-area">
       <span class="mask bg-gradient-dark opacity-2"></span>
       <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-5 text-center mx-auto">
-                <h1 class="text-white mb-2 mt-5">Schoolbox Server Health</h1>
+                <h1 class="text-white mb-3 mt-5">Schoolbox Server Health</h1>
             </div>
             <div class="container img-fluid">
                 <div class="">
@@ -59,14 +59,6 @@
             </div>
         </div>
       </div>
-        <ul class="box-area">
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-        </ul>
     </div>
 
   </section>

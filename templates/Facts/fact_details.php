@@ -1,27 +1,6 @@
 <?php
 
-// Known facts list - known facts should be treated differently in table rendering
-$knownFacts = [
-//    "schoolbox_totalusers",
-//    "schoolbox_config_site_type",
-//    "schoolbox_users_student",
-//	"schoolbox_users_staff",
-//	"schoolbox_users_parent",
-//	"schoolbox_totalcampus",
-//    "schoolbox_package_version",
-//    "schoolboxdev_package_version",
-//    "virtual",
-//    "lsbdistdescription",
-//	"kernelmajversion",
-//	"kernelrelease",
-//	"php_cli_version",
-//	"mysql_extra_version",
-//	"processorcount",
-//	"memorysize",
-//	"schoolbox_config_date_timezone",
-//    "schoolbox_config_external_type",
-//	"schoolbox_first_file_upload_year"
-];
+$knownFacts = [];
 
 /**
  * Note regarding this weirdness:
@@ -62,6 +41,9 @@ if (isset($fact)) {
         ]);
     }
 }
+
+// Sort the list of fact names alphabetically according to their values
+asort($factNamesList);
 
 // If a fact value is set, then update the page title
 if (isset($fact)) {
@@ -128,10 +110,12 @@ if (isset($fact)) {
                                             }
                                         }
                                     }
+                                    echo '<div class="input-group px-4 pb-3">
+                                              <input type="search" id="individual_facts_search" class="form-control" placeholder="Type here to search!">
+                                          </div>';
 
                                     // Start creating the table
-                                    echo '<table id="factTable" class="table table-responsive w-100"><thead><tr>';
-
+                                    echo '<table id="factTable" class="table table-responsive table-striped w-100"><thead><tr>';
 
                                     // If in the array of known facts, render entirely different table + skip data processing
                                     if (in_array($fact, $knownFacts)) {
@@ -288,17 +272,18 @@ if (isset($fact)) {
             ],
             info: false,
             scrollX: true,
-            <?php
-                if (isset($searchVal)) {
-                    echo 'dom: "ti",';
-                }
-            ?>
+            dom: "ti"
         })
 
         // Set search value
         table.columns("#value")
             .search(<?= "'" . $searchVal . "'" ?>)
             .draw();
+
+        $('#individual_facts_search').keyup(function(){
+            table.search($(this).val()).draw() ;
+        })
+        $('#individual_facts_search').val(<?= "'" . $searchVal . "'" ?>);
 
     });
 

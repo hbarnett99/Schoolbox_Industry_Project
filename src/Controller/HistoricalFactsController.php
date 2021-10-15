@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use Cake\Event\EventInterface;
 use Cake\I18n\FrozenTime;
+use DateTime;
 
 /**
  * HistoricalFacts Controller
@@ -42,11 +43,48 @@ class HistoricalFactsController extends AppController
      */
     public function index()
     {
-        $historicalFacts = $this->paginate($this->HistoricalFacts, [
-            'order' => ['HistoricalFacts.id' => 'desc']
-        ]);
+        // Redirect POST to GET
+        if ($this->request->is('POST')) {
+            $date = $this->request->getData('date');
+            $this->redirect(['action' => 'index', '?' => ['date' => $date]]);
+        }
 
-        $this->set(compact('historicalFacts'));
+        // Get the date value and check if it's set
+        $date = $this->request->getQuery('date');
+
+        // If date value is provided, then paginate only that date provided
+        if (isset($date)) {
+            $historicalFacts = $this->paginate(
+                $this->HistoricalFacts->find('all')->where(['HistoricalFacts.timestamp LIKE' => "%" . $this->request->getQuery('date') . "%"]),
+                [
+                    'order' => ['HistoricalFacts.id' => 'desc'],
+                    'limit' => 48 // 30 min intervals = max of 48 records a day, easiest to show them all on one page
+                ]
+            );
+            $this->set(compact('historicalFacts'));
+
+            // Display a flash message to make it clear that this is not all the records.
+            $this->Flash->success("You are viewing the fact sets for " . date('d/m/Y', strtotime($date)) . ".", ['params' =>
+                    [
+                        'text' => 'View all facts?',
+                        'controller' => 'HistoricalFacts',
+                        'action' => 'index'
+                    ]
+                ]
+            );
+        // If no date provided, paginate all data and send it to the view as usual
+        } else {
+            $historicalFacts = $this->paginate($this->HistoricalFacts, [
+                'order' => ['HistoricalFacts.id' => 'desc']
+            ]);
+            $this->set(compact('historicalFacts'));
+        }
+
+        // Get the earliest timestamp in the entire list of historical facts
+        $this->set('earliestDate', $this->HistoricalFacts->find('all')->first()->timestamp->format('Y-m-d'));
+
+        // Get the date provided in the query and set is a view variable
+        $this->set('date', $date);
     }
 
     /**
@@ -75,12 +113,22 @@ class HistoricalFactsController extends AppController
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $historicalFact = $this->HistoricalFacts->get($id);
-        if ($this->HistoricalFacts->delete($historicalFact)) {
-            $this->Flash->success(__('The historical fact has been deleted.'));
+
+        // Obtain user type from session object
+        $userIsAdmin = $this->request->getSession()->read('Auth.isAdmin');
+
+        // If the user is an admin, allow delete, otherwise flash an error
+        if ($userIsAdmin) {
+            $historicalFact = $this->HistoricalFacts->get($id);
+            if ($this->HistoricalFacts->delete($historicalFact)) {
+                $this->Flash->success(__('The historical fact has been deleted.'));
+            } else {
+                $this->Flash->error(__('The historical fact could not be deleted. Please, try again.'));
+            }
         } else {
-            $this->Flash->error(__('The historical fact could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Deleting historical fact sets requires administrator rights. Please contact an administrator if you think this is an error.'));
         }
+
 
         return $this->redirect(['action' => 'index']);
     }

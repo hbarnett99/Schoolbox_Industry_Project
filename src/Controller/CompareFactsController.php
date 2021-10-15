@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Cake\Datasource\Exception\RecordNotFoundException;
 use Cake\Event\EventInterface;
+use Cake\Http\Exception\InternalErrorException;
 use Cake\I18n\FrozenTime;
 
 /**
@@ -68,11 +70,23 @@ class CompareFactsController extends AppController
         $idTwo = $this->request->getQuery('timestamp_two');
         $selectedFact = $this->request->getQuery('fact');
 
+        // If both IDs are the same, then display error message and redirect
+        if ($idOne !== null && $idTwo !== null) {
+            if ($idOne === $idTwo) {
+                $this->Flash->error("Please select two different times to compare!");
+                $this->redirect(['action' => 'compare']);
+            }
+        }
+
         // Ensure all data is here before continuing
         if ($idOne && $idTwo && $selectedFact) {
             // Get the selected fact data for the given HistoricalFact set
-            $factSetOne = $this->HistoricalFacts->get($idOne)->$selectedFact;
-            $factSetTwo = $this->HistoricalFacts->get($idTwo)->$selectedFact;
+            try {
+                $factSetOne = $this->HistoricalFacts->get($idOne)->$selectedFact;
+                $factSetTwo = $this->HistoricalFacts->get($idTwo)->$selectedFact;
+            } catch (RecordNotFoundException $exception) {
+                throw new InternalErrorException(__('Unable to locate record. Please check IDs provided.'));
+            }
 
             // Set view variables
             $this->set('factSetOne', json_decode($factSetOne));
@@ -91,7 +105,7 @@ class CompareFactsController extends AppController
     protected function getHistoricalFactTimeStamps() {
         // Get all the HistoricalFacts
         $this->loadModel('HistoricalFacts');
-        $historicalFacts = $this->HistoricalFacts->find()->order(['timestamp' => 'desc'])->all();
+        $historicalFacts = $this->HistoricalFacts->find()->select(['id', 'timestamp'])->order(['timestamp' => 'desc'])->all();
         $historicalFactsTimeStamps = [];
 
         // Iterate over all of them to get their timestamps

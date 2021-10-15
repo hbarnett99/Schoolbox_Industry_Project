@@ -27,5 +27,6 @@ class User extends Entity
     protected $_accessible = [
         'email' => true,
         'social_profiles' => true,
+        'isAdmin' => true,
     ];
 }
