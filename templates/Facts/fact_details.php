@@ -190,7 +190,13 @@ if (isset($fact)) {
 
                                                 // Create certname
                                                 echo '<td>';
-                                                echo implode(', ', $value[0]);
+                                                $certArray = [];
+                                                // Get all the CertNames within each instance
+                                                foreach ($value[0] as $instanceCerts) {
+                                                    $certArray[] = $this->Html->link($instanceCerts, ['action' => 'certname-facts', '?' => ['certname' => $instanceCerts]]);
+                                                }
+
+                                                echo implode(', ', $certArray);
                                                 echo '</td>';
 
                                                 // Create fact value
@@ -199,7 +205,7 @@ if (isset($fact)) {
                                             } else {
                                                 // If not instance specific, render with 2 columns (CertName, Value)
                                                 echo '<tr>';
-                                                echo '<td>' . $key . '</td>';
+                                                echo '<td>' . $this->Html->link($key, ['action' => 'certname-facts', '?' => ['certname' => $key]]) . '</td>';
                                                 echo '<td>' . $value[0] . '</td>';
                                                 echo '</tr>';
                                             }
@@ -220,7 +226,8 @@ if (isset($fact)) {
                                     [
                                         'type' => 'select',
                                         'options' => $factNamesList,
-                                        'class' => 'form-control'
+                                        'class' => 'form-control',
+                                        'default' => $this->request->getQuery('fact')
                                     ]
                                 );
                                 echo '</div><div class="col-md-auto">';
@@ -229,10 +236,12 @@ if (isset($fact)) {
                                     [
                                         'type' => 'select',
                                         'options' => [
+                                            'all' => 'all',
                                             'production' => 'production',
                                             'staging' => 'staging'
                                         ],
-                                        'class' => 'form-control'
+                                        'class' => 'form-control',
+                                        'default' => $this->request->getQuery('environment')
                                     ]
                                 );
                                 echo '</div><div class="col-md-auto mt-2 mt-md-0">';

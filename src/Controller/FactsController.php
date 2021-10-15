@@ -226,12 +226,16 @@ class FactsController extends AppController
         $value = $this->request->getQuery('value');
         $environment = $this->request->getQuery('environment');
 
-
         // Prioritise requests from form on page
         if ($this->request->is('post')) {
             $fact = $this->request->getData('fact');
             $environment = $this->request->getData('environment');
             $this->redirect(['action' => 'factDetails', '?' => ['fact' => $fact, 'environment' => $environment]]);
+        }
+
+        // If 'all' is selected for environment, then set to null
+        if ($environment == 'all') {
+            $environment = null;
         }
 
         // Check if a fact name has been provided, and set it as a variable
