@@ -54,9 +54,11 @@ if (isset($fact)) {
 
 // Check if the environment query string is 'all', and enable the manual filter if so
 $noEnvironment = false;
-if ($this->request->getQuery('environment') == 'all') {
+if ($this->request->getQuery('environment') == 'all' || $this->request->getQuery('environment') == null) {
     $noEnvironment = true;
 }
+
+$testVal = 0;
 
 ?>
 
@@ -101,7 +103,7 @@ if ($this->request->getQuery('environment') == 'all') {
                                 $isInstanceSpecific = false;
                             }
                         echo "</div>";
-                        if ($noEnvironment) {
+                        if ($noEnvironment && isset($fact)) {
                             echo "<div class='col'>";
                             echo "<div class='form-group row'>";
                             echo "<label class='col col-form-label' for='environment-selector'>Select an environment to filter by: </label>";
@@ -113,10 +115,9 @@ if ($this->request->getQuery('environment') == 'all') {
                                   <option value='staging'>Staging Servers</option>
                                 </select>
                             ";
-                            echo "</div></div></div>";
+                            echo "</div></div>";
                         }
                     ?>
-                </div>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 <div class="row">
@@ -261,7 +262,12 @@ if ($this->request->getQuery('environment') == 'all') {
                                                 // If not instance specific, render with 2 columns (CertName, Value)
                                                 echo '<tr>';
                                                 echo '<td>' . $this->Html->link($key, ['action' => 'certname-facts', '?' => ['certname' => $key]]) . '</td>';
-                                                echo '<td>' . $value['result'] . '</td>';
+
+                                                if ($noEnvironment) {
+                                                    echo '<td>' . $value['result'] . '</td>';
+                                                } else {
+                                                    echo '<td>' . $value[0] . '</td>';
+                                                }
 
                                                 // If no environment set, display environment column
                                                 if ($noEnvironment) {

@@ -89,23 +89,23 @@ class QueryServerCommand extends Command
     public function performQuery(string $fact): array {
         switch($fact) {
             case "schoolbox_totalusers":
-                return schoolbox_totalusers($this->sendRequest('schoolbox_totalusers'));
+                return schoolbox_totalusers($this->deduplicateInstanceValues($this->sendRequest('schoolbox_totalusers')));
             case "schoolbox_config_site_type":
                 return schoolbox_config_site_type($this->sendRequest('schoolbox_config_site_type'));
             case "schoolbox_users_student":
-                return schoolbox_users_student($this->sendRequest('schoolbox_users_student'));
+                return schoolbox_users_student($this->deduplicateInstanceValues($this->sendRequest('schoolbox_users_student')));
             case "schoolbox_users_staff":
-                return schoolbox_users_staff($this->sendRequest('schoolbox_users_staff'));
+                return schoolbox_users_staff($this->deduplicateInstanceValues($this->sendRequest('schoolbox_users_staff')));
             case "schoolbox_users_parent":
-                return schoolbox_users_parent($this->sendRequest('schoolbox_users_parent'));
+                return schoolbox_users_parent($this->deduplicateInstanceValues($this->sendRequest('schoolbox_users_parent')));
             case "schoolbox_totalcampus":
-                return schoolbox_totalcampus($this->sendRequest('schoolbox_totalcampus'));
+                return schoolbox_totalcampus($this->deduplicateInstanceValues($this->sendRequest('schoolbox_totalcampus')));
             case "schoolbox_package_version":
                 return schoolbox_package_version($this->sendRequest('schoolbox_package_version'));
             case "schoolboxdev_package_version":
                 return schoolboxdev_package_version($this->sendRequest('schoolboxdev_package_version'));
             case "schoolbox_config_site_version":
-                return schoolbox_config_site_version($this->sendRequest('schoolbox_config_site_version'));
+                return schoolbox_config_site_version($this->deduplicateInstanceValues($this->sendRequest('schoolbox_config_site_version')));
             case "virtual":
                 return virtualEnv($this->sendRequest('virtual'));
             case "lsbdistdescription":
@@ -123,9 +123,9 @@ class QueryServerCommand extends Command
             case "memorysize":
                 return memorysize($this->sendRequest('memorysize'));
             case "schoolbox_config_date_timezone":
-                return schoolbox_config_date_timezone($this->sendRequest('schoolbox_config_date_timezone'));
+                return schoolbox_config_date_timezone($this->deduplicateInstanceValues($this->sendRequest('schoolbox_config_date_timezone')));
             case "schoolbox_config_external_type":
-                return schoolbox_config_external_type($this->sendRequest('schoolbox_config_external_type'));
+                return schoolbox_config_external_type($this->deduplicateInstanceValues($this->sendRequest('schoolbox_config_external_type')));
             case "schoolbox_first_file_upload_year":
                 return schoolbox_first_file_upload_year($this->sendRequest('schoolbox_first_file_upload_year'));
             default:
@@ -177,6 +177,42 @@ class QueryServerCommand extends Command
         }
     }
 
+
+    public function deduplicateInstanceValues($serverValues) {
+        // Map each instanceId to site_type
+        $instanceSiteTypeMap = [];
+        foreach($this->sendRequest('schoolbox_config_site_type') as $facts) {
+            foreach($facts as $fact) {
+                foreach($fact['value'] as $instanceId => $siteType) {
+                    $instanceSiteTypeMap[$instanceId] = $siteType;
+                }
+            }
+        }
+
+        // Get deduplicated values per instance
+        $instanceFactValues = [];
+        foreach($serverValues as $servers) {
+            foreach($servers as $server) {
+                if (array_key_exists('value', $server)) {
+                    // If an array, then handle like an array, otherwise ignore as should not be run through here
+                    if (getType(($server['value'])) == 'array') {
+                        foreach($server['value'] as $instanceId => $value) {
+                            if (!array_key_exists($instanceId, $instanceFactValues) || $value > $instanceFactValues[$instanceId]['value']) {
+                                $instanceFactValues[$instanceId]['value'] = $value;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Attach either 'prod' or 'dev' as environment key
+        foreach($instanceFactValues as $instanceId => $value) {
+            $instanceFactValues[$instanceId]['environment'] = $instanceSiteTypeMap[$instanceId];
+        }
+
+        return $instanceFactValues;
+    }
 
     /**
      * Main execution function for the command
