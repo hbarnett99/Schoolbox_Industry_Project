@@ -107,7 +107,7 @@ $testVal = 0;
                             echo "<div class='col'>";
                             echo "<div class='form-group row'>";
                             echo "<label class='col col-form-label' for='environment-selector'>Select an environment to filter by: </label>";
-                            echo "<div class='col'>";
+                            echo "<div class='col d-flex'>";
                             echo "
                                 <select class='custom-select form-control' id='environment-selector'>
                                   <option selected value='all'>All Environments</option>
