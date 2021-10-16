@@ -51,6 +51,13 @@ if (isset($fact)) {
 } else {
     $this->assign('title', 'Individual Fact Details');
 }
+
+// Check if the environment query string is 'all', and enable the manual filter if so
+$noEnvironment = false;
+if ($this->request->getQuery('environment') == 'all') {
+    $noEnvironment = true;
+}
+
 ?>
 
 <div class="row">
@@ -63,36 +70,53 @@ if (isset($fact)) {
         ?>
         <div class="card mb-4">
             <div class="card-header pb-0">
-                <?php
-                    // Determine what header to show
-                    if (isset($fact)) {
-                        echo "
-                        <div class='alert alert-primary alert-dismissible fade show' role='alert'>
-                            <span class='text-white font-weight-bold'>The below is <u>live</u> data, pulled from the server just now.</span>
-                            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'>
-                                <span aria-hidden='true'>&times;</span>
-                            </button>
-                        </div>";
-                        echo "<h5><em><b>'$fact'</b></em> Details</h5>";
-                        if (isset($searchVal)) {
-                            echo "<em>Searching for: '<b>" . $searchVal . "</b>'" .  (isset($environmentSpecific) ? ", in environment: '<b>" . $environmentSpecific . "</b>'.</em>" : ".</em>");
-                        } else if (isset($environmentSpecific)) {
-                            echo "<em>In  environment:'<b>" . $environmentSpecific . "</b>'</em>";
-                        };
-                        // Determine if this fact is instance specific
-                        $isInstanceSpecific =
-                            str_starts_with($fact, 'schoolbox_config_') ||
-                            str_starts_with($fact, 'schoolbox_users_')  ||
-                            str_starts_with($fact, 'schoolbox_media_')  ||
-                            $fact == 'schoolbox_totalusers' ||
-                            $fact == 'schoolbox_totalcampus';
+                <div class="row">
+                    <?php
+                        // Determine what header to show
+                        if (isset($fact)) {
+                            echo "
+                            <div class='alert alert-primary alert-dismissible fade show' role='alert'>
+                                <span class='text-white font-weight-bold'>The below is <u>live</u> data, pulled from the server just now.</span>
+                                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'>
+                                    <span aria-hidden='true'>&times;</span>
+                                </button>
+                            </div>";
+                            echo "<div class='col'>";
+                                echo "<h5><em><b>'$fact'</b></em> Details</h5>";
+                                if (isset($searchVal)) {
+                                    echo "<em>Searching for: '<b>" . $searchVal . "</b>'" .  (isset($environmentSpecific) ? ", in environment: '<b>" . $environmentSpecific . "</b>'.</em>" : ".</em>");
+                                } else if (isset($environmentSpecific)) {
+                                    echo "<em>In  environment:'<b>" . $environmentSpecific . "</b>'</em>";
+                                };
+                                // Determine if this fact is instance specific
+                                $isInstanceSpecific =
+                                    str_starts_with($fact, 'schoolbox_config_') ||
+                                    str_starts_with($fact, 'schoolbox_users_')  ||
+                                    str_starts_with($fact, 'schoolbox_media_')  ||
+                                    $fact == 'schoolbox_totalusers' ||
+                                    $fact == 'schoolbox_totalcampus';
 
-                    } else {
-                        echo '<h5>Individual Fact Details</h5>';
-                        $isInstanceSpecific = false;
-                    }
-                ?>
-
+                            } else {
+                                echo '<h5>Individual Fact Details</h5>';
+                                $isInstanceSpecific = false;
+                            }
+                        echo "</div>";
+                        if ($noEnvironment) {
+                            echo "<div class='col'>";
+                            echo "<div class='form-group row'>";
+                            echo "<label class='col col-form-label' for='environment-selector'>Select an environment to filter by: </label>";
+                            echo "<div class='col'>";
+                            echo "
+                                <select class='custom-select form-control' id='environment-selector'>
+                                  <option selected value='all'>All Environments</option>
+                                  <option value='production'>Production Servers</option>
+                                  <option value='staging'>Staging Servers</option>
+                                </select>
+                            ";
+                            echo "</div></div></div>";
+                        }
+                    ?>
+                </div>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 <div class="row">
@@ -143,8 +167,14 @@ if (isset($fact)) {
                                         // If instance-specific, render with InstanceID column
                                         if ($isInstanceSpecific) {
                                             echo '<th>Instance ID</th><th>Certname</th><th id="value">Value</th>';
+                                            if ($noEnvironment) {
+                                                echo '<th id="environment">Environment</th>';
+                                            }
                                         } else {
                                             echo '<th>Certname</th><th id="value">Value</th>';
+                                            if ($noEnvironment) {
+                                                echo '<th id="environment">Environment</th>';
+                                            }
                                         }
                                         echo '</tr></thead>';
                                         echo '<tbody>';
@@ -158,29 +188,49 @@ if (isset($fact)) {
                                                 if ($result['environment'] == $environmentSpecific) {
                                                     $certNameValues[$result['certname']] = $result['value'];
                                                 }
-                                                // Otherwise, just get all values
+                                                // Otherwise, just get all values (and obtain the environment as a second key)
                                             } else {
-                                                $certNameValues[$result['certname']] = $result['value'];
-
+                                                $certNameValues[$result['certname']] = ['result' => $result['value'], 'environment' => $result['environment']];
                                             }
                                         }
                                         // If the query is instance specific, then get the instance ID as the first column of the table
                                         foreach ($certNameValues as $certName => $values) {
+                                            if ($noEnvironment) {
+                                                $env = $values['environment'];
+                                            }
                                             if ($isInstanceSpecific) {
-                                                foreach ($values as $instanceId => $value) {
-                                                    if (!array_key_exists($instanceId, $data)) {
-                                                        $data[$instanceId] = [[], []];
+                                                if ($noEnvironment) {
+                                                    foreach ($values['result'] as $instanceId => $value) {
+                                                        if (!array_key_exists($instanceId, $data)) {
+                                                            $data[$instanceId] = [[], []];
+                                                        }
+                                                        $data[$instanceId][0][] = $certName;
+                                                        $data[$instanceId][1][] = $value;
+                                                        $data[$instanceId][2] = $env;
                                                     }
-                                                    $data[$instanceId][0][] = $certName;
-                                                    $data[$instanceId][1][] = $value;
+                                                } else {
+                                                    foreach ($values as $instanceId => $value) {
+                                                        if (!array_key_exists($instanceId, $data)) {
+                                                            $data[$instanceId] = [[], []];
+                                                        }
+                                                        $data[$instanceId][0][] = $certName;
+                                                        $data[$instanceId][1][] = $value;
+                                                    }
                                                 }
                                                 // If not instance specific, then just create the data array normally
                                             } else {
                                                 foreach ($certNameValues as $certName => $value) {
-                                                    $data[$certName] = [is_array($value) ? json_encode($value) : $value];
+                                                    // If there's no environment set, grab the "result" key only
+                                                    if ($noEnvironment) {
+                                                        $data[$certName]['result'] = is_array($value['result']) ? json_encode($value['result']) : $value['result'];
+                                                        $data[$certName]['environment'] = $value['environment'];
+                                                    } else {
+                                                        $data[$certName] = [is_array($value) ? json_encode($value) : $value];
+                                                    }
                                                 }
                                             }
                                         }
+
                                         // If instance specific, render with 3 columns (InstanceID, CertName, Value)
                                         foreach ($data as $key => $value) {
                                             if ($isInstanceSpecific) {
@@ -201,12 +251,22 @@ if (isset($fact)) {
 
                                                 // Create fact value
                                                 echo '<td>' . $value[1][0] . '</td>';
+
+                                                // If no environment set, display environment column
+                                                if ($noEnvironment) {
+                                                    echo '<td>' . $value[2] . '</td>';
+                                                }
                                                 echo '</tr>';
                                             } else {
                                                 // If not instance specific, render with 2 columns (CertName, Value)
                                                 echo '<tr>';
                                                 echo '<td>' . $this->Html->link($key, ['action' => 'certname-facts', '?' => ['certname' => $key]]) . '</td>';
-                                                echo '<td>' . $value[0] . '</td>';
+                                                echo '<td>' . $value['result'] . '</td>';
+
+                                                // If no environment set, display environment column
+                                                if ($noEnvironment) {
+                                                    echo '<td>' . $value['environment'] . '</td>';
+                                                }
                                                 echo '</tr>';
                                             }
                                         }
@@ -293,6 +353,22 @@ if (isset($fact)) {
             table.search($(this).val()).draw() ;
         })
         $('#individual_facts_search').val(<?= "'" . $searchVal . "'" ?>);
+
+        // Get the value of the environment selector, and change depending
+        $('#environment-selector').on('change', function (e) {
+            var valueSelected = this.value;
+            // If a value other than all is selected, search by that value in the environment column
+            if (valueSelected !== 'all') {
+                table.columns("#environment")
+                    .search(valueSelected)
+                    .draw();
+            // If 'all' is selected, then clear the filter in the environment column
+            } else {
+                table.columns("#environment")
+                    .search('')
+                    .draw();
+            }
+        });
 
     });
 
