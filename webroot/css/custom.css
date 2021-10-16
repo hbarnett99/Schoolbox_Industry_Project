@@ -267,3 +267,8 @@ code[class*="language-"], pre[class*="language-"] {
     position: absolute;
     bottom: 0;
 }
+
+#factTable a {
+    color: #cb0c9f;
+    text-decoration: underline;
+}

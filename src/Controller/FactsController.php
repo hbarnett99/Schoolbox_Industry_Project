@@ -226,12 +226,16 @@ class FactsController extends AppController
         $value = $this->request->getQuery('value');
         $environment = $this->request->getQuery('environment');
 
-
         // Prioritise requests from form on page
         if ($this->request->is('post')) {
             $fact = $this->request->getData('fact');
             $environment = $this->request->getData('environment');
             $this->redirect(['action' => 'factDetails', '?' => ['fact' => $fact, 'environment' => $environment]]);
+        }
+
+        // If 'all' is selected for environment, then set to null
+        if ($environment == 'all') {
+            $environment = null;
         }
 
         // Check if a fact name has been provided, and set it as a variable
@@ -291,11 +295,52 @@ class FactsController extends AppController
     }
 
     /**
+     * Queries the Schoolbox PuppetDB servers for a list of all certnames
+     *
+     * @return array array of certnames from the server query
+     */
+    private function getAllCertNamesFromServer() {
+        // List of PuppetDB Servers used by Schoolbox
+        $puppetDbServers = ['https://puppetdb.stg.1.schoolbox.com.au', 'https://puppetdb.prd.1.schoolbox.com.au'];
+
+        // Fact URL path
+        $path = '/pdb/query/v4/nodes?query=';
+
+        // Create a valid queryString, extracting only certnames from the node endpoint
+        $QueryString = urlencode(sprintf('["extract", "certname"]'));
+
+        // Create the HTTP Client
+        $client = new Client();
+
+        $results = [];
+        // For each PuppetDB server, execute a query
+        foreach($puppetDbServers as $server) {
+            $formattedQuery = $server . $path . $QueryString;
+
+            // Execute request and get response
+            $response = $client->get(
+                $formattedQuery,
+                [], // For whatever reason, there is no way to turn off encoding here, so the urlencode() value from above is encoded twice.
+                // For that reason, the queryString is just appended straight to the URL rather than using the query value.
+                ['auth' => ['username' => 'monash', 'password' => 'ywtsghpsqhsbxg']]
+            );
+            array_push($results, $response->getJson());
+        }
+
+
+        return array_column(array_merge($results[0], $results[1]), 'certname');
+    }
+
+
+    /**
      * CertNameFacts method
      *
      * @return \Cake\Http\Response|null|void Renders view
      */
     public function certnameFacts() {
+        // Get all CertNames from the server for use in a dropdown
+        $this->set('certnames', $this->getAllCertNamesFromServer());
+
         // Get certname from query
         $certname = $this->request->getQuery('certname');
 

@@ -103,7 +103,7 @@ if (isset($selectedFact)) {
                                         } else if ($factTwoValue < $factOneValue) {
                                             echo "<td class='highlight-minus'> - " . abs($factTwoValue - $factOneValue);
                                         } else if ($factTwoValue == $factOneValue) {
-                                            echo "<td> No change";
+                                            echo "<td>";
                                         }
                                         echo "</td>
                                             </tr>
@@ -128,7 +128,7 @@ if (isset($selectedFact)) {
                                                     } else if ($factTwoValue < $factOneValue) {
                                                         echo "<td class='highlight-minus'> - " . abs($factTwoValue - $factOneValue);
                                                     } else if ($factTwoValue == $factOneValue) {
-                                                        echo "<td> No change";
+                                                        echo "<td>";
                                                     }
                                                     echo "</td>
                                                             </tr>
@@ -158,7 +158,7 @@ if (isset($selectedFact)) {
                                                             } else if ($value->count < $factOneValue) {
                                                                 echo "<td class='highlight-minus'> - " . abs($value->count - $factOneValue);
                                                             } else if ($value->count == $factOneValue) {
-                                                                echo "<td> No change";
+                                                                echo "<td>";
                                                             }
                                                         } else {
                                                             echo "<td class='highlight-new'> New value";
