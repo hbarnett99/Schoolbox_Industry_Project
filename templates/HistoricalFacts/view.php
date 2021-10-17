@@ -90,7 +90,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
                                                             <?=
-                                                            $this->Html->link(number_format(intval(json_decode($historicalFact->schoolbox_totalusers, JSON_PRETTY_PRINT)['totalUsersFleetCount'])), ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_totalusers']], ['class' => 'accordion-results-link', 'target' => '_blank']);
+                                                            $this->Html->link(number_format(intval(json_decode($historicalFact->schoolbox_totalusers, JSON_PRETTY_PRINT)['totalUsersFleetCount'])), ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_totalusers']], ['class' => 'accordion-results-link']);
                                                             ?>
                                                         </div>
                                                     </div>
@@ -160,7 +160,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
                                                             <?=
-                                                            $this->Html->link(number_format(intval(json_decode($historicalFact->schoolbox_users_student, JSON_PRETTY_PRINT)['totalStudentCount'])), ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_users_student']], ['class' => 'accordion-results-link', 'target' => '_blank']);
+                                                            $this->Html->link(number_format(intval(json_decode($historicalFact->schoolbox_users_student, JSON_PRETTY_PRINT)['totalStudentCount'])), ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_users_student']], ['class' => 'accordion-results-link']);
                                                             ?>
                                                         </div>
                                                     </div>
@@ -183,7 +183,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
                                                             <?=
-                                                            $this->Html->link(number_format(intval(json_decode($historicalFact->schoolbox_users_staff, JSON_PRETTY_PRINT)['totalStaffCount'])), ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_users_staff']], ['class' => 'accordion-results-link', 'target' => '_blank']);
+                                                            $this->Html->link(number_format(intval(json_decode($historicalFact->schoolbox_users_staff, JSON_PRETTY_PRINT)['totalStaffCount'])), ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_users_staff']], ['class' => 'accordion-results-link']);
                                                             ?>
                                                         </div>
                                                     </div>
@@ -206,7 +206,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
                                                             <?=
-                                                            $this->Html->link(number_format(intval(json_decode($historicalFact->schoolbox_users_parent, JSON_PRETTY_PRINT)['totalParentCount'])), ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_users_parent']], ['class' => 'accordion-results-link', 'target' => '_blank']);
+                                                            $this->Html->link(number_format(intval(json_decode($historicalFact->schoolbox_users_parent, JSON_PRETTY_PRINT)['totalParentCount'])), ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_users_parent']], ['class' => 'accordion-results-link']);
                                                             ?>
                                                         </div>
                                                     </div>
@@ -229,7 +229,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                         <div id="accordion-divider" class="accordion-divider"></div>
                                                         <div class="accordion-body">
                                                             <?=
-                                                            $this->Html->link(number_format(intval(json_decode($historicalFact->schoolbox_totalcampus, JSON_PRETTY_PRINT)['totalCampus'])), ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_totalcampus']], ['class' => 'accordion-results-link', 'target' => '_blank']);
+                                                            $this->Html->link(number_format(intval(json_decode($historicalFact->schoolbox_totalcampus, JSON_PRETTY_PRINT)['totalCampus'])), ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_totalcampus']], ['class' => 'accordion-results-link']);
                                                             ?>
                                                         </div>
                                                     </div>
@@ -268,7 +268,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
 
                                                                 foreach ($details as $key => $detail) {
                                                                     echo "<tr>
-                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_package_version', 'value' => $key, 'environment' => 'production']], ['target' => '_blank']) .  "</td>
+                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_package_version', 'value' => $key, 'environment' => 'production']]) .  "</td>
                                                                             <td>" . $detail['count'] . "</td>
                                                                             <td>" . $detail['percent'] . "%" . "</td>
                                                                           </tr>";
@@ -315,7 +315,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
 
                                                                     foreach ($details as $key => $detail) {
                                                                         echo "<tr>
-                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolboxdev_package_version', 'value' => $key, 'environment' => 'production']], ['target' => '_blank']) .  "</td>
+                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolboxdev_package_version', 'value' => $key, 'environment' => 'production']]) .  "</td>
                                                                             <td>" . $detail['count'] . "</td>
                                                                             <td>" . $detail['percent'] . "%" . "</td>
                                                                           </tr>";
@@ -361,7 +361,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
                                                             $details = sortByCountDescending($details);
 
                                                             echo "<tr>
-                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_package_version', 'value' => $key, 'environment' => 'staging']], ['target' => '_blank']) .  "</td>
+                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_package_version', 'value' => $key, 'environment' => 'staging']]) .  "</td>
                                                                             <td>" . $detail['count'] . "</td>
                                                                             <td>" . $detail['percent'] . "%" . "</td>
                                                                           </tr>";
@@ -406,7 +406,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
 
                                                             foreach ($details as $key => $detail) {
                                                                 echo "<tr>
-                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolboxdev_package_version', 'value' => $key, 'environment' => 'staging']], ['target' => '_blank']) .  "</td>
+                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolboxdev_package_version', 'value' => $key, 'environment' => 'staging']]) .  "</td>
                                                                             <td>" . $detail['count'] . "</td>
                                                                             <td>" . $detail['percent'] . "%" . "</td>
                                                                           </tr>";                                                            }
@@ -450,7 +450,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
 
                                                             foreach ($details as $key => $detail) {
                                                                 echo "<tr>
-                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_config_site_version', 'value' => $key, 'environment' => 'production']], ['target' => '_blank']) .  "</td>
+                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_config_site_version', 'value' => $key, 'environment' => 'production']]) .  "</td>
                                                                             <td>" . $detail['count'] . "</td>
                                                                             <td>" . $detail['percent'] . "%" . "</td>
                                                                           </tr>";                                                                 }
@@ -498,7 +498,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
 
                                                             foreach ($details as $key => $detail) {
                                                                 echo "<tr>
-                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_config_site_version', 'value' => $key, 'environment' => 'staging']], ['target' => '_blank']) .  "</td>
+                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_config_site_version', 'value' => $key, 'environment' => 'staging']]) .  "</td>
                                                                             <td>" . $detail['count'] . "</td>
                                                                             <td>" . $detail['percent'] . "%" . "</td>
                                                                           </tr>";                                                                }
@@ -542,7 +542,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
 
                                                             foreach ($details as $key => $detail) {
                                                                 echo "<tr>
-                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'virtual', 'value' => $key]], ['target' => '_blank']) .  "</td>
+                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'virtual', 'value' => $key]]) .  "</td>
                                                                             <td>" . $detail['count'] . "</td>
                                                                             <td>" . $detail['percent'] . "%" . "</td>
                                                                           </tr>";
@@ -587,7 +587,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
 
                                                             foreach ($details as $key => $detail) {
                                                                 echo "<tr>
-                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'lsbdistdescription', 'value' => $key]], ['target' => '_blank']) .  "</td>
+                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'lsbdistdescription', 'value' => $key]]) .  "</td>
                                                                             <td>" . $detail['count'] . "</td>
                                                                             <td>" . $detail['percent'] . "%" . "</td>
                                                                           </tr>";
@@ -632,7 +632,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
 
                                                             foreach ($details as $key => $detail) {
 																echo "<tr>
-                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'kernelmajversion', 'value' => $key]], ['target' => '_blank']) .  "</td>
+                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'kernelmajversion', 'value' => $key]]) .  "</td>
                                                                             <td>" . $detail['count'] . "</td>
                                                                             <td>" . $detail['percent'] . "%" . "</td>
                                                                           </tr>";
@@ -677,7 +677,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
 
                                                             foreach ($details as $key => $detail) {
                                                                 echo "<tr>
-                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'kernelrelease', 'value' => $key]], ['target' => '_blank']) .  "</td>
+                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'kernelrelease', 'value' => $key]]) .  "</td>
                                                                             <td>" . $detail['count'] . "</td>
                                                                             <td>" . $detail['percent'] . "%" . "</td>
                                                                           </tr>";
@@ -722,7 +722,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
 
                                                             foreach ($details as $key => $detail) {
                                                                 echo "<tr>
-                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'php_cli_version', 'value' => $key]], ['target' => '_blank']) .  "</td>
+                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'php_cli_version', 'value' => $key]]) .  "</td>
                                                                             <td>" . $detail['count'] . "</td>
                                                                             <td>" . $detail['percent'] . "%" . "</td>
                                                                           </tr>";
@@ -767,7 +767,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
 
                                                             foreach ($details as $key => $detail) {
                                                                 echo "<tr>
-                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'mysql_extra_version', 'value' => $key]], ['target' => '_blank']) .  "</td>
+                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'mysql_extra_version', 'value' => $key]]) .  "</td>
                                                                             <td>" . $detail['count'] . "</td>
                                                                             <td>" . $detail['percent'] . "%" . "</td>
                                                                           </tr>";
@@ -812,7 +812,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
 
                                                             foreach ($details as $key => $detail) {
 																echo "<tr>
-                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'processorcount', 'value' => $key]], ['target' => '_blank']) .  "</td>
+                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'processorcount', 'value' => $key]]) .  "</td>
                                                                             <td>" . $detail['count'] . "</td>
                                                                             <td>" . $detail['percent'] . "%" . "</td>
                                                                           </tr>";
@@ -902,7 +902,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
 
                                                             foreach ($details as $key => $detail) {
                                                                 echo "<tr>
-                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_config_date_timezone', 'value' => $key, 'environment' => 'production']], ['target' => '_blank']) .  "</td>
+                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_config_date_timezone', 'value' => $key, 'environment' => 'production']]) .  "</td>
                                                                             <td>" . $detail['count'] . "</td>
                                                                             <td>" . $detail['percent'] . "%" . "</td>
                                                                           </tr>";
@@ -947,7 +947,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
 
                                                             foreach ($details as $key => $detail) {
                                                                 echo "<tr>
-                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_config_external_type', 'value' => $key, 'environment' => 'production']], ['target' => '_blank']) .  "</td>
+                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_config_external_type', 'value' => $key, 'environment' => 'production']]) .  "</td>
                                                                             <td>" . $detail['count'] . "</td>
                                                                             <td>" . $detail['percent'] . "%" . "</td>
                                                                           </tr>";
@@ -992,7 +992,7 @@ if ($this->getRequest()->getPath() == '/historical-facts/newest-data') {
 
                                                             foreach ($details as $key => $detail) {
                                                                 echo "<tr>
-                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_first_file_upload_year', 'value' => $key]], ['target' => '_blank']) .  "</td>
+                                                                            <td>" . $this->Html->link($key, ['controller' => 'Facts', 'action' => 'factDetails', '?' => ['fact' => 'schoolbox_first_file_upload_year', 'value' => $key]]) .  "</td>
                                                                             <td>" . $detail['count'] . "</td>
                                                                             <td>" . $detail['percent'] . "%" . "</td>
                                                                           </tr>";

@@ -3,7 +3,7 @@
      * queries.php
      *
      * Written by Dane Rainbird (drai0001@student.monash.edu)
-     * Last edited 18/08/2021
+     * Last edited 16/10/2021
      *
      * Performs business / data manipulation on results from a given query to the PuppetDB
      *
@@ -14,22 +14,20 @@
     function schoolbox_totalusers($results) : array {
     $totalUserFleetCount = 0;
     $totalUsers = [];
+
     foreach ($results as $server) {
-        foreach ($server as $individualServer) {
-            // Ensure only using production servers
-            if (stripos($individualServer['certname'], '.live.') || stripos($individualServer['certname'], '.prd.')) {
-                // Increase the total user count
-                $value = is_array($individualServer['value']) ? array_sum($individualServer['value']) : $individualServer['value'];
-                $totalUserFleetCount += $value;
+        if ($server['environment'] == 'prod') {
+            // Increase the total user count
+            $value = $server['value'];
+            $totalUserFleetCount += $value;
 
-                $tempVal = strval(floor($value / 1000));
+            $tempVal = strval(floor($value / 1000));
 
-                // Create the totalUsersArray
-                if (!array_key_exists($tempVal, $totalUsers)) {
-                    $totalUsers[$tempVal] = 0;
-                }
-                $totalUsers[$tempVal]++;
+            // Create the totalUsersArray
+            if (!array_key_exists($tempVal, $totalUsers)) {
+                $totalUsers[$tempVal] = 0;
             }
+            $totalUsers[$tempVal]++;
         }
     }
 
@@ -54,13 +52,13 @@
 
     function schoolbox_users_student($results) : array {
         $totalStudentCount = 0;
-        foreach ($results as $server) {
-            foreach ($server as $individualServer) {
-                if (stripos($individualServer['certname'], '.live.') || stripos($individualServer['certname'], '.prd.')) {
-                    $totalStudentCount += is_array($individualServer['value']) ? array_sum($individualServer['value']) : $individualServer['value'];
-                }
+
+        foreach($results as $server) {
+            if ($server['environment'] == 'prod') {
+                $totalStudentCount += $server['value'];
             }
         }
+
         return [
             'totalStudentCount' => $totalStudentCount
         ];
@@ -68,11 +66,10 @@
 
     function schoolbox_users_staff($results) : array {
         $totalStaffCount = 0;
-        foreach ($results as $server) {
-            foreach ($server as $individualServer) {
-                if (stripos($individualServer['certname'], '.live.') || stripos($individualServer['certname'], '.prd.')) {
-                    $totalStaffCount += is_array($individualServer['value']) ? array_sum($individualServer['value']) : $individualServer['value'];
-                }
+
+        foreach($results as $server) {
+            if ($server['environment'] == 'prod') {
+                $totalStaffCount += $server['value'];
             }
         }
         return [
@@ -82,13 +79,13 @@
 
     function schoolbox_users_parent($results) : array {
         $totalParentCount = 0;
-        foreach ($results as $server) {
-            foreach ($server as $individualServer) {
-                if (stripos($individualServer['certname'], '.live.') || stripos($individualServer['certname'], '.prd.')) {
-                    $totalParentCount += is_array($individualServer['value']) ? array_sum($individualServer['value']) : $individualServer['value'];
-                }
+
+        foreach($results as $server) {
+            if ($server['environment'] == 'prod') {
+                $totalParentCount += $server['value'];
             }
         }
+
         return [
             'totalParentCount' => $totalParentCount
         ];
@@ -96,11 +93,10 @@
 
     function schoolbox_totalcampus($results) : array {
         $totalCampus = 0;
-        foreach ($results as $server) {
-            foreach ($server as $individualServer) {
-                if (stripos($individualServer['certname'], '.live.') || stripos($individualServer['certname'], '.prd.')) {
-                    $totalCampus += is_array($individualServer['value']) ? array_sum($individualServer['value']) : $individualServer['value'];
-                }
+
+        foreach($results as $server) {
+            if ($server['environment'] == 'prod') {
+                $totalCampus += $server['value'];
             }
         }
         return [
@@ -218,27 +214,25 @@
         $productionTotal = 0;
 
         foreach ($results as $server) {
-            foreach ($server as $individualServer) {
-                foreach ($individualServer['value'] as $key => $value) {
-                    // Get all development environments
-                    if ($siteTypes[(string) $key] == 'dev') {
-                        if (!array_key_exists($value, $stagingServerVersions)) {
-                            $stagingServerVersions[$value] = ['count' => 1, 'percent' => 0.00];
-                        } else {
-                            $stagingServerVersions[$value]['count']++;
-                        }
-                        $stagingTotal++;
-
-                    // Get all production environments
-                    } elseif ($siteTypes[(string) $key] == 'prod') {
-                        if (!array_key_exists($value, $productionServerVersions)) {
-                            $productionServerVersions[$value] = ['count' => 1, 'percent' => 0.00];
-                        } else {
-                            $productionServerVersions[$value]['count']++;
-                        }
-                        $productionTotal++;
-                    }
+            // Get all development environments
+            if ($server['environment'] == 'dev') {
+                $value = $server['value'];
+                if (!array_key_exists($value, $stagingServerVersions)) {
+                    $stagingServerVersions[$value] = ['count' => 1, 'percent' => 0.00];
+                } else {
+                    $stagingServerVersions[$value]['count']++;
                 }
+                $stagingTotal++;
+
+           // Get all production environments
+            } else {
+                $value = $server['value'];
+                if (!array_key_exists($value, $productionServerVersions)) {
+                    $productionServerVersions[$value] = ['count' => 1, 'percent' => 0.00];
+                } else {
+                    $productionServerVersions[$value]['count']++;
+                }
+                $productionTotal++;
             }
         }
 
@@ -488,18 +482,16 @@
         $total = 0;
 
         foreach ($results as $server) {
-            foreach ($server as $individualServer) {
-                // Only use production servers
-                if (stripos($individualServer['certname'], '.live.') || stripos($individualServer['certname'], '.prd.')) {
-                    $value = array_values($individualServer['value'])[0];
+            // Only use production servers
+            if ($server['environment'] == 'prod') {
+                $value = $server['value'];
 
-                    if (!array_key_exists($value, $timeZones)) {
-                        $timeZones[$value] = ['count' => 1, 'percent' => 0.00];
-                    } else {
-                        $timeZones[$value]['count']++;
-                    }
-                    $total++;
+                if (!array_key_exists($value, $timeZones)) {
+                    $timeZones[$value] = ['count' => 1, 'percent' => 0.00];
+                } else {
+                    $timeZones[$value]['count']++;
                 }
+                $total++;
             }
         }
 
@@ -518,18 +510,16 @@
         $total = 0;
 
         foreach ($results as $server) {
-            foreach ($server as $individualServer) {
-                // Only use production servers
-                if (stripos($individualServer['certname'], '.live.') || stripos($individualServer['certname'], '.prd.')) {
-                    $value = array_values($individualServer['value'])[0];
+            // Only use production servers
+            if ($server['environment'] == "prod") {
+                $value = $server['value'];
 
-                    if (!array_key_exists($value, $externalDBTypes)) {
-                        $externalDBTypes[$value] = ['count' => 1, 'percent' => 0.00];
-                    } else {
-                        $externalDBTypes[$value]['count']++;
-                    }
-                    $total++;
+                if (!array_key_exists($value, $externalDBTypes)) {
+                    $externalDBTypes[$value] = ['count' => 1, 'percent' => 0.00];
+                } else {
+                    $externalDBTypes[$value]['count']++;
                 }
+                $total++;
             }
         }
 
