@@ -18,6 +18,7 @@ if (isset($certname)) {
 }
 
 echo $this->Html->script('highlight.min.js');
+echo $this->Html->script('languages/json.min.js');
 echo $this->Html->css('default')
 
 ?>
