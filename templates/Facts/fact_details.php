@@ -43,7 +43,7 @@ if (isset($fact)) {
 }
 
 // Sort the list of fact names alphabetically according to their values
-asort($factNamesList);
+natsort($factNamesList);
 
 // If a fact value is set, then update the page title
 if (isset($fact)) {

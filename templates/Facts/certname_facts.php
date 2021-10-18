@@ -8,6 +8,8 @@ if (isset($certname)) {
     ]);
 }
 
+natsort($certnames);
+
 // If a fact value is set, then update the page title
 if (isset($certname)) {
     $this->assign('title', $certname . ' Details');
@@ -99,13 +101,8 @@ echo $this->Html->css('default')
                                 // Create an HTML form for selecting the certname
                                 echo $this->Form->create(null, ['url' => ['action' => 'certname-facts']]);
                                 echo '<div class="row align-items-center"><div class="col-md-auto">';
-                                echo $this->Form->input(
-                                    'certname',
-                                    [
-                                        'class' => 'form-control',
-                                        'default' => (isset($certname)) ? $certname : ''
-                                    ]
-                                );
+                                echo $this->Form->select('certname', $certnames, ['class' => 'js-example-basic-single d-flex']);
+
                                 echo '</div><div class="col-md-auto mt-2 mt-md-0">';
                                 echo $this->Form->button('Go to cert details!', ['type' => 'submit', 'class' => 'btn btn-primary mb-0 w-100']);
                                 echo $this->Form->end();
@@ -137,6 +134,11 @@ echo $this->Html->css('default')
                 hljs.highlightElement(el);
             });
         })
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
     </script>
     </div>
 </div>

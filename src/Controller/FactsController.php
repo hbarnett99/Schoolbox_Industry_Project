@@ -339,7 +339,12 @@ class FactsController extends AppController
      */
     public function certnameFacts() {
         // Get all CertNames from the server for use in a dropdown
-        $this->set('certnames', $this->getAllCertNamesFromServer());
+        $certnameArray = [];
+        foreach ($this->getAllCertNamesFromServer() as $certname) {
+            $certnameArray[$certname] = $certname;
+        }
+
+        $this->set('certnames', $certnameArray);
 
         // Get certname from query
         $certname = $this->request->getQuery('certname');
