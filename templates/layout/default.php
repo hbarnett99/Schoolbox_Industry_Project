@@ -35,12 +35,15 @@ $pageDescription = 'Schoolbox - Server Health';
 
     <!-- DataTables Scripts -->
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.25/sc-2.0.5/datatables.min.js"></script>
+    <!--  Select2 Search Dropdown  -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
 </head>
 <body>
-    <?= $this->element('navbar')?>
+<?= $this->element('navbar')?>
 
-    <main class="main">
+<main class="main">
         <div class="container-fluid">
             <?= $this->Flash->render() ?>
             <?= $this->fetch('content') ?>
